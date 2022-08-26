@@ -1,0 +1,7 @@
+---
+formats:
+  - html
+no_browser: true
+minimum_score: 94
+paths:
+  - 'lib'

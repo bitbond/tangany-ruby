@@ -9,6 +9,9 @@
   "prettier.printWidth": 120,
   "prettier.singleQuote": true,
   "terminal.integrated.scrollback": 42000,
+  "[gemfile]": {
+    "editor.defaultFormatter": "misogi.ruby-rubocop"
+  },
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop"
   }
