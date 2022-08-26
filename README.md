@@ -62,7 +62,7 @@ rubocop
 Run the code quality checker:
 
 ```sh
-rake code:quality_check
+rake quality_check
 ```
 
 ## Contributing
