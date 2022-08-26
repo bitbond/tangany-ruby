@@ -10,3 +10,7 @@ group :development do
   gem "rubocop", "~> 1.21"
   gem "rubocop-shopify", "~> 2.9"
 end
+
+group :test do
+  gem 'simplecov', require: false
+end

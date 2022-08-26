@@ -1,20 +1,43 @@
 # Tangany Ruby Library
 
-TODO: Delete this and the text above, and describe your gem
+The Tangany Ruby library provides convenient access to the Tangany APIs from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that initialize themselves dynamically from API responses.
 
 ## Installation
 
-Install the gem and add to the application's Gemfile by executing:
+You don't need this source code unless you want to modify the gem. If you just want to use the package, just run:
 
-    $ bundle add tangany
+```sh
+gem install tangany
+```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+If you want to build the gem from source:
 
-    $ gem install tangany
+```sh
+gem build tangany.gemspec
+```
+
+### Requirements
+
+- Ruby 2.7.5+.
+
+### Bundler
+
+If you are installing via bundler, you should be sure to use the https rubygems source in your Gemfile, as any gems fetched over http could potentially be compromised in transit and alter the code of gems fetched securely over https:
+
+```ruby
+source 'https://rubygems.org'
+gem 'rails'
+gem 'tangany'
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+The library needs to be configured with your account's secrets. Set `Tangany.customers_subscription` to its value:
+
+```ruby
+require 'tangany'
+Tangany.customers_subscription = '...'
+```
 
 ## Development
 

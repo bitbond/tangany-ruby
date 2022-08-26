@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
+require "simplecov"
+require "simplecov_json_formatter"
+
+SimpleCov.start do
+  if ENV["CI"]
+    formatter SimpleCov::Formatter::JSONFormatter
+  else
+    formatter SimpleCov::Formatter::HTMLFormatter
+  end
+end
+
 require "tangany"
 
 RSpec.configure do |config|

@@ -11,5 +11,7 @@ require "tangany"
 # require "pry"
 # Pry.start
 
+Tangany.customers_subscription = ENV.fetch("CUSTOMERS_API_TANGANY_SUBSCRIPTION")
+
 require "irb"
 IRB.start(__FILE__)
