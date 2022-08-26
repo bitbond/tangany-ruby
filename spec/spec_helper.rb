@@ -2,6 +2,7 @@
 
 require "simplecov"
 require "simplecov_json_formatter"
+require "vcr"
 
 SimpleCov.start do
   if ENV["CI"]
@@ -23,4 +24,14 @@ RSpec.configure do |config|
   config.expect_with(:rspec) do |c|
     c.syntax = :expect
   end
+
+  config.before(:suite) do
+    Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION")
+  end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr"
+  config.default_cassette_options = { record: :new_episodes }
+  config.hook_into(:webmock)
 end

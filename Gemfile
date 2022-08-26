@@ -13,6 +13,12 @@ group :development do
   gem "rubycritic", require: false
 end
 
+group :development, :test do
+  gem "byebug"
+end
+
 group :test do
   gem "simplecov", require: false
+  gem "vcr"
+  gem "webmock"
 end

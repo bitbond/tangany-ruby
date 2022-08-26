@@ -2,7 +2,4 @@
 
 require_relative "customers/client"
 
-module Tangany
-  module Customers
-  end
-end
+require_relative "customers/objects"
