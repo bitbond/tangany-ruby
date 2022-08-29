@@ -30,6 +30,6 @@ RSpec.configure do |config|
   config.include(RequestHelpers)
 
   config.before(:suite) do
-    Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION")
+    Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION") { "test" }
   end
 end
