@@ -23,6 +23,10 @@ module Tangany
           faraday.url_prefix = Tangany.customers_base_url
         end
       end
+
+      def customers
+        CustomersResource.new(self)
+      end
     end
   end
 end
