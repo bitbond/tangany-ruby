@@ -1,0 +1,16 @@
+{
+  "total": 3,
+  "results": [
+    {
+      "id": "2f7d3c3b-7e93-46c7-8ffb-54c4f1771e5b",
+      "environment": "testing",
+      "_links": {
+        "self": "/customers/2f7d3c3b-7e93-46c7-8ffb-54c4f1771e5b"
+      }
+    }
+  ],
+  "_links": {
+    "next": "/customers?start=2&limit=1",
+    "previous": "/customers?start=0&limit=1"
+  }
+}

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+require "byebug"
 require "simplecov"
 require "simplecov_json_formatter"
-require "vcr"
+require "webmock/rspec"
 
 SimpleCov.start do
   if ENV["CI"]
@@ -13,6 +14,7 @@ SimpleCov.start do
 end
 
 require "tangany"
+require_relative "support/request_helpers"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -25,13 +27,9 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.include(RequestHelpers)
+
   config.before(:suite) do
     Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION")
   end
-end
-
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/fixtures/vcr"
-  config.default_cassette_options = { record: :new_episodes }
-  config.hook_into(:webmock)
 end

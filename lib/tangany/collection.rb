@@ -2,25 +2,25 @@
 
 module Tangany
   class Collection
-    attr_reader :data, :total, :next_cursor, :prev_cursor
+    attr_reader :data, :total, :next_path, :previous_path
 
     class << self
       def from_response(response, type:)
         body = response.body
         new(
-          data: body["results"].map { |attributes| type.new(attributes.deep_symbolize_keys) },
-          total: body["total"],
-          next_cursor: body.dig("_links", "next"),
-          prev_cursor: body.dig("_links", "prev")
+          data: body[:results].map { |attributes| type.new(attributes) },
+          total: body[:total],
+          next_path: body.dig(:_links, :next),
+          previous_path: body.dig(:_links, :previous)
         )
       end
     end
 
-    def initialize(data:, total:, next_cursor:, prev_cursor:)
+    def initialize(data:, total:, next_path:, previous_path:)
       @data = data
       @total = total
-      @next_cursor = next_cursor
-      @prev_cursor = prev_cursor
+      @next_path = next_path
+      @previous_path = previous_path
     end
   end
 end

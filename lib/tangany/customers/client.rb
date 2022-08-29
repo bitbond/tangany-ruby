@@ -5,17 +5,21 @@ require "faraday"
 module Tangany
   module Customers
     class Client
+      attr_reader :adapter
       attr_reader :subscription
 
-      def initialize
+      def initialize(adapter: Faraday.default_adapter, stubs: nil)
+        @adapter = adapter
         @subscription = Tangany.customers_subscription
+
+        @stubs = stubs
       end
 
       def connection
         @connection ||= Faraday.new do |faraday|
-          faraday.adapter(Faraday.default_adapter)
+          faraday.adapter(adapter, @stubs)
           faraday.request(:json)
-          faraday.response(:json, content_type: /\bjson$/)
+          faraday.response(:json, content_type: /\bjson$/, parser_options: { symbolize_names: true })
           faraday.url_prefix = Tangany.customers_base_url
         end
       end
