@@ -3,7 +3,8 @@
 module Tangany
   module Customers
     class CustomersResource < Resource
-      def create(body:)
+      def create(**attributes)
+        body = Tangany::Customers::CustomersCreateBody.new(attributes)
         Customer.new(post_request("customers", body: body).body)
       end
 

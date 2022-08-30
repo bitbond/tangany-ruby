@@ -1,0 +1,55 @@
+{
+  "id": "dfc1a846-1c75-4a99-9df3-ac6248db7aac",
+  "person": {
+    "firstName": "Mohammed",
+    "lastName": "Marks",
+    "gender": "M",
+    "birthDate": "1983-11-28",
+    "birthName": "Tory",
+    "birthPlace": "Turcottefurt",
+    "birthCountry": "CO",
+    "nationality": "TN",
+    "address": {
+      "country": "GI",
+      "city": "West Bernardo",
+      "postcode": "84912-8521",
+      "streetName": "Barton Valleys",
+      "streetNumber": "718"
+    },
+    "email": "lucas@gleichner.biz",
+    "kyc": {
+      "id": "1c02cdba-496a-40a4-8afc-217f5acf49be",
+      "date": "2022-03-01",
+      "method": "id_copy",
+      "document": {
+        "country": "HN",
+        "nationality": "AS",
+        "number": "124-13-3690",
+        "issuedBy": "Schoen LLC",
+        "issueDate": "2017-09-12",
+        "validUntil": "2027-09-12",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2022-06-30",
+      "source": "Wiegand Inc",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2020-04-25",
+    "isCancelled": true,
+    "cancelledDate": "2022-01-03"
+  },
+  "additional_attributes": {
+    "username": "emmitt",
+    "email": "lauren.robel@gerlach.io"
+  },
+  "_links": {
+    "documents": "/customers/dfc1a846-1c75-4a99-9df3-ac6248db7aac/documents"
+  }
+}

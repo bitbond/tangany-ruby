@@ -1,0 +1,55 @@
+{
+  "id": "5df5b17b-e150-41df-a374-5366b4244e1f",
+  "person": {
+    "firstName": "Rebecka",
+    "lastName": "Schulist",
+    "gender": "X",
+    "birthDate": "1977-05-15",
+    "birthName": "Charley",
+    "birthPlace": "Wendellport",
+    "birthCountry": "LR",
+    "nationality": "SG",
+    "address": {
+      "country": "MP",
+      "city": "Riceberg",
+      "postcode": "86151-4415",
+      "streetName": "Reinaldo Heights",
+      "streetNumber": "699"
+    },
+    "email": "jimmy@ernser.co",
+    "kyc": {
+      "id": "298c76b2-b120-4779-bde4-7ac155d7f0dc",
+      "date": "2022-06-06",
+      "method": "no_verification",
+      "document": {
+        "country": "MM",
+        "nationality": "BS",
+        "number": "824-14-0768",
+        "issuedBy": "Schowalter-Pfannerstill",
+        "issueDate": "2021-03-09",
+        "validUntil": "2031-03-09",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2020-09-14",
+      "source": "Rohan-Raynor",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2019-08-22",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additional_attributes": {
+    "username": "olympia",
+    "email": "dede@murphy-smitham.biz"
+  },
+  "_links": {
+    "documents": "/customers/5df5b17b-e150-41df-a374-5366b4244e1f/documents"
+  }
+}

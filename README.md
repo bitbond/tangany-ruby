@@ -50,6 +50,17 @@ customers_client.customers.list(limit: 21, start: 42)
 
 # retrieve single customer
 customers_client.customers.retrieve('cus_123456789')
+
+# create customer
+customers_client.customers.create(
+  id: 'cus_123456789',
+  person: {
+    firstName: 'John',
+    lastName: 'Doe',
+    ...
+  },
+  ...
+)
 ```
 
 ---
@@ -62,6 +73,12 @@ Tell `git` where to find the project shared hooks:
 
 ```bash
 git config core.hooksPath .githooks
+```
+
+### Interactive console
+
+```sh
+bin/console
 ```
 
 ### Testing

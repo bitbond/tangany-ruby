@@ -31,30 +31,17 @@ desc "Regenerates the fixtures"
 task :regenerate_fixtures do
   puts
   puts "== Regenerating customers responses ".ljust(80, "=")
-
   puts " -> Regenerating customers/retrieve"
   Tangany::Customers::CustomersResponsesGenerator.new.retrieve
-
   puts " -> Regenerating customers/list"
   Tangany::Customers::CustomersResponsesGenerator.new.list
-
   puts " -> Regenerating customers/create"
   Tangany::Customers::CustomersResponsesGenerator.new.create
 
-  # puts " -> Regenerating customers/list"
-  # # Dir.glob("spec/fixtures/responses/customers/customers/list/*.json").each { |file| File.delete(file) }
-  # customers = {}
-  # response = {
-  #   total: customers.size,
-  #   results: customers.values.map { |value| value["id"] },
-  #   _links: {
-  #     next: nil,
-  #     previous: nil,
-  #   },
-  # }
-  # File.open("spec/fixtures/responses/customers/customers/list/empty.json", "w") do |file|
-  #   file.write(JSON.pretty_generate(response))
-  # end
+  puts
+  puts "== Regenerating customers bodies ".ljust(80, "=")
+  puts " -> Regenerating customers/create"
+  Tangany::Customers::CustomersBodiesGenerator.new.create
 end
 
 task default: [:rubocop, :quality_check, :spec]

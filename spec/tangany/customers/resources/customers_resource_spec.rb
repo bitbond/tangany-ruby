@@ -11,12 +11,11 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   let(:stubbed_response) { stub_customers_response(fixture: fixture, status: status) }
 
   context "#create" do
-    subject(:customer) { client.customers.create(body: body) }
+    subject(:customer) { client.customers.create(**body) }
 
-    let(:attributes) do
+    let(:body) do
       JSON.parse(File.read("spec/fixtures/bodies/customers/customers/create/valid-payload.json"), symbolize_names: true)
     end
-    let(:body) { Tangany::Customers::CustomersCreateBody.new(attributes) }
     let(:method) { :post }
     let(:path) { "customers" }
 
@@ -26,6 +25,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       it "creates a customer" do
         expect(customer).to(be_a(Tangany::Customers::Customer))
       end
+    end
+
+    context "with an invalid payload" do
+      it "raises an error"
+    end
+
+    context "with a conflicting payload" do
+      it "raises an error"
     end
   end
 
