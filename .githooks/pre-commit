@@ -1,0 +1,19 @@
+#!/bin/sh
+
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+RED='\033[0;31m'
+
+echo "${CYAN}[Ruby Style][Info] Checking ruby style with Rubocop...${NC}\r\n"
+
+git status --porcelain | awk 'match($1, /[^(D|R)]/){print $2}' | grep '\.rb$' | xargs -r bundle exec rubocop \
+  && git status --porcelain | awk 'match($1, "R"){print $4}' | grep '\.rb$' | xargs -r bundle exec rubocop
+
+if [ $? -ne 0 ]; then
+  echo "\r\n${RED}[Ruby Style][Error] Fix the issues and try to commit again.${NC}\r\n"
+  exit 1
+else
+  echo "\r\n${GREEN}[Ruby Style][Success] Style check successful.${NC}\r\n"
+  exit 0
+fi

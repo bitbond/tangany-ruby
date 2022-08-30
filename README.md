@@ -41,6 +41,16 @@ Tangany.customers_subscription = '...'
 
 ## Development
 
+### Git config
+
+Tell `git` where to find the project shared hooks:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+### Testing
+
 Run all tests:
 
 ```sh
@@ -52,6 +62,8 @@ Run a single test suite:
 ```sh
 rspec spec/tangany/customers/client_spec.rb
 ```
+
+### Linting and code quality
 
 Run the linter:
 

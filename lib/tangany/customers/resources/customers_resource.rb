@@ -8,7 +8,6 @@ module Tangany
       end
 
       def retrieve(customer_id:)
-        byebug
         Customer.new(get_request("customers/#{customer_id}").body)
       end
     end
