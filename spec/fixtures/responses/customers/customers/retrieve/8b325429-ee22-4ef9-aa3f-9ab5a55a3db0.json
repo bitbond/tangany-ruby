@@ -1,0 +1,55 @@
+{
+  "id": "8b325429-ee22-4ef9-aa3f-9ab5a55a3db0",
+  "person": {
+    "firstName": "Clara",
+    "lastName": "Schiller",
+    "gender": "X",
+    "birthDate": "1957-12-21",
+    "birthName": "Franklyn",
+    "birthPlace": "North Magdalen",
+    "birthCountry": "CI",
+    "nationality": "AX",
+    "address": {
+      "country": "KG",
+      "city": "West Hiramville",
+      "postcode": "08845-6924",
+      "streetName": "Hettinger Hills",
+      "streetNumber": "961"
+    },
+    "email": "vicente.nitzsche@grady.name",
+    "kyc": {
+      "id": "c112e09e-bbf1-4164-9452-878dd91165ed",
+      "date": "2021-11-04",
+      "method": "video_ident",
+      "document": {
+        "country": "ET",
+        "nationality": "CK",
+        "number": "813-77-6071",
+        "issuedBy": "Mante-Greenholt",
+        "issueDate": "2020-05-13",
+        "validUntil": "2030-05-13",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2018-12-31",
+      "source": "Gutkowski, Ruecker and Cormier",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2021-01-08",
+    "isCancelled": true,
+    "cancelledDate": "2022-08-05"
+  },
+  "additional_attributes": {
+    "username": "orval_bosco",
+    "email": "eboni.mayert@homenick.biz"
+  },
+  "_links": {
+    "documents": "/customers/8b325429-ee22-4ef9-aa3f-9ab5a55a3db0/documents"
+  }
+}

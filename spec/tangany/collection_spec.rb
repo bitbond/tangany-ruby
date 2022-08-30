@@ -24,25 +24,6 @@ RSpec.describe(Tangany::Collection) do
       end
     end
 
-    context "with a non-empty resultset" do
-      let(:fixture) { "non-empty" }
-
-      it "initializes a non-empty collection" do
-        expect(collection.data.size).to(eq(1))
-        expect(collection.total).to(eq(1))
-        expect(collection.next_path).to(be_nil)
-        expect(collection.previous_path).to(be_nil)
-      end
-
-      it "fills the collection with the correct type" do
-        expect(collection.data.first).to(be_a(Tangany::Customers::Customer))
-      end
-
-      it "fills the collection with the correct attributes" do
-        expect(collection.data.first.id).to(eq("5a32f085-ac72-4765-a9ec-1e81f61446b2"))
-      end
-    end
-
     context "with a paginated resultset" do
       let(:path) { "customers?limit=1&start=1" }
       let(:fixture) { "paginated" }
@@ -59,7 +40,10 @@ RSpec.describe(Tangany::Collection) do
       end
 
       it "fills the collection with the correct attributes" do
-        expect(collection.data.first.id).to(eq("2f7d3c3b-7e93-46c7-8ffb-54c4f1771e5b"))
+        expected_id = Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
+          File.basename(file, ".json")
+        end.sort[1]
+        expect(collection.data.first.id).to(eq(expected_id))
       end
     end
   end

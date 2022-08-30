@@ -6,6 +6,8 @@ gemspec
 
 group :development do
   gem "bundler-audit"
+  gem "factory_bot"
+  gem "faker"
   gem "rake"
   gem "rspec"
   gem "rubocop", "~> 1.21"

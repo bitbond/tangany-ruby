@@ -26,7 +26,11 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     subject(:customer) { client.customers.retrieve(customer_id: customer_id) }
 
     let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubbed_request) }
-    let(:customer_id) { "35b64385-5a21-4700-a951-a517d99a4f42" }
+    let(:customer_id) do
+      Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
+        File.basename(file, ".json")
+      end.sample
+    end
     let(:path) { "customers/#{customer_id}" }
     let(:stubbed_request) do
       stub_customers_request(path, response: stubbed_response)

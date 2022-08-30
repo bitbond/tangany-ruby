@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
+require "byebug"
+
 require "tangany"
 
 # You can add fixtures and/or initialization code here to make experimenting
