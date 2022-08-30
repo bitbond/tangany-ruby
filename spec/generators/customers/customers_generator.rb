@@ -3,9 +3,6 @@
 module Tangany
   module Customers
     class CustomersGenerator
-      PAGINATION_LIMIT = 1
-      PAGINATION_START = 1
-
       attr_reader :root_folder
 
       def initialize
