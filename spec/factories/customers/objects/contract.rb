@@ -3,7 +3,7 @@
 require "factory_bot"
 
 FactoryBot.define do
-  factory :customers_contract, class: Tangany::Customers::Contract do
+  factory :customers_objects_contract, class: Tangany::Customers::Contract do
     initialize_with { new(attributes) }
 
     isSigned { [true, false].sample }

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require "dry-struct"
+
 module Tangany
-  class Object < Dry::Struct
+  class Body < Dry::Struct
     def to_json
       to_h.to_json
     end

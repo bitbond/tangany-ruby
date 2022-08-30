@@ -3,11 +3,11 @@
 module Tangany
   module Customers
     class Address < Object
-      attribute :country, Types::String.constrained(format: COUNTRY_REGEXP)
-      attribute :city, Types::String.constrained(max_size: 50)
-      attribute :postcode, Types::String.constrained(max_size: 50)
-      attribute :streetName, Types::String.constrained(max_size: 50)
-      attribute :streetNumber, Types::String.constrained(max_size: 50)
+      attribute :country, Types::String
+      attribute :city, Types::String
+      attribute :postcode, Types::String
+      attribute :streetName, Types::String
+      attribute :streetNumber, Types::String
     end
   end
 end

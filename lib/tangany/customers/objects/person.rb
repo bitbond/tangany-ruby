@@ -3,18 +3,16 @@
 module Tangany
   module Customers
     class Person < Object
-      ALLOWED_GENDERS = ["F", "M", "X"].freeze
-
-      attribute :firstName, Types::String.constrained(max_size: 50)
-      attribute :lastName, Types::String.constrained(max_size: 50)
-      attribute :gender, Types::String.constrained(included_in: ALLOWED_GENDERS)
-      attribute :birthDate, Types::String.constrained(format: DATE_REGEXP)
-      attribute :birthName, Types::String.constrained(max_size: 50)
-      attribute :birthPlace, Types::String.constrained(max_size: 50)
-      attribute :birthCountry, Types::String.constrained(format: COUNTRY_REGEXP)
-      attribute :nationality, Types::String.constrained(format: COUNTRY_REGEXP)
+      attribute :firstName, Types::String
+      attribute :lastName, Types::String
+      attribute :gender, Types::String
+      attribute :birthDate, Types::String
+      attribute :birthName, Types::String
+      attribute :birthPlace, Types::String
+      attribute :birthCountry, Types::String
+      attribute :nationality, Types::String
       attribute :address, Address
-      attribute :email, Types::String.constrained(max_size: 255)
+      attribute :email, Types::String
       attribute :kyc, Kyc
       attribute :pep, Pep
     end

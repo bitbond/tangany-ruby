@@ -14,6 +14,14 @@ module Tangany
       end
     end
 
+    def post_request(url, body:, headers: {})
+      client.connection.post do |request|
+        request.url(url)
+        request.body = body.to_json
+        request.headers = default_headers.merge(headers)
+      end
+    end
+
     private
 
     attr_reader :client

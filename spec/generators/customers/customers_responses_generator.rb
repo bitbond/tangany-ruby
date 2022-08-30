@@ -2,11 +2,16 @@
 
 module Tangany
   module Customers
-    class CustomersGenerator
+    class CustomersResponsesGenerator
       attr_reader :root_folder
 
       def initialize
         @root_folder = "spec/fixtures/responses/customers/customers"
+      end
+
+      def create
+        file = Dir.glob("#{root_folder}/retrieve/*.json").sort[0]
+        FileUtils.cp(file, "spec/fixtures/responses/customers/customers/create/created.json")
       end
 
       def list
@@ -23,7 +28,7 @@ module Tangany
       def retrieve
         Dir.glob("#{root_folder}/retrieve/*.json").each { |file| File.delete(file) }
         3.times do
-          customer = FactoryBot.build(:customers_customer)
+          customer = FactoryBot.build(:customers_objects_customer)
           File.open("#{root_folder}/retrieve/#{customer.id}.json", "w") do |file|
             file.write(JSON.pretty_generate(JSON.parse(customer.to_json)))
           end

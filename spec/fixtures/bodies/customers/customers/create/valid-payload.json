@@ -1,0 +1,52 @@
+{
+  "id": "5a750674-a8bc-471b-87af-041234fc4a1e",
+  "person": {
+    "firstName": "Beau",
+    "lastName": "Murphy",
+    "gender": "F",
+    "birthDate": "1995-09-15",
+    "birthName": "Arron",
+    "birthPlace": "Hudsonshire",
+    "birthCountry": "AU",
+    "nationality": "GH",
+    "address": {
+      "country": "BE",
+      "city": "East Earle",
+      "postcode": "27065",
+      "streetName": "Grover Prairie",
+      "streetNumber": "5109"
+    },
+    "email": "betsey_donnelly@simonis-pouros.biz",
+    "kyc": {
+      "id": "cbe50866-d56b-42d5-9fc9-d44b0a3c37e1",
+      "date": "2022-03-21",
+      "method": "in_person",
+      "document": {
+        "country": "CC",
+        "nationality": "BG",
+        "number": "179-32-5030",
+        "issuedBy": "Kassulke-Labadie",
+        "issueDate": "2020-01-15",
+        "validUntil": "2030-01-15",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2017-11-10",
+      "source": "Ryan Group",
+      "reason": "Aliquid neque quod nemo.",
+      "isSanctioned": true
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2021-06-29",
+    "isCancelled": true,
+    "cancelledDate": "2021-08-10"
+  },
+  "additional_attributes": {
+    "username": "cyndy",
+    "email": "hayden@vonrueden.com"
+  }
+}

@@ -3,7 +3,7 @@
 require "factory_bot"
 
 FactoryBot.define do
-  factory :customers_address, class: Tangany::Customers::Address do
+  factory :customers_objects_address, class: Tangany::Customers::Address do
     initialize_with { new(attributes) }
 
     country { Faker::Address.country_code }

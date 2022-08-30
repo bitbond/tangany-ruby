@@ -3,6 +3,10 @@
 module Tangany
   module Customers
     class CustomersResource < Resource
+      def create(body:)
+        Customer.new(post_request("customers", body: body).body)
+      end
+
       def list(**params)
         Collection.from_response(get_request("customers", params: params), type: Customer)
       end

@@ -27,16 +27,19 @@ task :quality_check do
   abort unless system("rubycritic #{paths}")
 end
 
-desc "Regenerate the fixtures"
+desc "Regenerates the fixtures"
 task :regenerate_fixtures do
   puts
-  puts "== Regenerating customers ".ljust(80, "=")
+  puts "== Regenerating customers responses ".ljust(80, "=")
 
   puts " -> Regenerating customers/retrieve"
-  Tangany::Customers::CustomersGenerator.new.retrieve
+  Tangany::Customers::CustomersResponsesGenerator.new.retrieve
 
   puts " -> Regenerating customers/list"
-  Tangany::Customers::CustomersGenerator.new.list
+  Tangany::Customers::CustomersResponsesGenerator.new.list
+
+  puts " -> Regenerating customers/create"
+  Tangany::Customers::CustomersResponsesGenerator.new.create
 
   # puts " -> Regenerating customers/list"
   # # Dir.glob("spec/fixtures/responses/customers/customers/list/*.json").each { |file| File.delete(file) }
