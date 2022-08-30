@@ -28,7 +28,7 @@ If you are installing via bundler, you should be sure to use the https rubygems 
 
 ```ruby
 source 'https://rubygems.org'
-gem 'rails'
+
 gem 'tangany'
 ```
 
