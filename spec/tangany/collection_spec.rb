@@ -5,12 +5,12 @@ RSpec.describe(Tangany::Collection) do
     subject(:collection) { Tangany::Collection.from_response(response, type: type) }
 
     let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubbed_request) }
-    let(:path) { "customers" }
+    let(:path) { "customers/list" }
     let(:response) do
       client.connection.get(path, {}, { "tangany-subscription" => Tangany.customers_subscription })
     end
     let(:stubbed_request) { stub_customers_request(path, response: stubbed_response) }
-    let(:stubbed_response) { stub_customers_response(fixture: "customers/#{fixture}") }
+    let(:stubbed_response) { stub_customers_response(fixture: "customers/list/#{fixture}") }
     let(:type) { Tangany::Customers::Customer }
 
     context "with an empty resultset" do

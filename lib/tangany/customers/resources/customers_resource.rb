@@ -6,6 +6,11 @@ module Tangany
       def list(**params)
         Collection.from_response(get_request("customers", params: params), type: Customer)
       end
+
+      def retrieve(customer_id:)
+        byebug
+        Customer.new(get_request("customers/#{customer_id}").body)
+      end
     end
   end
 end

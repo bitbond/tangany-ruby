@@ -11,7 +11,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     let(:stubbed_request) do
       stub_customers_request(path, response: stubbed_response)
     end
-    let(:stubbed_response) { stub_customers_response(fixture: "customers/paginated") }
+    let(:stubbed_response) { stub_customers_response(fixture: "customers/list/paginated") }
 
     it "returns a paginated collection of customers" do
       expect(customers.class).to(eq(Tangany::Collection))
@@ -19,6 +19,22 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       expect(customers.total).to(eq(3))
       expect(customers.next_path).to(eq("/customers?start=2&limit=1"))
       expect(customers.previous_path).to(eq("/customers?start=0&limit=1"))
+    end
+  end
+
+  context "#retrieve" do
+    subject(:customer) { client.customers.retrieve(customer_id: customer_id) }
+
+    let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubbed_request) }
+    let(:customer_id) { "35b64385-5a21-4700-a951-a517d99a4f42" }
+    let(:path) { "customers/#{customer_id}" }
+    let(:stubbed_request) do
+      stub_customers_request(path, response: stubbed_response)
+    end
+    let(:stubbed_response) { stub_customers_response(fixture: "customers/retrieve/#{customer_id}") }
+
+    it "returns a Customer" do
+      expect(customer.class).to(eq(Tangany::Customers::Customer))
     end
   end
 end

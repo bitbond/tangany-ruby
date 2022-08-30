@@ -17,19 +17,23 @@ require "tangany"
 require_relative "support/request_helpers"
 
 RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
-
-  # Disable RSpec exposing methods globally on `Module` and `main`
-  config.disable_monkey_patching!
-
-  config.expect_with(:rspec) do |c|
-    c.syntax = :expect
-  end
-
-  config.include(RequestHelpers)
-
   config.before(:suite) do
     Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION") { "test" }
   end
+  config.disable_monkey_patching!
+  config.example_status_persistence_file_path = ".rspec_status"
+  config.expect_with(:rspec) do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+    expectations.syntax = :expect
+  end
+  config.expose_dsl_globally = false
+  config.mock_with(:rspec) do |mocks|
+    mocks.verify_partial_doubles = true
+  end
+  config.order = :random
+  config.profile_examples = 10
+
+  config.include(RequestHelpers)
+
+  Kernel.srand(config.seed)
 end
