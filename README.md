@@ -2,6 +2,8 @@
 
 The Tangany Ruby library provides convenient access to the Tangany APIs from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that initialize themselves dynamically from API responses.
 
+---
+
 ## Installation
 
 You don't need this source code unless you want to modify the gem. If you just want to use the package, just run:
@@ -30,6 +32,8 @@ gem 'rails'
 gem 'tangany'
 ```
 
+---
+
 ## Usage
 
 The library needs to be configured with your account's secrets. Set `Tangany.customers_subscription` to its value:
@@ -37,7 +41,18 @@ The library needs to be configured with your account's secrets. Set `Tangany.cus
 ```ruby
 require 'tangany'
 Tangany.customers_subscription = '...'
+
+# initialize the client
+customers_client = Tangany::Customers::client.new
+
+# list customers
+customers_client.customers.list(limit: 21, start: 42)
+
+# retrieve single customer
+customers_client.customers.retrieve('cus_123456789')
 ```
+
+---
 
 ## Development
 
@@ -50,6 +65,12 @@ git config core.hooksPath .githooks
 ```
 
 ### Testing
+
+If Tangany API changes, edit the `spec/factories` and the `spec/generators` accordingly, then regenerate all the fixtures:
+
+```sh
+rake regenerate_fixtures
+```
 
 Run all tests:
 
@@ -76,6 +97,8 @@ Run the code quality checker:
 ```sh
 rake quality_check
 ```
+
+---
 
 ## Contributing
 
