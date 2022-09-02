@@ -2,9 +2,10 @@
 
 require "forwardable"
 
+require_relative "tangany/error"
+
 require_relative "tangany/collection"
 require_relative "tangany/config"
-require_relative "tangany/error"
 require_relative "tangany/resource"
 require_relative "tangany/types"
 require_relative "tangany/version"

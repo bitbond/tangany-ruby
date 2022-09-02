@@ -13,13 +13,16 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   context "#create" do
     subject(:customer) { client.customers.create(**body) }
 
-    let(:body) do
-      JSON.parse(File.read("spec/fixtures/bodies/customers/customers/create/valid-payload.json"), symbolize_names: true)
-    end
     let(:method) { :post }
     let(:path) { "customers" }
 
     context "with a valid payload" do
+      let(:body) do
+        JSON.parse(
+          File.read("spec/fixtures/bodies/customers/customers/create/valid-payload.json"),
+          symbolize_names: true
+        )
+      end
       let(:fixture) { "customers/create/created" }
 
       it "creates a customer" do
@@ -28,11 +31,35 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with an invalid payload" do
-      it "raises an error"
+      let(:body) do
+        JSON.parse(
+          File.read("spec/fixtures/bodies/customers/customers/create/invalid-payload.json"),
+          symbolize_names: true
+        )
+      end
+      let(:fixture) { "customers/create/created" }
+
+      it "raises a Dry::Struct::Error" do
+        expect { customer }.to(raise_error(Dry::Struct::Error))
+      end
     end
 
     context "with a conflicting payload" do
-      it "raises an error"
+      let(:body) do
+        JSON.parse(
+          File.read("spec/fixtures/bodies/customers/customers/create/valid-payload.json"),
+          symbolize_names: true
+        )
+      end
+      let(:fixture) { "customers/create/conflicting" }
+      let(:status) { 409 }
+
+      it "raises an error" do
+        expect { customer }.to(
+          raise_error(Tangany::RequestError)
+          .with_message(/Customer with ID "[^\"]+" already exists/)
+        )
+      end
     end
   end
 

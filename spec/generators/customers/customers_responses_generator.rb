@@ -10,8 +10,19 @@ module Tangany
       end
 
       def create
+        # created
         file = Dir.glob("#{root_folder}/retrieve/*.json").sort[0]
         FileUtils.cp(file, "spec/fixtures/responses/customers/customers/create/created.json")
+
+        # conflicting
+        customer_id = JSON.parse(File.read("spec/fixtures/bodies/customers/customers/create/valid-payload.json"))["id"]
+        File.open("spec/fixtures/responses/customers/customers/create/conflicting.json", "w") do |file|
+          file.write(JSON.pretty_generate({
+            statusCode: 409,
+            activityId: "e0303d0f-aa88-4b8a-b360-48a5580ebee1",
+            message: "Customer with ID \"#{customer_id}\" already exists.",
+          }))
+        end
       end
 
       def list

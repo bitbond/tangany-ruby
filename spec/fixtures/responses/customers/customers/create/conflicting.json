@@ -1,0 +1,5 @@
+{
+  "statusCode": 409,
+  "activityId": "e0303d0f-aa88-4b8a-b360-48a5580ebee1",
+  "message": "Customer with ID \"010126a8-434a-4b4f-b5d7-4b376b744a23\" already exists."
+}
