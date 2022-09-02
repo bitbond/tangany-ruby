@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative "bodies/customers/create"
+require_relative "bodies/customers"
