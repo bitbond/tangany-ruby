@@ -1,0 +1,55 @@
+{
+  "id": "d530fd9a-c922-4202-8c9a-52724e1dbe39",
+  "person": {
+    "firstName": "Benjamin",
+    "lastName": "Schmitt",
+    "gender": "F",
+    "birthDate": "2000-02-10",
+    "birthName": "Hoyt",
+    "birthPlace": "Port Carmel",
+    "birthCountry": "DK",
+    "nationality": "RE",
+    "address": {
+      "country": "MA",
+      "city": "South Luci",
+      "postcode": "10266-4420",
+      "streetName": "Amado Creek",
+      "streetNumber": "6356"
+    },
+    "email": "brian_spinka@konopelski-padberg.io",
+    "kyc": {
+      "id": "94a2072d-15f2-44ea-9671-fade9548e19c",
+      "date": "2021-12-07",
+      "method": "auto_ident",
+      "document": {
+        "country": "BI",
+        "nationality": "MG",
+        "number": "148-45-6412",
+        "issuedBy": "Spencer Group",
+        "issueDate": "2022-07-28",
+        "validUntil": "2032-07-28",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2020-04-11",
+      "source": "Lemke, Kutch and Rath",
+      "reason": "Non eligendi est veniam.",
+      "isSanctioned": true
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2020-06-04",
+    "isCancelled": true,
+    "cancelledDate": "2022-08-15"
+  },
+  "additional_attributes": {
+    "username": "francisco",
+    "email": "velva.marvin@schulist.io"
+  },
+  "_links": {
+    "documents": "/customers/d530fd9a-c922-4202-8c9a-52724e1dbe39/documents"
+  }
+}
