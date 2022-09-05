@@ -1,52 +1,52 @@
 {
-  "id": "65367ae2-58e1-400e-ac2d-54391fb110e0",
+  "id": "c2e519b9-480d-4677-8654-bd248370b4b3",
   "person": {
-    "firstName": "Gayle",
-    "lastName": "Fay",
-    "gender": "F",
-    "birthDate": "1986-04-04",
-    "birthName": "Andrew",
-    "birthPlace": "East Paul",
-    "birthCountry": "LY",
-    "nationality": "BO",
+    "firstName": "Lulu",
+    "lastName": "DuBuque",
+    "gender": "M",
+    "birthDate": "1966-07-05",
+    "birthName": "Idell",
+    "birthPlace": "East Tamieshire",
+    "birthCountry": "ER",
+    "nationality": "YE",
     "address": {
-      "country": "IR",
-      "city": "Stantonville",
-      "postcode": "09461-6171",
-      "streetName": "Melvin Point",
-      "streetNumber": "96814"
+      "country": "MP",
+      "city": "Lucienmouth",
+      "postcode": "24456",
+      "streetName": "Heller Track",
+      "streetNumber": "8459"
     },
-    "email": "rosalind.johnston@kuvalis.net",
+    "email": "dillon@larson.name",
     "kyc": {
-      "id": "46c42b30-68a3-4ed7-976d-d2d12f8d9dfc",
-      "date": "2021-10-04",
-      "method": "in_person",
+      "id": "3cd670b7-bfc3-42c4-a036-2dbf909337f2",
+      "date": "2022-04-13",
+      "method": "video_ident",
       "document": {
-        "country": "TZ",
-        "nationality": "BB",
-        "number": "786-76-2381",
-        "issuedBy": "Will, Lemke and Gleichner",
-        "issueDate": "2018-10-03",
-        "validUntil": "2028-10-03",
+        "country": "JE",
+        "nationality": "GR",
+        "number": "795-20-9595",
+        "issuedBy": "Johns LLC",
+        "issueDate": "2018-09-14",
+        "validUntil": "2028-09-14",
         "type": "id_card"
       }
     },
     "pep": {
       "isExposed": true,
-      "checkDate": "2022-08-21",
-      "source": "Jacobi-Shanahan",
-      "reason": "Molestias veniam possimus ea.",
-      "isSanctioned": false
+      "checkDate": "2018-04-15",
+      "source": "Fisher and Sons",
+      "reason": "Qui nam officiis est.",
+      "isSanctioned": true
     }
   },
   "contract": {
     "isSigned": false,
-    "signedDate": "2018-10-16",
-    "isCancelled": false,
-    "cancelledDate": null
+    "signedDate": "2017-12-22",
+    "isCancelled": true,
+    "cancelledDate": "2021-07-04"
   },
   "additional_attributes": {
-    "username": "sammie",
-    "email": "demetrice@goyette.com"
+    "username": "miyoko",
+    "email": "catharine@cormier-crist.biz"
   }
 }

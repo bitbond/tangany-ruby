@@ -2,10 +2,10 @@
   "total": 3,
   "results": [
     {
-      "id": "63589a41-c623-4aef-9c4c-d8a950c34a5e",
+      "id": "a4d055e2-37dd-4d41-a939-901b8b2c6e42",
       "environment": "testing",
       "_links": {
-        "self": "/customers/63589a41-c623-4aef-9c4c-d8a950c34a5e"
+        "self": "/customers/a4d055e2-37dd-4d41-a939-901b8b2c6e42"
       }
     }
   ],

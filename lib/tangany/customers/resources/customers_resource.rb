@@ -8,6 +8,10 @@ module Tangany
         Customer.new(post_request("customers", body: body).body)
       end
 
+      def delete(customer_id:)
+        delete_request("customers/#{customer_id}")
+      end
+
       def list(**params)
         Collection.from_response(get_request("customers", params: params), type: Customer)
       end

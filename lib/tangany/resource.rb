@@ -6,6 +6,13 @@ module Tangany
       @client = client
     end
 
+    def delete_request(url, headers: {})
+      handle_response(client.connection.delete do |request|
+        request.url(url)
+        request.headers = default_headers.merge(headers)
+      end)
+    end
+
     def get_request(url, params: {}, headers: {})
       handle_response(client.connection.get do |request|
         request.url(url)
@@ -32,7 +39,7 @@ module Tangany
 
     def handle_response(response)
       case response.status
-      when 409
+      when 404, 409
         raise RequestError.new(
           response.body[:message],
           activity_id: response.body[:activity_id],

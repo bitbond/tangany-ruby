@@ -25,18 +25,33 @@ module Tangany
         end
       end
 
+      def delete
+        # invalid customer
+        File.open("#{root_folder}/delete/invalid.json", "w") do |file|
+          file.write(JSON.pretty_generate(customer_not_found_response("invalid")))
+        end
+      end
+
       def list
+        # empty
         File.open("#{root_folder}/list/empty.json", "w") do |file|
           file.write(JSON.pretty_generate(list_response_from_customer_ids([])))
         end
 
-        customer_ids = Dir.glob("#{root_folder}/retrieve/*.json").map { |file| File.basename(file, ".json") }.sort
+        # paginated
+        customer_ids = Dir.glob("#{root_folder}/retrieve/*.json").map do |file|
+          id = File.basename(file, ".json")
+          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+          id
+        end.compact.sort
         File.open("#{root_folder}/list/paginated.json", "w") do |file|
           file.write(JSON.pretty_generate(list_response_from_customer_ids(customer_ids)))
         end
       end
 
       def retrieve
+        # valid customers
         Dir.glob("#{root_folder}/retrieve/*.json").each { |file| File.delete(file) }
         3.times do
           customer = FactoryBot.build(:customers_objects_customer)
@@ -44,9 +59,22 @@ module Tangany
             file.write(JSON.pretty_generate(JSON.parse(customer.to_json)))
           end
         end
+
+        # invalid customer
+        File.open("#{root_folder}/retrieve/invalid.json", "w") do |file|
+          file.write(JSON.pretty_generate(customer_not_found_response("invalid")))
+        end
       end
 
       private
+
+      def customer_not_found_response(customer_id)
+        {
+          statusCode: 404,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "Customer with ID \"#{customer_id}\" was not found",
+        }
+      end
 
       def list_response_from_customer_ids(customer_ids)
         {

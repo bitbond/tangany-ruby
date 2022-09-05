@@ -63,6 +63,45 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
   end
 
+  context "#delete" do
+    subject(:customer) { client.customers.delete(customer_id: customer_id) }
+
+    let(:fixture) { "customers/delete/#{customer_id}" }
+    let(:method) { :delete }
+    let(:path) { "customers/#{customer_id}" }
+
+    context "with a valid customer ID" do
+      let(:customer_id) do
+        Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
+          File.basename(file, ".json")
+        end.sample
+      end
+
+      it "returns an empty response"
+    end
+
+    context "with an invalid customer ID" do
+      let(:customer_id) { "invalid" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { customer }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("Customer with ID \"#{customer_id}\" was not found")
+        )
+      end
+    end
+
+    context "with a customer ID assigned to a wallet link" do
+      it "raises an error"
+      # {
+      #     "statusCode": 400,
+      #     "activityId": "9b33505c-7255-4b1f-92fa-5bfd8fabcbd6",
+      #     "message": "Customer assigned to a wallet link cannot be deleted"
+      # }
+    end
+  end
+
   context "#list" do
     subject(:customers) { client.customers.list(limit: limit, start: start) }
 
@@ -83,16 +122,34 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   context "#retrieve" do
     subject(:customer) { client.customers.retrieve(customer_id: customer_id) }
 
-    let(:customer_id) do
-      Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
-        File.basename(file, ".json")
-      end.sample
-    end
     let(:fixture) { "customers/retrieve/#{customer_id}" }
     let(:path) { "customers/#{customer_id}" }
 
-    it "returns a Customer" do
-      expect(customer).to(be_a(Tangany::Customers::Customer))
+    context "with a valid customer ID" do
+      let(:customer_id) do
+        Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
+          id = File.basename(file, ".json")
+          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+          id
+        end.compact.sample
+      end
+
+      it "returns a Customer" do
+        expect(customer).to(be_a(Tangany::Customers::Customer))
+      end
+    end
+
+    context "with an invalid customer ID" do
+      let(:customer_id) { "invalid" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { customer }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("Customer with ID \"#{customer_id}\" was not found")
+        )
+      end
     end
   end
 end

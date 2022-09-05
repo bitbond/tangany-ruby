@@ -42,6 +42,8 @@ task :regenerate_fixtures do
   Tangany::Customers::CustomersResponsesGenerator.new.list
   puts " -> Regenerating customers/create"
   Tangany::Customers::CustomersResponsesGenerator.new.create
+  puts " -> Regenerating customers/delete"
+  Tangany::Customers::CustomersResponsesGenerator.new.delete
 end
 
 task default: [:rubocop, :quality_check, :spec]
