@@ -1,0 +1,52 @@
+{
+  "id": "21cb4d01-6dcd-41b3-ac20-1a05cab8b27e",
+  "person": {
+    "firstName": "Irvin",
+    "lastName": "Swift",
+    "gender": "F",
+    "birthDate": "2000-11-14",
+    "birthName": "Lidia",
+    "birthPlace": "South Orlando",
+    "birthCountry": "SJ",
+    "nationality": "GA",
+    "address": {
+      "country": "MV",
+      "city": "Larryville",
+      "postcode": "52633-9156",
+      "streetName": "Tonette Ranch",
+      "streetNumber": "3570"
+    },
+    "email": "kena@wisozk.info",
+    "kyc": {
+      "id": "ca4c133f-99d8-4ae3-af33-bdeeff54a826",
+      "date": "2021-10-09",
+      "method": "no_verification",
+      "document": {
+        "country": "ML",
+        "nationality": "NZ",
+        "number": "045-33-2576",
+        "issuedBy": "Dooley-Torphy",
+        "issueDate": "2019-10-08",
+        "validUntil": "2029-10-08",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2021-02-19",
+      "source": "Wunsch Group",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2018-09-12",
+    "isCancelled": true,
+    "cancelledDate": "2019-01-02"
+  },
+  "additional_attributes": {
+    "username": "julian_schuster",
+    "email": "ginger_wilderman@balistreri.info"
+  }
+}

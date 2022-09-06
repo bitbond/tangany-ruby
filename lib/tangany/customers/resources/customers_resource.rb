@@ -21,8 +21,13 @@ module Tangany
       end
 
       def update(customer_id:, operations: [])
+        if_match_header = get_request("customers/#{customer_id}").headers["If-Match"]
         body = Tangany::Customers::Customers::UpdateBody.new(operations: operations)
-        Customer.new(patch_request("customers/#{customer_id}", body: body).body)
+        Customer.new(patch_request(
+          "customers/#{customer_id}",
+          body: body,
+          headers: { "If-Match" => if_match_header }
+        ).body)
       end
     end
   end

@@ -4,14 +4,18 @@ RSpec.describe(Tangany::Collection) do
   context "from a response" do
     subject(:collection) { Tangany::Collection.from_response(response, type: type) }
 
-    let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubbed_request) }
+    let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
     let(:path) { "customers/list" }
     let(:response) do
       client.connection.get(path, {}, { "tangany-subscription" => Tangany.customers_subscription })
     end
-    let(:stubbed_request) { stub_customers_request(path, response: stubbed_response) }
     let(:stubbed_response) { stub_customers_response(fixture: "customers/list/#{fixture}") }
+    let(:stubs) { Faraday::Adapter::Test::Stubs.new }
     let(:type) { Tangany::Customers::Customer }
+
+    before do
+      stub_customers_request(stubs, path, response: stubbed_response)
+    end
 
     context "with an empty resultset" do
       let(:fixture) { "empty" }

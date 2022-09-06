@@ -53,6 +53,11 @@ module Tangany
           activity_id: response.body[:activity_id],
           status_code: response.body[:statusCode]
         )
+      when 412
+        raise RequestError.new(
+          "Mid-air edit collision detected",
+          status_code: 412
+        )
       else
         response
       end

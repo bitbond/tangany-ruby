@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/contract/isSigned",
+    "value": true
+  },
+  {
+    "op": "replace",
+    "path": "/contract/signedAt",
+    "value": "2022-09-06"
+  }
+]

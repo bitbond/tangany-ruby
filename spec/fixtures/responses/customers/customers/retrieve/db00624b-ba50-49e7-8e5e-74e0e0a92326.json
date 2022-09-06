@@ -1,0 +1,55 @@
+{
+  "id": "db00624b-ba50-49e7-8e5e-74e0e0a92326",
+  "person": {
+    "firstName": "Iliana",
+    "lastName": "Effertz",
+    "gender": "X",
+    "birthDate": "1975-02-09",
+    "birthName": "Ted",
+    "birthPlace": "West Faustinobury",
+    "birthCountry": "CC",
+    "nationality": "PL",
+    "address": {
+      "country": "NL",
+      "city": "East Arnold",
+      "postcode": "48802-0862",
+      "streetName": "Dong Lodge",
+      "streetNumber": "447"
+    },
+    "email": "normand_morar@kris.io",
+    "kyc": {
+      "id": "835175f2-1ea5-45f4-a472-a04c32e0401d",
+      "date": "2022-02-05",
+      "method": "no_verification",
+      "document": {
+        "country": "KZ",
+        "nationality": "MX",
+        "number": "238-78-2709",
+        "issuedBy": "Schamberger-Abbott",
+        "issueDate": "2019-04-16",
+        "validUntil": "2029-04-16",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2021-06-12",
+      "source": "Ward, Halvorson and White",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2020-02-23",
+    "isCancelled": true,
+    "cancelledDate": "2021-01-27"
+  },
+  "additional_attributes": {
+    "username": "delaine",
+    "email": "audria.hilll@boyle-ullrich.info"
+  },
+  "_links": {
+    "documents": "/customers/db00624b-ba50-49e7-8e5e-74e0e0a92326/documents"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "c555b71b-99e9-4cd2-a4f7-af586bb0ef9d",
+  "person": {
+    "firstName": "Nella",
+    "lastName": "Bradtke",
+    "gender": "F",
+    "birthDate": "1991-01-01",
+    "birthName": "My",
+    "birthPlace": "Port Zachary",
+    "birthCountry": "HN",
+    "nationality": "HU",
+    "address": {
+      "country": "ID",
+      "city": "Lake Ozzie",
+      "postcode": "33858-5329",
+      "streetName": "Mertz Walk",
+      "streetNumber": "79302"
+    },
+    "email": "rufus@rutherford.org",
+    "kyc": {
+      "id": "22e64235-0144-4b0e-a400-639ea8f6487d",
+      "date": "2022-08-26",
+      "method": "no_verification",
+      "document": {
+        "country": "ZW",
+        "nationality": "AZ",
+        "number": "529-58-2152",
+        "issuedBy": "Leannon Group",
+        "issueDate": "2022-08-10",
+        "validUntil": "2032-08-10",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2020-05-15",
+      "source": "Walker Group",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2018-09-09",
+    "isCancelled": true,
+    "cancelledDate": "2022-06-06"
+  },
+  "additional_attributes": {
+    "username": "antone",
+    "email": "kirk@murphy.org"
+  },
+  "_links": {
+    "documents": "/customers/c555b71b-99e9-4cd2-a4f7-af586bb0ef9d/documents"
+  }
+}

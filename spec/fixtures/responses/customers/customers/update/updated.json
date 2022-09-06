@@ -1,55 +1,55 @@
 {
-  "id": "4a6697d1-25ab-4135-8172-978e36c4b4db",
+  "id": "57e32189-8447-4607-9a35-7144ce4b7156",
   "person": {
-    "firstName": "Shane",
-    "lastName": "Koch",
+    "firstName": "Cedric",
+    "lastName": "Legros",
     "gender": "M",
-    "birthDate": "1996-11-01",
-    "birthName": "Ai",
-    "birthPlace": "East Nonafort",
-    "birthCountry": "RS",
-    "nationality": "BA",
+    "birthDate": "1981-03-05",
+    "birthName": "Leonie",
+    "birthPlace": "Robertofurt",
+    "birthCountry": "SD",
+    "nationality": "WF",
     "address": {
-      "country": "BD",
-      "city": "Ulyssesfurt",
-      "postcode": "17277",
-      "streetName": "Shawn Isle",
-      "streetNumber": "3290"
+      "country": "ZM",
+      "city": "West Scotty",
+      "postcode": "42150-9065",
+      "streetName": "Conn Garden",
+      "streetNumber": "373"
     },
-    "email": "lorina.durgan@johnson.org",
+    "email": "ashlyn@fadel-howe.org",
     "kyc": {
-      "id": "b074c072-e858-460f-a19c-94f1df11b91a",
-      "date": "2022-07-03",
-      "method": "auto_ident",
+      "id": "450572ca-b3e6-4d6d-aeae-1639998d1cfc",
+      "date": "2021-11-26",
+      "method": "no_verification",
       "document": {
-        "country": "CY",
-        "nationality": "AU",
-        "number": "537-52-0219",
-        "issuedBy": "Koch-Bergnaum",
-        "issueDate": "2017-09-27",
-        "validUntil": "2027-09-27",
-        "type": "passport"
+        "country": "BY",
+        "nationality": "BF",
+        "number": "812-45-7351",
+        "issuedBy": "Hane-Langosh",
+        "issueDate": "2019-12-12",
+        "validUntil": "2029-12-12",
+        "type": "id_card"
       }
     },
     "pep": {
-      "isExposed": true,
-      "checkDate": "2021-06-02",
-      "source": "McClure, Emard and Bergnaum",
-      "reason": "Est sit qui dolorum.",
-      "isSanctioned": true
+      "isExposed": false,
+      "checkDate": "2019-12-19",
+      "source": "Medhurst Group",
+      "reason": null,
+      "isSanctioned": false
     }
   },
   "contract": {
     "isSigned": true,
-    "signedDate": "2020-02-06",
-    "isCancelled": false,
-    "cancelledDate": null
+    "signedDate": "2017-12-04",
+    "isCancelled": true,
+    "cancelledDate": "2018-12-22"
   },
   "additional_attributes": {
-    "username": "weston",
-    "email": "jason.nicolas@carroll-sanford.biz"
+    "username": "aurelia_schaefer",
+    "email": "kemberly@nitzsche.org"
   },
   "_links": {
-    "documents": "/customers/4a6697d1-25ab-4135-8172-978e36c4b4db/documents"
+    "documents": "/customers/57e32189-8447-4607-9a35-7144ce4b7156/documents"
   }
 }

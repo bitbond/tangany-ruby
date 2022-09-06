@@ -2,13 +2,15 @@
 
 RSpec.describe(Tangany::Customers::CustomersResource) do
   let(:body) { nil }
-  let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubbed_request) }
+  let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
   let(:method) { :get }
   let(:status) { 200 }
-  let(:stubbed_request) do
-    stub_customers_request(path, method: method, body: body, response: stubbed_response)
-  end
   let(:stubbed_response) { stub_customers_response(fixture: fixture, status: status) }
+  let(:stubs) { Faraday::Adapter::Test::Stubs.new }
+
+  before do
+    stub_customers_request(stubs, path, method: method, body: body, response: stubbed_response)
+  end
 
   context "#create" do
     subject(:customer) { client.customers.create(**body) }
@@ -19,7 +21,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a valid payload" do
       let(:body) do
         JSON.parse(
-          File.read("spec/fixtures/bodies/customers/customers/create/valid-payload.json"),
+          File.read("spec/fixtures/bodies/customers/customers/create/valid_payload.json"),
           symbolize_names: true
         )
       end
@@ -33,7 +35,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with an invalid payload" do
       let(:body) do
         JSON.parse(
-          File.read("spec/fixtures/bodies/customers/customers/create/invalid-payload.json"),
+          File.read("spec/fixtures/bodies/customers/customers/create/invalid_payload.json"),
           symbolize_names: true
         )
       end
@@ -47,7 +49,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a conflicting payload" do
       let(:body) do
         JSON.parse(
-          File.read("spec/fixtures/bodies/customers/customers/create/valid-payload.json"),
+          File.read("spec/fixtures/bodies/customers/customers/create/valid_payload.json"),
           symbolize_names: true
         )
       end
@@ -155,28 +157,50 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   context "#update" do
+    before do
+      stub_customers_request(
+        stubs,
+        "customers/#{customer_id}",
+        method: :get,
+        response: stub_customers_response(
+          fixture: "customers/retrieve/#{customer_id}",
+          headers: { "If-Match" => if_match_header }
+        )
+      )
+    end
+
     subject(:customer) { client.customers.update(customer_id: customer_id, operations: body) }
 
     let(:body) { [] }
     let(:fixture) { "customers/update/#{customer_id}" }
+    let(:if_match_header) { "etag" }
     let(:method) { :patch }
     let(:path) { "customers/#{customer_id}" }
 
     context "with a valid customer ID" do
       let(:customer_id) { fetch_customer_id }
+      let(:fixture) { "customers/update/updated" }
 
       context "with a valid payload" do
-        it "updates the customer"
+        let(:body) do
+          JSON.parse(
+            File.read("spec/fixtures/bodies/customers/customers/update/valid_payload.json"),
+            symbolize_names: true
+          )
+        end
+
+        it "updates the customer" do
+          expect(customer).to(be_a(Tangany::Customers::Customer))
+        end
       end
 
       context "with an invalid payload" do
         let(:body) do
           JSON.parse(
-            File.read("spec/fixtures/bodies/customers/customers/update/invalid-payload.json"),
+            File.read("spec/fixtures/bodies/customers/customers/update/invalid_payload.json"),
             symbolize_names: true
           )
         end
-        let(:fixture) { "customers/update/updated" }
 
         it "raises a Dry::Struct::Error" do
           expect { customer }.to(raise_error(Dry::Struct::Error))
@@ -184,7 +208,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       end
 
       context "with a conflicting If-Match precondition" do
-        it "raises an error"
+        let(:status) { 412 }
+
+        it "raises an error" do
+          expect { customer }.to(
+            raise_error(Tangany::RequestError)
+            .with_message("Mid-air edit collision detected")
+          )
+        end
       end
     end
 

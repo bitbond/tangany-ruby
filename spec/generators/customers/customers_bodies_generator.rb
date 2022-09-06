@@ -13,12 +13,12 @@ module Tangany
         # cleanup
         cleanup("create")
 
-        # invalid-payload.json
-        File.open("#{root_folder}/create/invalid-payload.json", "w") { |file| file.write("{ \"foo\": \"bar\" }") }
+        # invalid_payload.json
+        File.open("#{root_folder}/create/invalid_payload.json", "w") { |file| file.write("{ \"foo\": \"bar\" }") }
 
-        # valid-payload.json
+        # valid_payload.json
         body = FactoryBot.build(:customers_bodies_customers_create)
-        File.open("#{root_folder}/create/valid-payload.json", "w") do |file|
+        File.open("#{root_folder}/create/valid_payload.json", "w") do |file|
           file.write(JSON.pretty_generate(JSON.parse(body.to_json)))
         end
       end
@@ -27,8 +27,14 @@ module Tangany
         # cleanup
         cleanup("update")
 
-        # invalid-payload.json
-        File.open("#{root_folder}/update/invalid-payload.json", "w") { |file| file.write("[{ \"foo\": \"bar\" }]") }
+        # invalid_payload.json
+        File.open("#{root_folder}/update/invalid_payload.json", "w") { |file| file.write("[{ \"foo\": \"bar\" }]") }
+
+        # valid_payload.json
+        body = FactoryBot.build(:customers_bodies_customers_update)
+        File.open("#{root_folder}/update/valid_payload.json", "w") do |file|
+          file.write(JSON.pretty_generate(JSON.parse(body.to_json)))
+        end
       end
 
       private
