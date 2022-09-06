@@ -1,55 +1,55 @@
 {
-  "id": "57e32189-8447-4607-9a35-7144ce4b7156",
+  "id": "3b245cec-a966-461e-927b-5aaf6cb7c74e",
   "person": {
-    "firstName": "Cedric",
-    "lastName": "Legros",
-    "gender": "M",
-    "birthDate": "1981-03-05",
-    "birthName": "Leonie",
-    "birthPlace": "Robertofurt",
-    "birthCountry": "SD",
-    "nationality": "WF",
+    "firstName": "Sean",
+    "lastName": "Kuhn",
+    "gender": "F",
+    "birthDate": "1992-01-04",
+    "birthName": "Doreatha",
+    "birthPlace": "Danielfurt",
+    "birthCountry": "NP",
+    "nationality": "KZ",
     "address": {
-      "country": "ZM",
-      "city": "West Scotty",
-      "postcode": "42150-9065",
-      "streetName": "Conn Garden",
-      "streetNumber": "373"
+      "country": "GR",
+      "city": "Rippinside",
+      "postcode": "92307-1137",
+      "streetName": "Gale Trail",
+      "streetNumber": "275"
     },
-    "email": "ashlyn@fadel-howe.org",
+    "email": "lilian@spencer-cummings.com",
     "kyc": {
-      "id": "450572ca-b3e6-4d6d-aeae-1639998d1cfc",
-      "date": "2021-11-26",
-      "method": "no_verification",
+      "id": "a4553a75-b7b2-4335-aa81-a8c1721133f8",
+      "date": "2022-03-26",
+      "method": "video_ident",
       "document": {
-        "country": "BY",
-        "nationality": "BF",
-        "number": "812-45-7351",
-        "issuedBy": "Hane-Langosh",
-        "issueDate": "2019-12-12",
-        "validUntil": "2029-12-12",
-        "type": "id_card"
+        "country": "BD",
+        "nationality": "BB",
+        "number": "314-15-3214",
+        "issuedBy": "Koelpin-Nitzsche",
+        "issueDate": "2020-02-05",
+        "validUntil": "2030-02-05",
+        "type": "passport"
       }
     },
     "pep": {
       "isExposed": false,
-      "checkDate": "2019-12-19",
-      "source": "Medhurst Group",
+      "checkDate": "2019-06-23",
+      "source": "Abbott Group",
       "reason": null,
       "isSanctioned": false
     }
   },
   "contract": {
     "isSigned": true,
-    "signedDate": "2017-12-04",
-    "isCancelled": true,
-    "cancelledDate": "2018-12-22"
+    "signedDate": "2020-03-19",
+    "isCancelled": false,
+    "cancelledDate": null
   },
   "additional_attributes": {
-    "username": "aurelia_schaefer",
-    "email": "kemberly@nitzsche.org"
+    "username": "felton",
+    "email": "collene.swaniawski@littel.biz"
   },
   "_links": {
-    "documents": "/customers/57e32189-8447-4607-9a35-7144ce4b7156/documents"
+    "documents": "/customers/3b245cec-a966-461e-927b-5aaf6cb7c74e/documents"
   }
 }

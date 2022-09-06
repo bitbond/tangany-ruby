@@ -1,0 +1,55 @@
+{
+  "id": "f1621bf5-6f79-4fd5-9ceb-6607bed17cc0",
+  "person": {
+    "firstName": "Jaleesa",
+    "lastName": "Wisoky",
+    "gender": "X",
+    "birthDate": "1972-08-15",
+    "birthName": "Etta",
+    "birthPlace": "North Clarencetown",
+    "birthCountry": "KY",
+    "nationality": "SD",
+    "address": {
+      "country": "UZ",
+      "city": "Royalstad",
+      "postcode": "25228",
+      "streetName": "Pagac Lodge",
+      "streetNumber": "67050"
+    },
+    "email": "afton@okeefe.net",
+    "kyc": {
+      "id": "9b93188b-76e5-4657-8798-5b40223e94aa",
+      "date": "2022-04-10",
+      "method": "in_person",
+      "document": {
+        "country": "AM",
+        "nationality": "FI",
+        "number": "664-02-0746",
+        "issuedBy": "Kulas and Sons",
+        "issueDate": "2020-05-02",
+        "validUntil": "2030-05-02",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2017-11-22",
+      "source": "Purdy-Harber",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2021-08-13",
+    "isCancelled": true,
+    "cancelledDate": "2021-09-14"
+  },
+  "additional_attributes": {
+    "username": "alva.rau",
+    "email": "charles.swift@wuckert-west.biz"
+  },
+  "_links": {
+    "documents": "/customers/f1621bf5-6f79-4fd5-9ceb-6607bed17cc0/documents"
+  }
+}

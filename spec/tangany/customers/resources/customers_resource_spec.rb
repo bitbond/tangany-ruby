@@ -75,7 +75,9 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a valid customer ID" do
       let(:customer_id) { fetch_customer_id }
 
-      it "returns an empty response"
+      it "returns an empty response" do
+        expect { customer }.to_not(raise_error)
+      end
     end
 
     context "with an invalid customer ID" do
@@ -88,15 +90,6 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
           .with_message("Customer with ID \"#{customer_id}\" was not found")
         )
       end
-    end
-
-    context "with a customer ID assigned to a wallet link" do
-      it "raises an error"
-      # {
-      #     "statusCode": 400,
-      #     "activityId": "9b33505c-7255-4b1f-92fa-5bfd8fabcbd6",
-      #     "message": "Customer assigned to a wallet link cannot be deleted"
-      # }
     end
   end
 
@@ -240,6 +233,6 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
 
       id
-    end.compact.sample
+    end.compact[0]
   end
 end

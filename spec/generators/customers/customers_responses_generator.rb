@@ -32,6 +32,12 @@ module Tangany
         # cleanup
         cleanup("delete")
 
+        # deleted
+        customer_id = File.basename(Dir.glob("#{root_folder}/retrieve/*.json").sort[0], ".json")
+        File.open("#{root_folder}/delete/#{customer_id}.json", "w") do |file|
+          file.write("{}")
+        end
+
         # invalid customer
         File.open("#{root_folder}/delete/not_found.json", "w") do |file|
           file.write(JSON.pretty_generate(not_found_response))
