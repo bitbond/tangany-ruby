@@ -1,0 +1,55 @@
+{
+  "id": "098159d3-ae03-4ae5-8709-832ff054eb48",
+  "person": {
+    "firstName": "Hobert",
+    "lastName": "Krajcik",
+    "gender": "F",
+    "birthDate": "1977-11-21",
+    "birthName": "Edward",
+    "birthPlace": "Lake Silas",
+    "birthCountry": "RU",
+    "nationality": "LU",
+    "address": {
+      "country": "PE",
+      "city": "West Edaberg",
+      "postcode": "29894-1277",
+      "streetName": "Ullrich Turnpike",
+      "streetNumber": "8761"
+    },
+    "email": "clemente_oconner@pagac-lynch.com",
+    "kyc": {
+      "id": "0ec75414-f32a-41db-9bc4-76cb177ffef6",
+      "date": "2022-08-31",
+      "method": "in_person",
+      "document": {
+        "country": "NR",
+        "nationality": "KI",
+        "number": "412-04-7347",
+        "issuedBy": "Tremblay Group",
+        "issueDate": "2021-12-09",
+        "validUntil": "2031-12-09",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2022-07-14",
+      "source": "Homenick-McLaughlin",
+      "reason": "Nihil qui magnam at.",
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2020-02-21",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additional_attributes": {
+    "username": "phillip",
+    "email": "cinthia@wolff.co"
+  },
+  "_links": {
+    "documents": "/customers/098159d3-ae03-4ae5-8709-832ff054eb48/documents"
+  }
+}

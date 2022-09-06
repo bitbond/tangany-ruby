@@ -1,0 +1,55 @@
+{
+  "id": "b9670c17-fd8f-4df2-a8a7-e1c0807bf47b",
+  "person": {
+    "firstName": "Conchita",
+    "lastName": "Rippin",
+    "gender": "F",
+    "birthDate": "1976-10-01",
+    "birthName": "Denyse",
+    "birthPlace": "Wileyshire",
+    "birthCountry": "BR",
+    "nationality": "IN",
+    "address": {
+      "country": "BR",
+      "city": "Kleinborough",
+      "postcode": "35632",
+      "streetName": "Macejkovic Spur",
+      "streetNumber": "45396"
+    },
+    "email": "kacey@gulgowski.co",
+    "kyc": {
+      "id": "4040d362-d37f-4270-980f-58d2016f839f",
+      "date": "2021-09-30",
+      "method": "no_verification",
+      "document": {
+        "country": "BN",
+        "nationality": "FM",
+        "number": "026-38-0448",
+        "issuedBy": "O'Hara, Gleichner and Jacobi",
+        "issueDate": "2020-09-26",
+        "validUntil": "2030-09-26",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2021-08-13",
+      "source": "Nikolaus-Hauck",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2021-08-20",
+    "isCancelled": true,
+    "cancelledDate": "2022-02-08"
+  },
+  "additional_attributes": {
+    "username": "emanuel.sauer",
+    "email": "phillip@thiel.io"
+  },
+  "_links": {
+    "documents": "/customers/b9670c17-fd8f-4df2-a8a7-e1c0807bf47b/documents"
+  }
+}

@@ -81,7 +81,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with an invalid customer ID" do
-      let(:customer_id) { "invalid" }
+      let(:customer_id) { "not_found" }
       let(:status) { 404 }
 
       it "raises an error" do
@@ -141,13 +141,25 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with an invalid customer ID" do
-      let(:customer_id) { "invalid" }
+      let(:customer_id) { "not_found" }
       let(:status) { 404 }
 
       it "raises an error" do
         expect { customer }.to(
           raise_error(Tangany::RequestError)
           .with_message("Customer with ID \"#{customer_id}\" was not found")
+        )
+      end
+    end
+
+    context "with a deleted customer ID" do
+      let(:customer_id) { "deleted" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { customer }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("Customer with ID \"#{customer_id}\" has been deleted")
         )
       end
     end

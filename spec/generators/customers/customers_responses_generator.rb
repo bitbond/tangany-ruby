@@ -10,6 +10,9 @@ module Tangany
       end
 
       def create
+        # cleanup
+        cleanup("create")
+
         # created
         file = Dir.glob("#{root_folder}/retrieve/*.json").sort[0]
         FileUtils.cp(file, "spec/fixtures/responses/customers/customers/create/created.json")
@@ -19,20 +22,26 @@ module Tangany
         File.open("spec/fixtures/responses/customers/customers/create/conflicting.json", "w") do |file|
           file.write(JSON.pretty_generate({
             statusCode: 409,
-            activityId: "e0303d0f-aa88-4b8a-b360-48a5580ebee1",
+            activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
             message: "Customer with ID \"#{customer_id}\" already exists.",
           }))
         end
       end
 
       def delete
+        # cleanup
+        cleanup("delete")
+
         # invalid customer
-        File.open("#{root_folder}/delete/invalid.json", "w") do |file|
-          file.write(JSON.pretty_generate(customer_not_found_response("invalid")))
+        File.open("#{root_folder}/delete/not_found.json", "w") do |file|
+          file.write(JSON.pretty_generate(not_found_response))
         end
       end
 
       def list
+        # cleanup
+        cleanup("list")
+
         # empty
         File.open("#{root_folder}/list/empty.json", "w") do |file|
           file.write(JSON.pretty_generate(list_response_from_customer_ids([])))
@@ -51,8 +60,10 @@ module Tangany
       end
 
       def retrieve
+        # cleanup
+        cleanup("retrieve")
+
         # valid customers
-        Dir.glob("#{root_folder}/retrieve/*.json").each { |file| File.delete(file) }
         3.times do
           customer = FactoryBot.build(:customers_objects_customer)
           File.open("#{root_folder}/retrieve/#{customer.id}.json", "w") do |file|
@@ -61,18 +72,36 @@ module Tangany
         end
 
         # invalid customer
-        File.open("#{root_folder}/retrieve/invalid.json", "w") do |file|
-          file.write(JSON.pretty_generate(customer_not_found_response("invalid")))
+        File.open("#{root_folder}/retrieve/not_found.json", "w") do |file|
+          file.write(JSON.pretty_generate(not_found_response))
+        end
+
+        # deleted customer
+        File.open("#{root_folder}/retrieve/deleted.json", "w") do |file|
+          file.write(JSON.pretty_generate(deleted_response))
         end
       end
 
       private
 
-      def customer_not_found_response(customer_id)
+      def cleanup(folder)
+        # cleanup
+        Dir.glob("#{root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
+      end
+
+      def deleted_response
         {
           statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"#{customer_id}\" was not found",
+          message: "Customer with ID \"deleted\" has been deleted",
+        }
+      end
+
+      def not_found_response
+        {
+          statusCode: 404,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "Customer with ID \"not_found\" was not found",
         }
       end
 
