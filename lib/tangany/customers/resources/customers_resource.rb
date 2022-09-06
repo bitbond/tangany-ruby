@@ -19,6 +19,11 @@ module Tangany
       def retrieve(customer_id:)
         Customer.new(get_request("customers/#{customer_id}").body)
       end
+
+      def update(customer_id:, operations: [])
+        body = Tangany::Customers::Customers::UpdateBody.new(operations: operations)
+        Customer.new(patch_request("customers/#{customer_id}", body: body).body)
+      end
     end
   end
 end

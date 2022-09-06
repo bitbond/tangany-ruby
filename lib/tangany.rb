@@ -10,8 +10,8 @@ require_relative "tangany/resource"
 require_relative "tangany/types"
 require_relative "tangany/version"
 
-require_relative "tangany/body"
 require_relative "tangany/object"
+require_relative "tangany/operation"
 
 require_relative "tangany/customers"
 

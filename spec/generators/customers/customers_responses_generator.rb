@@ -82,10 +82,23 @@ module Tangany
         end
       end
 
+      def update
+        # cleanup
+        cleanup("update")
+
+        # updated
+        file = Dir.glob("#{root_folder}/retrieve/*.json").sort[0]
+        FileUtils.cp(file, "spec/fixtures/responses/customers/customers/update/updated.json")
+
+        # invalid customer
+        File.open("#{root_folder}/update/not_found.json", "w") do |file|
+          file.write(JSON.pretty_generate(not_found_response))
+        end
+      end
+
       private
 
       def cleanup(folder)
-        # cleanup
         Dir.glob("#{root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
       end
 

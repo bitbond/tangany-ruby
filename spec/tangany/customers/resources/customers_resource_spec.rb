@@ -71,11 +71,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     let(:path) { "customers/#{customer_id}" }
 
     context "with a valid customer ID" do
-      let(:customer_id) do
-        Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
-          File.basename(file, ".json")
-        end.sample
-      end
+      let(:customer_id) { fetch_customer_id }
 
       it "returns an empty response"
     end
@@ -126,14 +122,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     let(:path) { "customers/#{customer_id}" }
 
     context "with a valid customer ID" do
-      let(:customer_id) do
-        Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
-          id = File.basename(file, ".json")
-          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
-
-          id
-        end.compact.sample
-      end
+      let(:customer_id) { fetch_customer_id }
 
       it "returns a Customer" do
         expect(customer).to(be_a(Tangany::Customers::Customer))
@@ -163,5 +152,63 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
         )
       end
     end
+  end
+
+  context "#update" do
+    subject(:customer) { client.customers.update(customer_id: customer_id, operations: body) }
+
+    let(:body) { [] }
+    let(:fixture) { "customers/update/#{customer_id}" }
+    let(:method) { :patch }
+    let(:path) { "customers/#{customer_id}" }
+
+    context "with a valid customer ID" do
+      let(:customer_id) { fetch_customer_id }
+
+      context "with a valid payload" do
+        it "updates the customer"
+      end
+
+      context "with an invalid payload" do
+        let(:body) do
+          JSON.parse(
+            File.read("spec/fixtures/bodies/customers/customers/update/invalid-payload.json"),
+            symbolize_names: true
+          )
+        end
+        let(:fixture) { "customers/update/updated" }
+
+        it "raises a Dry::Struct::Error" do
+          expect { customer }.to(raise_error(Dry::Struct::Error))
+        end
+      end
+
+      context "with a conflicting If-Match precondition" do
+        it "raises an error"
+      end
+    end
+
+    context "with an invalid customer ID" do
+      let(:customer_id) { "not_found" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { customer }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("Customer with ID \"#{customer_id}\" was not found")
+        )
+      end
+    end
+  end
+
+  private
+
+  def fetch_customer_id
+    Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
+      id = File.basename(file, ".json")
+      next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+      id
+    end.compact.sample
   end
 end

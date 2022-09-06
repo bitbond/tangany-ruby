@@ -33,6 +33,8 @@ task :regenerate_fixtures do
   puts "== Regenerating customers bodies ".ljust(80, "=")
   puts " -> Regenerating customers/create"
   Tangany::Customers::CustomersBodiesGenerator.new.create
+  puts " -> Regenerating customers/update"
+  Tangany::Customers::CustomersBodiesGenerator.new.update
 
   puts
   puts "== Regenerating customers responses ".ljust(80, "=")
@@ -44,6 +46,8 @@ task :regenerate_fixtures do
   Tangany::Customers::CustomersResponsesGenerator.new.create
   puts " -> Regenerating customers/delete"
   Tangany::Customers::CustomersResponsesGenerator.new.delete
+  puts " -> Regenerating customers/update"
+  Tangany::Customers::CustomersResponsesGenerator.new.update
 end
 
 task default: [:rubocop, :quality_check, :spec]
