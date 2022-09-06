@@ -50,12 +50,13 @@ module Tangany
       when 404, 409
         raise RequestError.new(
           response.body[:message],
-          activity_id: response.body[:activity_id],
+          activity_id: response.headers["tangany-activity-id"],
           status_code: response.body[:statusCode]
         )
       when 412
         raise RequestError.new(
           "Mid-air edit collision detected",
+          activity_id: response.headers["tangany-activity-id"],
           status_code: 412
         )
       else
