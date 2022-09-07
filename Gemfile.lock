@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     tangany (0.1.0)
+      activesupport (>= 3.0.0)
       dry-struct (~> 1.4)
       faraday (~> 2.5)
       hash_diff (~> 1.1)

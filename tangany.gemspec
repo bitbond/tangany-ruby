@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.executables = %x(git ls-files -z -- bin/*).split("\x0").map { |f| ::File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency("activesupport", ">= 3.0.0")
   spec.add_dependency("dry-struct", "~> 1.4")
   spec.add_dependency("faraday", "~> 2.5")
   spec.add_dependency("hash_diff", "~> 1.1")

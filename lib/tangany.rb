@@ -3,7 +3,6 @@
 require "forwardable"
 require "hash_diff"
 
-require_relative "core_ext/hash"
 require_relative "core_ext/hash_diff/comparison"
 
 require_relative "tangany/error"
