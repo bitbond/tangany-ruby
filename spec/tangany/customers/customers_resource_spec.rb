@@ -12,7 +12,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     stub_customers_request(stubs, path, method: method, body: body, response: stubbed_response)
   end
 
-  context "#create" do
+  describe "#create" do
     subject(:customer) { client.customers.create(**body) }
 
     let(:method) { :post }
@@ -65,7 +65,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
   end
 
-  context "#delete" do
+  describe "#delete" do
     subject(:customer) { client.customers.delete(customer_id: customer_id) }
 
     let(:fixture) { "customers/delete/#{customer_id}" }
@@ -76,7 +76,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       let(:customer_id) { fetch_customer_id }
 
       it "returns an empty response" do
-        expect { customer }.to_not(raise_error)
+        expect { customer }.not_to(raise_error)
       end
     end
 
@@ -93,7 +93,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
   end
 
-  context "#list" do
+  describe "#list" do
     subject(:customers) { client.customers.list(limit: limit, start: start) }
 
     let(:fixture) { "customers/list/paginated" }
@@ -101,16 +101,28 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     let(:path) { "customers?limit=#{limit}&start=#{start}" }
     let(:start) { 1 }
 
-    it "returns a paginated collection of customers" do
+    it "returns a collection" do
       expect(customers).to(be_a(Tangany::Collection))
+    end
+
+    it "returns a collection of customers" do
       expect(customers.data.first.class).to(eq(Tangany::Customers::Customer))
+    end
+
+    it "has a total of 3" do
       expect(customers.total).to(eq(3))
+    end
+
+    it "has a next path" do
       expect(customers.next_path).to(eq("/customers?start=2&limit=1"))
+    end
+
+    it "has a previous path" do
       expect(customers.previous_path).to(eq("/customers?start=0&limit=1"))
     end
   end
 
-  context "#retrieve" do
+  describe "#retrieve" do
     subject(:customer) { client.customers.retrieve(customer_id: customer_id) }
 
     let(:fixture) { "customers/retrieve/#{customer_id}" }
@@ -149,7 +161,9 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
   end
 
-  context "#update" do
+  describe "#update" do
+    subject(:customer) { client.customers.update(customer_id: customer_id, **body) }
+
     before do
       stub_customers_request(
         stubs,
@@ -162,8 +176,6 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
         )
       )
     end
-
-    subject(:customer) { client.customers.update(customer_id: customer_id, **body) }
 
     let(:body) { {} }
     let(:fixture) { "customers/update/#{customer_id}" }

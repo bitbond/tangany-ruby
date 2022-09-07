@@ -3,7 +3,7 @@
 require "factory_bot"
 
 FactoryBot.define do
-  factory :customers_bodies_customers_create, class: Tangany::Customers::Customers::CreateInput do
+  factory :customers_bodies_customers_create, class: "Tangany::Customers::Customers::CreateInput" do
     initialize_with { new(attributes) }
 
     id { Faker::Internet.uuid }

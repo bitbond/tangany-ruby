@@ -3,7 +3,7 @@
 require "factory_bot"
 
 FactoryBot.define do
-  factory :customers_objects_person, class: Tangany::Customers::Person do
+  factory :customers_objects_person, class: "Tangany::Customers::Person" do
     initialize_with { new(attributes) }
 
     firstName { Faker::Name.first_name }

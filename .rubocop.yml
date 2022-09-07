@@ -1,5 +1,13 @@
+require: rubocop-rake
+require: rubocop-rspec
+
 inherit_gem:
   rubocop-shopify: rubocop.yml
 
 AllCops:
   NewCops: enable
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+RSpec/NestedGroups:
+  Max: 4
