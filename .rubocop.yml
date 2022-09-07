@@ -7,6 +7,8 @@ inherit_gem:
   standard: config/base.yml
 
 AllCops:
+  Exclude:
+    - vendor/bundle/**/*
   NewCops: enable
 
 RSpec/MultipleMemoizedHelpers:
