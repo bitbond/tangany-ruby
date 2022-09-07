@@ -1,5 +1,7 @@
 # Tangany Ruby Library
 
+[![Tests](https://github.com/bitbond/tangany-ruby/actions/workflows/main.yml/badge.svg)](https://github.com/bitbond/tangany-ruby/actions/workflows/main.yml)
+
 The Tangany Ruby library provides convenient access to the Tangany APIs from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that initialize themselves dynamically from API responses.
 
 ---
