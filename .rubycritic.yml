@@ -2,6 +2,6 @@
 formats:
   - html
 no_browser: true
-minimum_score: 94
+minimum_score: 90
 paths:
   - 'lib'

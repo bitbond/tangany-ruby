@@ -1,5 +1,7 @@
-ARG RUBY_VERSION
-FROM ruby:${RUBY_VERSION}-slim-bullseye
+ARG DISTRO
+ARG VERSION
+
+FROM ruby:${VERSION}-${DISTRO}
 
 # Common dependencies
 RUN apt-get update -qq \
