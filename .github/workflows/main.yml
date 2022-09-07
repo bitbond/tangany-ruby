@@ -1,4 +1,4 @@
-name: Ruby
+name: Tests
 
 on:
   push:
@@ -25,5 +25,9 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Run the default task
-        run: bundle exec rake
+      - name: StandardRb check
+        run: bundle exec standardrb
+      - name: Quality check
+        run: bundle exec rake quality_check
+      - name: Run tests
+        run: bundle exec rspec
