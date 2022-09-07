@@ -14,6 +14,6 @@ module RequestHelpers
   private
 
   def default_headers
-    { "Content-Type" => "application/json" }
+    {"Content-Type" => "application/json"}
   end
 end

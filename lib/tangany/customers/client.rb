@@ -19,7 +19,7 @@ module Tangany
         @connection ||= Faraday.new do |faraday|
           faraday.adapter(adapter, @stubs)
           faraday.request(:json)
-          faraday.response(:json, content_type: /\bjson$/, parser_options: { symbolize_names: true })
+          faraday.response(:json, content_type: /\bjson$/, parser_options: {symbolize_names: true})
           faraday.url_prefix = Tangany.customers_base_url
         end
       end

@@ -61,7 +61,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       it "raises an error" do
         expect { customer }.to(
           raise_error(Tangany::RequestError)
-          .with_message(/Customer with ID "[^\"]+" already exists/)
+          .with_message(/Customer with ID "[^"]+" already exists/)
         )
       end
     end
@@ -179,7 +179,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
         method: :get,
         response: stub_customers_response(
           fixture: "customers/retrieve/#{customer_id}",
-          headers: { "If-Match" => if_match_header },
+          headers: {"If-Match" => if_match_header},
           status: status
         )
       )
@@ -191,7 +191,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
 
       context "with a valid payload" do
         let(:body) do
-          [{ op: "replace", path: "/contract/signedDate", value: input.dig(:contract, :signedDate) }].to_json
+          [{op: "replace", path: "/contract/signedDate", value: input.dig(:contract, :signedDate)}].to_json
         end
         let(:input) do
           JSON.parse(

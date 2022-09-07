@@ -29,7 +29,7 @@ module Tangany
         Customer.new(patch_request(
           "customers/#{customer_id}",
           body: build_update_body_json(customer_hash, update_input_hash),
-          headers: { "If-Match" => response.headers["If-Match"] }
+          headers: {"If-Match" => response.headers["If-Match"]}
         ).body)
       end
 

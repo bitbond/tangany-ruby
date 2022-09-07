@@ -1,9 +1,10 @@
 require:
+  - standard
   - rubocop-rake
   - rubocop-rspec
 
 inherit_gem:
-  rubocop-shopify: rubocop.yml
+  standard: config/base.yml
 
 AllCops:
   NewCops: enable

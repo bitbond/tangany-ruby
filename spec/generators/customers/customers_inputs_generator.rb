@@ -14,13 +14,11 @@ module Tangany
         cleanup("create")
 
         # invalid_input.json
-        File.open("#{root_folder}/create/invalid_input.json", "w") { |file| file.write("{ \"foo\": \"bar\" }") }
+        File.write("#{root_folder}/create/invalid_input.json", "{ \"foo\": \"bar\" }")
 
         # valid_input.json
         input = FactoryBot.build(:customers_inputs_customers_create)
-        File.open("#{root_folder}/create/valid_input.json", "w") do |file|
-          file.write(JSON.pretty_generate(JSON.parse(input.to_json)))
-        end
+        File.write("#{root_folder}/create/valid_input.json", JSON.pretty_generate(JSON.parse(input.to_json)))
       end
 
       def update
@@ -28,15 +26,11 @@ module Tangany
         cleanup("update")
 
         # invalid_input.json
-        File.open("#{root_folder}/update/invalid_input.json", "w") do |file|
-          file.write(JSON.pretty_generate({ foo: :bar }))
-        end
+        File.write("#{root_folder}/update/invalid_input.json", JSON.pretty_generate({foo: :bar}))
 
         # valid_input.json
         input = FactoryBot.build(:customers_inputs_customers_update)
-        File.open("#{root_folder}/update/valid_input.json", "w") do |file|
-          file.write(JSON.pretty_generate(JSON.parse(input.to_json)))
-        end
+        File.write("#{root_folder}/update/valid_input.json", JSON.pretty_generate(JSON.parse(input.to_json)))
       end
 
       private

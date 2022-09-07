@@ -14,18 +14,16 @@ module Tangany
         cleanup("create")
 
         # created
-        file = Dir.glob("#{root_folder}/retrieve/*.json").sort[0]
+        file = Dir.glob("#{root_folder}/retrieve/*.json").min
         FileUtils.cp(file, "spec/fixtures/responses/customers/customers/create/created.json")
 
         # conflicting
         customer_id = JSON.parse(File.read("spec/fixtures/inputs/customers/customers/create/valid_input.json"))["id"]
-        File.open("spec/fixtures/responses/customers/customers/create/conflicting.json", "w") do |file|
-          file.write(JSON.pretty_generate({
-            statusCode: 409,
-            activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-            message: "Customer with ID \"#{customer_id}\" already exists.",
-          }))
-        end
+        File.write("spec/fixtures/responses/customers/customers/create/conflicting.json", JSON.pretty_generate({
+          statusCode: 409,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "Customer with ID \"#{customer_id}\" already exists."
+        }))
       end
 
       def delete
@@ -33,15 +31,11 @@ module Tangany
         cleanup("delete")
 
         # deleted
-        customer_id = File.basename(Dir.glob("#{root_folder}/retrieve/*.json").sort[0], ".json")
-        File.open("#{root_folder}/delete/#{customer_id}.json", "w") do |file|
-          file.write("{}")
-        end
+        customer_id = File.basename(Dir.glob("#{root_folder}/retrieve/*.json").min, ".json")
+        File.write("#{root_folder}/delete/#{customer_id}.json", "{}")
 
         # invalid customer
-        File.open("#{root_folder}/delete/not_found.json", "w") do |file|
-          file.write(JSON.pretty_generate(not_found_response))
-        end
+        File.write("#{root_folder}/delete/not_found.json", JSON.pretty_generate(not_found_response))
       end
 
       def list
@@ -49,9 +43,7 @@ module Tangany
         cleanup("list")
 
         # empty
-        File.open("#{root_folder}/list/empty.json", "w") do |file|
-          file.write(JSON.pretty_generate(list_response_from_customer_ids([])))
-        end
+        File.write("#{root_folder}/list/empty.json", JSON.pretty_generate(list_response_from_customer_ids([])))
 
         # paginated
         customer_ids = Dir.glob("#{root_folder}/retrieve/*.json").map do |file|
@@ -60,9 +52,7 @@ module Tangany
 
           id
         end.compact.sort
-        File.open("#{root_folder}/list/paginated.json", "w") do |file|
-          file.write(JSON.pretty_generate(list_response_from_customer_ids(customer_ids)))
-        end
+        File.write("#{root_folder}/list/paginated.json", JSON.pretty_generate(list_response_from_customer_ids(customer_ids)))
       end
 
       def retrieve
@@ -72,20 +62,14 @@ module Tangany
         # valid customers
         3.times do
           customer = FactoryBot.build(:customers_objects_customer)
-          File.open("#{root_folder}/retrieve/#{customer.id}.json", "w") do |file|
-            file.write(JSON.pretty_generate(JSON.parse(customer.to_json)))
-          end
+          File.write("#{root_folder}/retrieve/#{customer.id}.json", JSON.pretty_generate(JSON.parse(customer.to_json)))
         end
 
         # invalid customer
-        File.open("#{root_folder}/retrieve/not_found.json", "w") do |file|
-          file.write(JSON.pretty_generate(not_found_response))
-        end
+        File.write("#{root_folder}/retrieve/not_found.json", JSON.pretty_generate(not_found_response))
 
         # deleted customer
-        File.open("#{root_folder}/retrieve/deleted.json", "w") do |file|
-          file.write(JSON.pretty_generate(deleted_response))
-        end
+        File.write("#{root_folder}/retrieve/deleted.json", JSON.pretty_generate(deleted_response))
       end
 
       def update
@@ -93,13 +77,11 @@ module Tangany
         cleanup("update")
 
         # updated
-        file = Dir.glob("#{root_folder}/retrieve/*.json").sort[0]
+        file = Dir.glob("#{root_folder}/retrieve/*.json").min
         FileUtils.cp(file, "spec/fixtures/responses/customers/customers/update/updated.json")
 
         # invalid customer
-        File.open("#{root_folder}/update/not_found.json", "w") do |file|
-          file.write(JSON.pretty_generate(not_found_response))
-        end
+        File.write("#{root_folder}/update/not_found.json", JSON.pretty_generate(not_found_response))
       end
 
       private
@@ -112,7 +94,7 @@ module Tangany
         {
           statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"deleted\" has been deleted",
+          message: "Customer with ID \"deleted\" has been deleted"
         }
       end
 
@@ -120,7 +102,7 @@ module Tangany
         {
           statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"not_found\" was not found",
+          message: "Customer with ID \"not_found\" was not found"
         }
       end
 
@@ -132,14 +114,14 @@ module Tangany
               id: id,
               environment: "testing",
               _links: {
-                self: "/customers/#{id}",
-              },
+                self: "/customers/#{id}"
+              }
             }
           end,
           _links: {
             next: customer_ids.present? ? "/customers?start=2&limit=1" : nil,
-            previous: customer_ids.present? ? "/customers?start=0&limit=1" : nil,
-          },
+            previous: customer_ids.present? ? "/customers?start=0&limit=1" : nil
+          }
         }
       end
     end

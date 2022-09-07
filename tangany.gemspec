@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
     "documentation_uri" => spec.homepage,
     "github_repo" => "ssh://github.com/bitbond/tangany-ruby",
     "homepage_uri" => spec.homepage,
-    "source_code_uri" => "https://github.com/bitbond/tangany-ruby",
+    "source_code_uri" => "https://github.com/bitbond/tangany-ruby"
   }
 
   ignored = Regexp.union(
@@ -30,8 +30,8 @@ Gem::Specification.new do |spec|
     /\A\.vscode/,
     /\Aspec/
   )
-  spec.files = %x(git ls-files -z).split("\x0").reject { |f| (f == __FILE__) || ignored.match(f) }
-  spec.executables = %x(git ls-files -z -- bin/*).split("\x0").map { |f| ::File.basename(f) }
+  spec.files = `git ls-files -z`.split("\x0").reject { |f| (f == __FILE__) || ignored.match(f) }
+  spec.executables = `git ls-files -z -- bin/*`.split("\x0").map { |f| ::File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency("activesupport", ">= 3.0.0")

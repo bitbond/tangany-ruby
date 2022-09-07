@@ -9,7 +9,7 @@ FactoryBot.define do
     contract do
       {
         isSigned: true,
-        signedDate: Date.today.to_s,
+        signedDate: Date.today.to_s
       }
     end
   end

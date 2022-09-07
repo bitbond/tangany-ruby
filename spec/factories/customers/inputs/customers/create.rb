@@ -24,7 +24,7 @@ FactoryBot.define do
           city: Faker::Address.city,
           postcode: Faker::Address.postcode,
           streetName: Faker::Address.street_name,
-          streetNumber: Faker::Address.building_number,
+          streetNumber: Faker::Address.building_number
         },
         email: Faker::Internet.email,
         kyc: {
@@ -38,16 +38,16 @@ FactoryBot.define do
             issuedBy: Faker::Company.name,
             issueDate: issue_date,
             validUntil: Date.parse(issue_date).next_year(10).to_s,
-            type: Tangany::Customers::Customers::CreateInput::ALLOWED_PERSON_KYC_DOCUMENT_TYPES.sample,
-          },
+            type: Tangany::Customers::Customers::CreateInput::ALLOWED_PERSON_KYC_DOCUMENT_TYPES.sample
+          }
         },
         pep: {
           isExposed: is_exposed,
           checkDate: Faker::Date.backward(days: 365 * 5).to_s,
           source: Faker::Company.name,
           reason: is_exposed ? Faker::Lorem.sentence : nil,
-          isSanctioned: is_exposed ? Faker::Boolean.boolean : false,
-        },
+          isSanctioned: is_exposed ? Faker::Boolean.boolean : false
+        }
       }
     end
     contract do
@@ -57,7 +57,7 @@ FactoryBot.define do
         isSigned: Faker::Boolean.boolean,
         signedDate: signed_date,
         isCancelled: is_cancelled,
-        cancelledDate: is_cancelled ? Faker::Date.between(from: signed_date, to: Date.today).to_s : nil,
+        cancelledDate: is_cancelled ? Faker::Date.between(from: signed_date, to: Date.today).to_s : nil
       }
     end
     additional_attributes { Faker::Internet.user }

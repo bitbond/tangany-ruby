@@ -10,6 +10,6 @@ FactoryBot.define do
     association :person, factory: :customers_objects_person
     association :contract, factory: :customers_objects_contract
     additional_attributes { Faker::Internet.user }
-    add_attribute(:_links) { |obj| { documents: "/customers/#{obj.id}/documents" } }
+    add_attribute(:_links) { |obj| {documents: "/customers/#{obj.id}/documents"} }
   end
 end
