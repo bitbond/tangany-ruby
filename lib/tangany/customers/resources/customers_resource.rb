@@ -4,8 +4,8 @@ module Tangany
   module Customers
     class CustomersResource < Resource
       def create(**attributes)
-        body = Tangany::Customers::Customers::CreateBody.new(attributes)
-        Customer.new(post_request("customers", body: body).body)
+        input = Tangany::Customers::Customers::CreateInput.new(attributes)
+        Customer.new(post_request("customers", body: input.to_json).body)
       end
 
       def delete(customer_id:)
@@ -24,11 +24,11 @@ module Tangany
         response = get_request("customers/#{customer_id}")
 
         customer_hash = Customer.new(response.body).to_h
-        update_body_hash = Tangany::Customers::Customers::UpdateBody.new(attributes).to_h
+        update_input_hash = Tangany::Customers::Customers::UpdateInput.new(attributes).to_h
 
         Customer.new(patch_request(
           "customers/#{customer_id}",
-          body: build_body(customer_hash, update_body_hash),
+          body: build_body(customer_hash, update_input_hash),
           headers: { "If-Match" => response.headers["If-Match"] }
         ).body)
       end

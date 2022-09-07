@@ -24,7 +24,7 @@ module Tangany
     def patch_request(url, body:, headers: {})
       handle_response(client.connection.patch do |request|
         request.url(url)
-        request.body = body.to_json
+        request.body = body
         request.headers = default_headers.merge(headers)
       end)
     end
@@ -32,7 +32,7 @@ module Tangany
     def post_request(url, body:, headers: {})
       handle_response(client.connection.post do |request|
         request.url(url)
-        request.body = body.to_json
+        request.body = body
         request.headers = default_headers.merge(headers)
       end)
     end

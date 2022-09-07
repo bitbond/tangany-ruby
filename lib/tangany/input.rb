@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Tangany
-  class Body < Dry::Struct
+  class Input < Dry::Struct
     COUNTRY_REGEXP = /[A-Z]{2}/.freeze
     DATE_REGEXP = /[0-9]{4}-[0-9]{2}-[0-9]{2}/.freeze
     DATETIME_OPTIONAL_REGEXP = /[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z)?/.freeze

@@ -3,7 +3,7 @@
 module Tangany
   module Customers
     module Customers
-      class CreateBody < Body
+      class CreateInput < Input
         ALLOWED_PERSON_GENDERS = ["F", "M", "X"].freeze
         ALLOWED_PERSON_KYC_DOCUMENT_TYPES = ["id_card", "passport"].freeze
         ALLOWED_PERSON_KYC_METHODS = ["video_ident", "id_copy", "auto_ident", "in_person", "no_verification"].freeze
