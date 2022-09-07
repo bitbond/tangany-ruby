@@ -20,14 +20,25 @@ module Tangany
         Customer.new(get_request("customers/#{customer_id}").body)
       end
 
-      def update(customer_id:, operations: [])
-        if_match_header = get_request("customers/#{customer_id}").headers["If-Match"]
-        body = Tangany::Customers::Customers::UpdateBody.new(operations: operations)
+      def update(customer_id:, **attributes)
+        response = get_request("customers/#{customer_id}")
+
+        customer_hash = Customer.new(response.body).to_h
+        update_body_hash = Tangany::Customers::Customers::UpdateBody.new(attributes).to_h
+
         Customer.new(patch_request(
           "customers/#{customer_id}",
-          body: body,
-          headers: { "If-Match" => if_match_header }
+          body: build_body(customer_hash, update_body_hash),
+          headers: { "If-Match" => response.headers["If-Match"] }
         ).body)
+      end
+
+      private
+
+      def build_body(customer_hash, update_body_hash)
+        merged_hash = customer_hash.deep_merge(update_body_hash)
+        hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
+        hash_diff.to_operations_json
       end
     end
   end

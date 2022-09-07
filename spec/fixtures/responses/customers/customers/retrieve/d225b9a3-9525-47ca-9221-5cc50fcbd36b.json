@@ -1,0 +1,55 @@
+{
+  "id": "d225b9a3-9525-47ca-9221-5cc50fcbd36b",
+  "person": {
+    "firstName": "Benny",
+    "lastName": "Spinka",
+    "gender": "F",
+    "birthDate": "1992-05-29",
+    "birthName": "Vannessa",
+    "birthPlace": "Leofurt",
+    "birthCountry": "SM",
+    "nationality": "MF",
+    "address": {
+      "country": "BO",
+      "city": "Greenholtfort",
+      "postcode": "34900-1979",
+      "streetName": "Robel Shoals",
+      "streetNumber": "34998"
+    },
+    "email": "mittie_schneider@walsh-cruickshank.io",
+    "kyc": {
+      "id": "d3d7b4b8-8c67-4b20-a6b5-a452b36cac7b",
+      "date": "2022-07-23",
+      "method": "auto_ident",
+      "document": {
+        "country": "CM",
+        "nationality": "MN",
+        "number": "013-80-4597",
+        "issuedBy": "Kuphal Group",
+        "issueDate": "2022-03-28",
+        "validUntil": "2032-03-28",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2022-01-01",
+      "source": "Runolfsdottir and Sons",
+      "reason": "Exercitationem eveniet sunt sint.",
+      "isSanctioned": true
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2020-01-31",
+    "isCancelled": true,
+    "cancelledDate": "2021-01-03"
+  },
+  "additional_attributes": {
+    "username": "hubert.raynor",
+    "email": "leon@lueilwitz-fadel.io"
+  },
+  "_links": {
+    "documents": "/customers/d225b9a3-9525-47ca-9221-5cc50fcbd36b/documents"
+  }
+}

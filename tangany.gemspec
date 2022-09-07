@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency("dry-struct", "~> 1.4")
   spec.add_dependency("faraday", "~> 2.5")
+  spec.add_dependency("hash_diff", "~> 1.1")
 end

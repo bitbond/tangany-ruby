@@ -28,7 +28,9 @@ module Tangany
         cleanup("update")
 
         # invalid_payload.json
-        File.open("#{root_folder}/update/invalid_payload.json", "w") { |file| file.write("[{ \"foo\": \"bar\" }]") }
+        File.open("#{root_folder}/update/invalid_payload.json", "w") do |file|
+          file.write(JSON.pretty_generate({ foo: :bar }))
+        end
 
         # valid_payload.json
         body = FactoryBot.build(:customers_bodies_customers_update)

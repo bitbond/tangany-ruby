@@ -157,14 +157,15 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
         method: :get,
         response: stub_customers_response(
           fixture: "customers/retrieve/#{customer_id}",
-          headers: { "If-Match" => if_match_header }
+          headers: { "If-Match" => if_match_header },
+          status: status
         )
       )
     end
 
-    subject(:customer) { client.customers.update(customer_id: customer_id, operations: body) }
+    subject(:customer) { client.customers.update(customer_id: customer_id, **body) }
 
-    let(:body) { [] }
+    let(:body) { {} }
     let(:fixture) { "customers/update/#{customer_id}" }
     let(:if_match_header) { "etag" }
     let(:method) { :patch }

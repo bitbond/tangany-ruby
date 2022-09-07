@@ -42,8 +42,7 @@
   "contract": {
     "isSigned": true,
     "signedDate": "2020-03-06",
-    "isCancelled": false,
-    "cancelledDate": null
+    "isCancelled": false
   },
   "additional_attributes": {
     "username": "noe_bartoletti",

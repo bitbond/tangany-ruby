@@ -3,13 +3,10 @@
 module Tangany
   module Customers
     module Customers
-      class CreateBody <  Dry::Struct
+      class CreateBody < Body
         ALLOWED_PERSON_GENDERS = ["F", "M", "X"].freeze
         ALLOWED_PERSON_KYC_DOCUMENT_TYPES = ["id_card", "passport"].freeze
         ALLOWED_PERSON_KYC_METHODS = ["video_ident", "id_copy", "auto_ident", "in_person", "no_verification"].freeze
-        COUNTRY_REGEXP = /[A-Z]{2}/.freeze
-        DATE_REGEXP = /[0-9]{4}-[0-9]{2}-[0-9]{2}/.freeze
-        DATETIME_OPTIONAL_REGEXP = /[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z)?/.freeze
 
         attribute :id, Types::String
         attribute :person do
@@ -58,10 +55,6 @@ module Tangany
           attribute :cancelledDate?, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP).optional
         end
         attribute :additional_attributes, Types::Hash
-
-        def to_json
-          to_h.to_json
-        end
       end
     end
   end

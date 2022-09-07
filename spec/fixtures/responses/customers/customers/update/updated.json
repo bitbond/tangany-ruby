@@ -1,55 +1,55 @@
 {
-  "id": "3b245cec-a966-461e-927b-5aaf6cb7c74e",
+  "id": "a231ca46-8e33-4ced-9483-97e29a9c1176",
   "person": {
-    "firstName": "Sean",
-    "lastName": "Kuhn",
+    "firstName": "Ingrid",
+    "lastName": "Spinka",
     "gender": "F",
-    "birthDate": "1992-01-04",
-    "birthName": "Doreatha",
-    "birthPlace": "Danielfurt",
-    "birthCountry": "NP",
-    "nationality": "KZ",
+    "birthDate": "1996-10-06",
+    "birthName": "Buddy",
+    "birthPlace": "Conroyton",
+    "birthCountry": "RE",
+    "nationality": "PW",
     "address": {
-      "country": "GR",
-      "city": "Rippinside",
-      "postcode": "92307-1137",
-      "streetName": "Gale Trail",
-      "streetNumber": "275"
+      "country": "AG",
+      "city": "Murazikfurt",
+      "postcode": "37158",
+      "streetName": "Hubert Keys",
+      "streetNumber": "7435"
     },
-    "email": "lilian@spencer-cummings.com",
+    "email": "aide_king@aufderhar-bailey.com",
     "kyc": {
-      "id": "a4553a75-b7b2-4335-aa81-a8c1721133f8",
-      "date": "2022-03-26",
+      "id": "72c6b2b9-709d-4a56-a237-e4798bfc00b2",
+      "date": "2022-01-20",
       "method": "video_ident",
       "document": {
-        "country": "BD",
-        "nationality": "BB",
-        "number": "314-15-3214",
-        "issuedBy": "Koelpin-Nitzsche",
-        "issueDate": "2020-02-05",
-        "validUntil": "2030-02-05",
+        "country": "KE",
+        "nationality": "DE",
+        "number": "221-03-4555",
+        "issuedBy": "Hayes-Heller",
+        "issueDate": "2021-01-20",
+        "validUntil": "2031-01-20",
         "type": "passport"
       }
     },
     "pep": {
-      "isExposed": false,
-      "checkDate": "2019-06-23",
-      "source": "Abbott Group",
-      "reason": null,
+      "isExposed": true,
+      "checkDate": "2021-06-25",
+      "source": "O'Conner LLC",
+      "reason": "Fuga reiciendis dolores quasi.",
       "isSanctioned": false
     }
   },
   "contract": {
     "isSigned": true,
-    "signedDate": "2020-03-19",
+    "signedDate": "2020-03-06",
     "isCancelled": false,
     "cancelledDate": null
   },
   "additional_attributes": {
-    "username": "felton",
-    "email": "collene.swaniawski@littel.biz"
+    "username": "noe_bartoletti",
+    "email": "chang@hauck.org"
   },
   "_links": {
-    "documents": "/customers/3b245cec-a966-461e-927b-5aaf6cb7c74e/documents"
+    "documents": "/customers/a231ca46-8e33-4ced-9483-97e29a9c1176/documents"
   }
 }
