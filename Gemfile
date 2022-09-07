@@ -11,6 +11,8 @@ group :development do
   gem "rake"
   gem "rspec"
   gem "rubocop", "~> 1.21"
+  gem "rubocop-rake", "~> 0.6"
+  gem "rubocop-rspec", "~> 2.12"
   gem "rubocop-shopify", "~> 2.9"
   gem "rubycritic", require: false
 end

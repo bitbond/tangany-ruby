@@ -119,6 +119,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.21.0)
       parser (>= 3.1.1.0)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    rubocop-rspec (2.12.1)
+      rubocop (~> 1.31)
     rubocop-shopify (2.9.0)
       rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
@@ -170,6 +174,8 @@ DEPENDENCIES
   rake
   rspec
   rubocop (~> 1.21)
+  rubocop-rake (~> 0.6)
+  rubocop-rspec (~> 2.12)
   rubocop-shopify (~> 2.9)
   rubycritic
   simplecov
