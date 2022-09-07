@@ -1,55 +1,55 @@
 {
-  "id": "a231ca46-8e33-4ced-9483-97e29a9c1176",
+  "id": "04ecdad3-736c-459b-867f-ebc9dcddf569",
   "person": {
-    "firstName": "Ingrid",
-    "lastName": "Spinka",
+    "firstName": "Lilliana",
+    "lastName": "Konopelski",
     "gender": "F",
-    "birthDate": "1996-10-06",
-    "birthName": "Buddy",
-    "birthPlace": "Conroyton",
-    "birthCountry": "RE",
-    "nationality": "PW",
+    "birthDate": "1961-01-27",
+    "birthName": "Dionne",
+    "birthPlace": "Troyberg",
+    "birthCountry": "FK",
+    "nationality": "GR",
     "address": {
-      "country": "AG",
-      "city": "Murazikfurt",
-      "postcode": "37158",
-      "streetName": "Hubert Keys",
-      "streetNumber": "7435"
+      "country": "PE",
+      "city": "Lauraleeburgh",
+      "postcode": "52740",
+      "streetName": "Burl Lodge",
+      "streetNumber": "37204"
     },
-    "email": "aide_king@aufderhar-bailey.com",
+    "email": "yasmine.rath@schmeler.net",
     "kyc": {
-      "id": "72c6b2b9-709d-4a56-a237-e4798bfc00b2",
-      "date": "2022-01-20",
-      "method": "video_ident",
+      "id": "bd86bfba-c3bf-4182-b3b6-da67dc8359ec",
+      "date": "2021-12-18",
+      "method": "no_verification",
       "document": {
-        "country": "KE",
-        "nationality": "DE",
-        "number": "221-03-4555",
-        "issuedBy": "Hayes-Heller",
-        "issueDate": "2021-01-20",
-        "validUntil": "2031-01-20",
+        "country": "AR",
+        "nationality": "TJ",
+        "number": "757-93-3958",
+        "issuedBy": "Purdy Group",
+        "issueDate": "2018-01-12",
+        "validUntil": "2028-01-12",
         "type": "passport"
       }
     },
     "pep": {
-      "isExposed": true,
-      "checkDate": "2021-06-25",
-      "source": "O'Conner LLC",
-      "reason": "Fuga reiciendis dolores quasi.",
+      "isExposed": false,
+      "checkDate": "2020-11-09",
+      "source": "Dicki, Dietrich and Prohaska",
+      "reason": null,
       "isSanctioned": false
     }
   },
   "contract": {
     "isSigned": true,
-    "signedDate": "2020-03-06",
-    "isCancelled": false,
-    "cancelledDate": null
+    "signedDate": "2017-10-01",
+    "isCancelled": true,
+    "cancelledDate": "2021-05-03"
   },
   "additional_attributes": {
-    "username": "noe_bartoletti",
-    "email": "chang@hauck.org"
+    "username": "hilton",
+    "email": "dallas_ruecker@durgan.com"
   },
   "_links": {
-    "documents": "/customers/a231ca46-8e33-4ced-9483-97e29a9c1176/documents"
+    "documents": "/customers/04ecdad3-736c-459b-867f-ebc9dcddf569/documents"
   }
 }

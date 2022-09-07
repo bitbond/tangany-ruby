@@ -3,7 +3,7 @@
 require "factory_bot"
 
 FactoryBot.define do
-  factory :customers_bodies_customers_update, class: "Tangany::Customers::Customers::UpdateInput" do
+  factory :customers_inputs_customers_update, class: "Tangany::Customers::Customers::UpdateInput" do
     initialize_with { new(attributes) }
 
     contract do

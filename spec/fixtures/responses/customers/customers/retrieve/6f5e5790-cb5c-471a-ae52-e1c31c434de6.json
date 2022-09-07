@@ -1,0 +1,55 @@
+{
+  "id": "6f5e5790-cb5c-471a-ae52-e1c31c434de6",
+  "person": {
+    "firstName": "Lorilee",
+    "lastName": "Paucek",
+    "gender": "X",
+    "birthDate": "1978-11-21",
+    "birthName": "Frankie",
+    "birthPlace": "Flatleyfort",
+    "birthCountry": "ZA",
+    "nationality": "BN",
+    "address": {
+      "country": "TF",
+      "city": "Nguyetport",
+      "postcode": "77359",
+      "streetName": "Detra Mission",
+      "streetNumber": "34590"
+    },
+    "email": "patria.hudson@koepp-bode.co",
+    "kyc": {
+      "id": "860704e9-e169-4ff2-86b4-ab54ee9e5c9e",
+      "date": "2022-01-09",
+      "method": "auto_ident",
+      "document": {
+        "country": "SM",
+        "nationality": "MW",
+        "number": "356-27-8211",
+        "issuedBy": "Green Group",
+        "issueDate": "2022-02-09",
+        "validUntil": "2032-02-09",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2020-05-21",
+      "source": "Kris and Sons",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2021-06-16",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additional_attributes": {
+    "username": "richie_rippin",
+    "email": "ina@grant.co"
+  },
+  "_links": {
+    "documents": "/customers/6f5e5790-cb5c-471a-ae52-e1c31c434de6/documents"
+  }
+}

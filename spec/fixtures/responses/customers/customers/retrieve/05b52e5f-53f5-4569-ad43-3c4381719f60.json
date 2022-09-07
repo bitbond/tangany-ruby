@@ -1,0 +1,55 @@
+{
+  "id": "05b52e5f-53f5-4569-ad43-3c4381719f60",
+  "person": {
+    "firstName": "Desmond",
+    "lastName": "Thompson",
+    "gender": "M",
+    "birthDate": "1998-05-17",
+    "birthName": "Darrell",
+    "birthPlace": "Langville",
+    "birthCountry": "HU",
+    "nationality": "AE",
+    "address": {
+      "country": "BI",
+      "city": "East Faustina",
+      "postcode": "16549-9749",
+      "streetName": "Wilmer Mission",
+      "streetNumber": "725"
+    },
+    "email": "renato.lowe@carroll.net",
+    "kyc": {
+      "id": "c86349be-6fba-4c34-bcf2-28083e8832b3",
+      "date": "2022-08-23",
+      "method": "auto_ident",
+      "document": {
+        "country": "BO",
+        "nationality": "DO",
+        "number": "850-51-2083",
+        "issuedBy": "Aufderhar-Schmitt",
+        "issueDate": "2021-06-20",
+        "validUntil": "2031-06-20",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2019-01-05",
+      "source": "Dietrich Group",
+      "reason": "Repellendus quod ut dolores.",
+      "isSanctioned": true
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2019-01-30",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additional_attributes": {
+    "username": "deshawn.dach",
+    "email": "tandy@keebler.info"
+  },
+  "_links": {
+    "documents": "/customers/05b52e5f-53f5-4569-ad43-3c4381719f60/documents"
+  }
+}

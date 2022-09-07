@@ -30,11 +30,11 @@ end
 desc "Regenerates the fixtures"
 task :regenerate_fixtures do
   puts
-  puts "== Regenerating customers bodies ".ljust(80, "=")
+  puts "== Regenerating customers inputs ".ljust(80, "=")
   puts " -> Regenerating customers/create"
-  Tangany::Customers::CustomersBodiesGenerator.new.create
+  Tangany::Customers::CustomersInputsGenerator.new.create
   puts " -> Regenerating customers/update"
-  Tangany::Customers::CustomersBodiesGenerator.new.update
+  Tangany::Customers::CustomersInputsGenerator.new.update
 
   puts
   puts "== Regenerating customers responses ".ljust(80, "=")

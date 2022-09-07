@@ -5,9 +5,9 @@ module RequestHelpers
     [status, default_headers.merge(headers), File.read("spec/fixtures/responses/customers/#{fixture}.json")]
   end
 
-  def stub_customers_request(stubs, path, response:, method: :get, body: {})
+  def stub_customers_request(stubs, path, response:, method: :get, body: "{}")
     arguments = [method, "/customers/#{path}"]
-    arguments << body.to_json if [:post, :put, :patch].include?(method)
+    arguments << body if [:post, :put, :patch].include?(method)
     stubs.send(*arguments) { |_env| response }
   end
 

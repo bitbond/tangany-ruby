@@ -1,0 +1,52 @@
+{
+  "id": "46aa2d24-f59d-446e-990c-e03a1f167718",
+  "person": {
+    "firstName": "Alberto",
+    "lastName": "Davis",
+    "gender": "M",
+    "birthDate": "2002-12-19",
+    "birthName": "Karima",
+    "birthPlace": "Jastmouth",
+    "birthCountry": "WS",
+    "nationality": "CF",
+    "address": {
+      "country": "CZ",
+      "city": "Lake Teodoroview",
+      "postcode": "60731-1666",
+      "streetName": "Yost Islands",
+      "streetNumber": "6020"
+    },
+    "email": "mariana.damore@heaney.net",
+    "kyc": {
+      "id": "75efe686-d962-4712-9b69-1b50b95ba458",
+      "date": "2021-11-19",
+      "method": "auto_ident",
+      "document": {
+        "country": "GT",
+        "nationality": "GY",
+        "number": "267-81-7697",
+        "issuedBy": "Schamberger LLC",
+        "issueDate": "2018-09-14",
+        "validUntil": "2028-09-14",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2021-07-23",
+      "source": "Schoen-Farrell",
+      "reason": "Ex deleniti soluta at.",
+      "isSanctioned": true
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2021-07-19",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additional_attributes": {
+    "username": "elton.hauck",
+    "email": "ashlyn.mayer@turcotte.net"
+  }
+}

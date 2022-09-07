@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe(Tangany::Customers::CustomersResource) do
-  let(:body) { nil }
+  let(:body) { "{}" }
   let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
+  let(:input) { nil }
   let(:method) { :get }
   let(:status) { 200 }
   let(:stubbed_response) { stub_customers_response(fixture: fixture, status: status) }
@@ -13,15 +14,16 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#create" do
-    subject(:customer) { client.customers.create(**body) }
+    subject(:customer) { client.customers.create(**input) }
 
+    let(:body) { input.to_json }
     let(:method) { :post }
     let(:path) { "customers" }
 
     context "with a valid payload" do
-      let(:body) do
+      let(:input) do
         JSON.parse(
-          File.read("spec/fixtures/bodies/customers/customers/create/valid_payload.json"),
+          File.read("spec/fixtures/inputs/customers/customers/create/valid_input.json"),
           symbolize_names: true
         )
       end
@@ -33,9 +35,9 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with an invalid payload" do
-      let(:body) do
+      let(:input) do
         JSON.parse(
-          File.read("spec/fixtures/bodies/customers/customers/create/invalid_payload.json"),
+          File.read("spec/fixtures/inputs/customers/customers/create/invalid_input.json"),
           symbolize_names: true
         )
       end
@@ -47,9 +49,9 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with a conflicting payload" do
-      let(:body) do
+      let(:input) do
         JSON.parse(
-          File.read("spec/fixtures/bodies/customers/customers/create/valid_payload.json"),
+          File.read("spec/fixtures/inputs/customers/customers/create/valid_input.json"),
           symbolize_names: true
         )
       end
@@ -162,7 +164,13 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#update" do
-    subject(:customer) { client.customers.update(customer_id: customer_id, **body) }
+    subject(:customer) { client.customers.update(customer_id: customer_id, **input) }
+
+    let(:fixture) { "customers/update/#{customer_id}" }
+    let(:if_match_header) { "etag" }
+    let(:input) { {} }
+    let(:method) { :patch }
+    let(:path) { "customers/#{customer_id}" }
 
     before do
       stub_customers_request(
@@ -177,20 +185,17 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       )
     end
 
-    let(:body) { {} }
-    let(:fixture) { "customers/update/#{customer_id}" }
-    let(:if_match_header) { "etag" }
-    let(:method) { :patch }
-    let(:path) { "customers/#{customer_id}" }
-
     context "with a valid customer ID" do
       let(:customer_id) { fetch_customer_id }
       let(:fixture) { "customers/update/updated" }
 
       context "with a valid payload" do
         let(:body) do
+          [{ op: "replace", path: "/contract/signedDate", value: input.dig(:contract, :signedDate) }].to_json
+        end
+        let(:input) do
           JSON.parse(
-            File.read("spec/fixtures/bodies/customers/customers/update/valid_payload.json"),
+            File.read("spec/fixtures/inputs/customers/customers/update/valid_input.json"),
             symbolize_names: true
           )
         end
@@ -201,9 +206,9 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       end
 
       context "with an invalid payload" do
-        let(:body) do
+        let(:input) do
           JSON.parse(
-            File.read("spec/fixtures/bodies/customers/customers/update/invalid_payload.json"),
+            File.read("spec/fixtures/inputs/customers/customers/update/invalid_input.json"),
             symbolize_names: true
           )
         end

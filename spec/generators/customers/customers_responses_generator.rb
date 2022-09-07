@@ -18,7 +18,7 @@ module Tangany
         FileUtils.cp(file, "spec/fixtures/responses/customers/customers/create/created.json")
 
         # conflicting
-        customer_id = JSON.parse(File.read("spec/fixtures/bodies/customers/customers/create/valid_payload.json"))["id"]
+        customer_id = JSON.parse(File.read("spec/fixtures/inputs/customers/customers/create/valid_input.json"))["id"]
         File.open("spec/fixtures/responses/customers/customers/create/conflicting.json", "w") do |file|
           file.write(JSON.pretty_generate({
             statusCode: 409,
