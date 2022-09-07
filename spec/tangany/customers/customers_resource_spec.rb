@@ -191,7 +191,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
 
       context "with a valid payload" do
         let(:body) do
-          [{op: "replace", path: "/contract/signedDate", value: input.dig(:contract, :signedDate)}].to_json
+          customer_hash = Tangany::Customers::Customer.new(JSON.parse(
+            File.read("spec/fixtures/responses/customers/customers/retrieve/#{customer_id}.json"),
+            symbolize_names: true
+          )).to_h
+          update_input_hash = Tangany::Customers::Customers::UpdateInput.new(input).to_h
+          merged_hash = customer_hash.deep_merge(update_input_hash)
+          hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
+          hash_diff.to_operations_json
         end
         let(:input) do
           JSON.parse(
