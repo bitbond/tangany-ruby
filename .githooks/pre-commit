@@ -5,9 +5,9 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 RED='\033[0;31m'
 
-echo "${CYAN}[Ruby Style][Info] Checking ruby style with Rubocop...${NC}\r\n"
+echo "${CYAN}[Ruby Style][Info] Checking ruby style with Standard...${NC}\r\n"
 
-bundle exec rubocop
+bundle exec standardrb
 
 if [ $? -ne 0 ]; then
   echo "\r\n${RED}[Ruby Style][Error] Fix the issues and try to commit again.${NC}\r\n"

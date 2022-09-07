@@ -2,7 +2,7 @@
 
 module Tangany
   class Operation < Dry::Struct
-    JSON_POINTER_REGEXP = %r{(/[^/]+)+}.freeze
+    JSON_POINTER_REGEXP = %r{(/[^/]+)+}
 
     attribute :op, Types::String.enum("add", "replace")
     attribute :path, Types::String.constrained(format: JSON_POINTER_REGEXP)
