@@ -1,55 +1,55 @@
 {
-  "id": "760aad57-39c3-4864-977d-af032df81e55",
+  "id": "20ebc16a-afaf-4d73-af23-226582860ea7",
   "person": {
-    "firstName": "Robin",
-    "lastName": "Stark",
-    "gender": "X",
-    "birthDate": "1964-08-20",
-    "birthName": "Benjamin",
-    "birthPlace": "Vivianbury",
-    "birthCountry": "LV",
-    "nationality": "EG",
+    "firstName": "Eunice",
+    "lastName": "Berge",
+    "gender": "M",
+    "birthDate": "2000-11-26",
+    "birthName": "Georgette",
+    "birthPlace": "East Lentown",
+    "birthCountry": "UG",
+    "nationality": "PS",
     "address": {
-      "country": "AL",
-      "city": "East Donte",
-      "postcode": "55314-3191",
-      "streetName": "Volkman Bypass",
-      "streetNumber": "2836"
+      "country": "GA",
+      "city": "Jacobiborough",
+      "postcode": "71561",
+      "streetName": "Salvatore Terrace",
+      "streetNumber": "672"
     },
-    "email": "sang@hintz-walter.com",
+    "email": "ashli.christiansen@connelly-mraz.io",
     "kyc": {
-      "id": "71d73029-b146-422e-b915-6af9d0de8ecd",
-      "date": "2022-07-10",
-      "method": "auto_ident",
+      "id": "32855dcf-5ded-42ca-8a25-6c041d2d2dc4",
+      "date": "2022-05-29",
+      "method": "in_person",
       "document": {
-        "country": "UM",
-        "nationality": "LT",
-        "number": "321-70-0971",
-        "issuedBy": "Flatley LLC",
-        "issueDate": "2018-05-02",
-        "validUntil": "2028-05-02",
+        "country": "PL",
+        "nationality": "PG",
+        "number": "416-68-4641",
+        "issuedBy": "Klein, Mertz and Purdy",
+        "issueDate": "2021-10-21",
+        "validUntil": "2031-10-21",
         "type": "passport"
       }
     },
     "pep": {
-      "isExposed": false,
-      "checkDate": "2018-12-02",
-      "source": "Greenfelder, Boyle and Walsh",
-      "reason": null,
-      "isSanctioned": false
+      "isExposed": true,
+      "checkDate": "2017-10-25",
+      "source": "Haley and Sons",
+      "reason": "Veritatis nam atque necessitatibus.",
+      "isSanctioned": true
     }
   },
   "contract": {
-    "isSigned": true,
-    "signedDate": "2020-10-23",
+    "isSigned": false,
+    "signedDate": "2019-05-23",
     "isCancelled": false,
     "cancelledDate": null
   },
-  "additional_attributes": {
-    "username": "williams_dicki",
-    "email": "eusebio@rath.name"
+  "additionalAttributes": {
+    "username": "caprice",
+    "email": "stanley.dickens@franecki-nolan.io"
   },
   "_links": {
-    "documents": "/customers/760aad57-39c3-4864-977d-af032df81e55/documents"
+    "documents": "/customers/20ebc16a-afaf-4d73-af23-226582860ea7/documents"
   }
 }

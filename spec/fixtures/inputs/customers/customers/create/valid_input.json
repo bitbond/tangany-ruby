@@ -1,52 +1,53 @@
 {
-  "id": "52af8a4d-b2f5-4925-847f-4d601a9915f3",
+  "id": "c1adf811-f01e-4799-a5c9-8ef49ddee8df",
+  "environment": "testing",
   "person": {
-    "firstName": "David",
-    "lastName": "Spinka",
-    "gender": "F",
-    "birthDate": "1998-02-09",
-    "birthName": "Pura",
-    "birthPlace": "Port Austin",
-    "birthCountry": "MK",
-    "nationality": "MU",
+    "firstName": "Shonna",
+    "lastName": "Wyman",
+    "gender": "X",
+    "birthDate": "1974-01-19",
+    "birthName": "Marlin",
+    "birthPlace": "Mooreberg",
+    "birthCountry": "DM",
+    "nationality": "SB",
     "address": {
-      "country": "GI",
-      "city": "Port Jami",
-      "postcode": "40458",
-      "streetName": "Champlin Haven",
-      "streetNumber": "7366"
+      "country": "HN",
+      "city": "Labadieshire",
+      "postcode": "03669",
+      "streetName": "Gibson Manor",
+      "streetNumber": "142"
     },
-    "email": "shelia_ortiz@osinski.info",
+    "email": "william_dibbert@cruickshank.io",
     "kyc": {
-      "id": "d990054d-d130-42e7-8882-2a3ef4b58a3b",
-      "date": "2022-08-12",
-      "method": "video_ident",
+      "id": "87d22e39-b569-4d6b-a4e9-1897ff06373c",
+      "date": "2022-01-22",
+      "method": "id_copy",
       "document": {
-        "country": "MY",
-        "nationality": "KY",
-        "number": "151-72-1726",
-        "issuedBy": "Spinka, Hessel and Pollich",
-        "issueDate": "2018-12-27",
-        "validUntil": "2028-12-27",
-        "type": "id_card"
+        "country": "MK",
+        "nationality": "PN",
+        "number": "346-13-2210",
+        "issuedBy": "Hoppe-Skiles",
+        "issueDate": "2019-08-20",
+        "validUntil": "2029-08-20",
+        "type": "passport"
       }
     },
     "pep": {
       "isExposed": true,
-      "checkDate": "2020-06-28",
-      "source": "Robel-Crona",
-      "reason": "Tempora neque aliquam et.",
-      "isSanctioned": true
+      "checkDate": "2022-08-18",
+      "source": "Schowalter and Sons",
+      "reason": "Iusto ut eos corrupti.",
+      "isSanctioned": false
     }
   },
   "contract": {
     "isSigned": true,
-    "signedDate": "2022-03-23",
+    "signedDate": "2021-07-10",
     "isCancelled": true,
-    "cancelledDate": "2022-07-18"
+    "cancelledDate": "2021-09-14"
   },
-  "additional_attributes": {
-    "username": "alma",
-    "email": "garland.white@rosenbaum-schultz.name"
+  "additionalAttributes": {
+    "username": "barbra",
+    "email": "vickey_gislason@heathcote.io"
   }
 }

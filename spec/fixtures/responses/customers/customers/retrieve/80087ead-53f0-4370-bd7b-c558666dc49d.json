@@ -1,0 +1,55 @@
+{
+  "id": "80087ead-53f0-4370-bd7b-c558666dc49d",
+  "person": {
+    "firstName": "Ebony",
+    "lastName": "Koss",
+    "gender": "F",
+    "birthDate": "1987-07-29",
+    "birthName": "Jolene",
+    "birthPlace": "New Haroldhaven",
+    "birthCountry": "LA",
+    "nationality": "OM",
+    "address": {
+      "country": "LY",
+      "city": "Beeburgh",
+      "postcode": "92322",
+      "streetName": "Emard Freeway",
+      "streetNumber": "46571"
+    },
+    "email": "krystyna.quitzon@rempel-klein.org",
+    "kyc": {
+      "id": "110c8ac9-e5e2-408e-bb14-c3837caf2805",
+      "date": "2021-12-21",
+      "method": "in_person",
+      "document": {
+        "country": "NI",
+        "nationality": "BB",
+        "number": "362-49-9561",
+        "issuedBy": "Bashirian, Ernser and Smith",
+        "issueDate": "2021-11-01",
+        "validUntil": "2031-11-01",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2017-09-27",
+      "source": "Stiedemann and Sons",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2019-06-17",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additionalAttributes": {
+    "username": "tanner",
+    "email": "homer@kassulke-thompson.com"
+  },
+  "_links": {
+    "documents": "/customers/80087ead-53f0-4370-bd7b-c558666dc49d/documents"
+  }
+}
