@@ -183,7 +183,7 @@ DEPENDENCIES
   rubocop-rspec (~> 2.12)
   rubycritic
   simplecov
-  standard
+  standard (~> 1.16)
   tangany!
   webmock
 
