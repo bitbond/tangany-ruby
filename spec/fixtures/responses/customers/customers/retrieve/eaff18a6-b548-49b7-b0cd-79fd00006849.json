@@ -1,0 +1,55 @@
+{
+  "id": "eaff18a6-b548-49b7-b0cd-79fd00006849",
+  "person": {
+    "firstName": "Cherish",
+    "lastName": "Lind",
+    "gender": "X",
+    "birthDate": "2002-07-13",
+    "birthName": "Garfield",
+    "birthPlace": "Seanbury",
+    "birthCountry": "BS",
+    "nationality": "GN",
+    "address": {
+      "country": "GL",
+      "city": "Merleton",
+      "postcode": "16930-0524",
+      "streetName": "O'Connell Heights",
+      "streetNumber": "378"
+    },
+    "email": "dwayne_roberts@kerluke.io",
+    "kyc": {
+      "id": "fe9f9169-9596-4c0e-9d9f-f6ddb3660f6c",
+      "date": "2022-06-20",
+      "method": "auto_ident",
+      "document": {
+        "country": "TJ",
+        "nationality": "EH",
+        "number": "631-36-1292",
+        "issuedBy": "Roob Group",
+        "issueDate": "2022-05-14",
+        "validUntil": "2032-05-14",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2020-05-27",
+      "source": "Schinner-Casper",
+      "reason": "Quasi quam sequi eligendi.",
+      "isSanctioned": true
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2018-05-01",
+    "isCancelled": true,
+    "cancelledDate": "2022-05-19"
+  },
+  "additional_attributes": {
+    "username": "noella",
+    "email": "aldo_turner@schaefer-johnson.name"
+  },
+  "_links": {
+    "documents": "/customers/eaff18a6-b548-49b7-b0cd-79fd00006849/documents"
+  }
+}

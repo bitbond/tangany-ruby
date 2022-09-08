@@ -8,7 +8,7 @@ module Tangany
         Customer.new(post_request("customers", body: input.to_json).body)
       end
 
-      def delete(customer_id:)
+      def delete(customer_id)
         delete_request("customers/#{customer_id}")
       end
 
@@ -16,18 +16,18 @@ module Tangany
         Collection.from_response(get_request("customers", params: params), type: Customer)
       end
 
-      def retrieve(customer_id:)
+      def retrieve(customer_id)
         Customer.new(get_request("customers/#{customer_id}").body)
       end
 
-      def update(customer_id:, **attributes)
-        response = get_request("customers/#{customer_id}")
+      def update(**attributes)
+        response = get_request("customers/#{attributes[:id]}")
 
         customer_hash = Customer.new(response.body).to_h
         update_input_hash = Tangany::Customers::Customers::UpdateInput.new(attributes).to_h
 
         Customer.new(patch_request(
-          "customers/#{customer_id}",
+          "customers/#{attributes[:id]}",
           body: build_update_body_json(customer_hash, update_input_hash),
           headers: {"If-Match" => response.headers["If-Match"]}
         ).body)

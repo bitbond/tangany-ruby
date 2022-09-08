@@ -66,7 +66,7 @@ customers_client.customers.create(
 
 # update customer
 customers_client.customers.update(
-  customer_id: 'cus_123456789',
+  id: 'cus_123456789',
   person: {
     firstName: 'John',
     lastName: 'Doe',
@@ -76,7 +76,7 @@ customers_client.customers.update(
 )
 
 # delete customer
-customers_client.customers.delete(customer_id: 'cus_123456789')
+customers_client.customers.delete('cus_123456789')
 ```
 
 ---

@@ -35,12 +35,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with an invalid payload" do
-      let(:input) do
-        JSON.parse(
-          File.read("spec/fixtures/inputs/customers/customers/create/invalid_input.json"),
-          symbolize_names: true
-        )
-      end
+      let(:input) { {foo: :bar} }
       let(:fixture) { "customers/create/created" }
 
       it "raises a Dry::Struct::Error" do
@@ -68,7 +63,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#delete" do
-    subject(:customer) { client.customers.delete(customer_id: customer_id) }
+    subject(:customer) { client.customers.delete(customer_id) }
 
     let(:fixture) { "customers/delete/#{customer_id}" }
     let(:method) { :delete }
@@ -125,7 +120,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#retrieve" do
-    subject(:customer) { client.customers.retrieve(customer_id: customer_id) }
+    subject(:customer) { client.customers.retrieve(customer_id) }
 
     let(:fixture) { "customers/retrieve/#{customer_id}" }
     let(:path) { "customers/#{customer_id}" }
@@ -164,11 +159,11 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#update" do
-    subject(:customer) { client.customers.update(customer_id: customer_id, **input) }
+    subject(:customer) { client.customers.update(**input) }
 
     let(:fixture) { "customers/update/#{customer_id}" }
     let(:if_match_header) { "etag" }
-    let(:input) { {} }
+    let(:input) { {id: customer_id} }
     let(:method) { :patch }
     let(:path) { "customers/#{customer_id}" }
 
@@ -213,12 +208,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       end
 
       context "with an invalid payload" do
-        let(:input) do
-          JSON.parse(
-            File.read("spec/fixtures/inputs/customers/customers/update/invalid_input.json"),
-            symbolize_names: true
-          )
-        end
+        let(:input) { {id: customer_id, foo: :bar} }
 
         it "raises a Dry::Struct::Error" do
           expect { customer }.to(raise_error(Dry::Struct::Error))

@@ -1,52 +1,52 @@
 {
-  "id": "46aa2d24-f59d-446e-990c-e03a1f167718",
+  "id": "52af8a4d-b2f5-4925-847f-4d601a9915f3",
   "person": {
-    "firstName": "Alberto",
-    "lastName": "Davis",
-    "gender": "M",
-    "birthDate": "2002-12-19",
-    "birthName": "Karima",
-    "birthPlace": "Jastmouth",
-    "birthCountry": "WS",
-    "nationality": "CF",
+    "firstName": "David",
+    "lastName": "Spinka",
+    "gender": "F",
+    "birthDate": "1998-02-09",
+    "birthName": "Pura",
+    "birthPlace": "Port Austin",
+    "birthCountry": "MK",
+    "nationality": "MU",
     "address": {
-      "country": "CZ",
-      "city": "Lake Teodoroview",
-      "postcode": "60731-1666",
-      "streetName": "Yost Islands",
-      "streetNumber": "6020"
+      "country": "GI",
+      "city": "Port Jami",
+      "postcode": "40458",
+      "streetName": "Champlin Haven",
+      "streetNumber": "7366"
     },
-    "email": "mariana.damore@heaney.net",
+    "email": "shelia_ortiz@osinski.info",
     "kyc": {
-      "id": "75efe686-d962-4712-9b69-1b50b95ba458",
-      "date": "2021-11-19",
-      "method": "auto_ident",
+      "id": "d990054d-d130-42e7-8882-2a3ef4b58a3b",
+      "date": "2022-08-12",
+      "method": "video_ident",
       "document": {
-        "country": "GT",
-        "nationality": "GY",
-        "number": "267-81-7697",
-        "issuedBy": "Schamberger LLC",
-        "issueDate": "2018-09-14",
-        "validUntil": "2028-09-14",
+        "country": "MY",
+        "nationality": "KY",
+        "number": "151-72-1726",
+        "issuedBy": "Spinka, Hessel and Pollich",
+        "issueDate": "2018-12-27",
+        "validUntil": "2028-12-27",
         "type": "id_card"
       }
     },
     "pep": {
       "isExposed": true,
-      "checkDate": "2021-07-23",
-      "source": "Schoen-Farrell",
-      "reason": "Ex deleniti soluta at.",
+      "checkDate": "2020-06-28",
+      "source": "Robel-Crona",
+      "reason": "Tempora neque aliquam et.",
       "isSanctioned": true
     }
   },
   "contract": {
     "isSigned": true,
-    "signedDate": "2021-07-19",
-    "isCancelled": false,
-    "cancelledDate": null
+    "signedDate": "2022-03-23",
+    "isCancelled": true,
+    "cancelledDate": "2022-07-18"
   },
   "additional_attributes": {
-    "username": "elton.hauck",
-    "email": "ashlyn.mayer@turcotte.net"
+    "username": "alma",
+    "email": "garland.white@rosenbaum-schultz.name"
   }
 }

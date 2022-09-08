@@ -24,22 +24,26 @@ end
 desc "Regenerates the fixtures"
 task :regenerate_fixtures do
   puts
-  puts "== Regenerating customers inputs ".ljust(80, "=")
-  puts " -> Regenerating customers/create"
+  puts "== Regenerating customers fixtures ".ljust(80, "=")
+
+  puts " -> Regenerating responses/customers/customers/retrieve"
+  Tangany::Customers::CustomersResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating responses/customers/customers/list"
+  Tangany::Customers::CustomersResponsesGenerator.new.list
+
+  puts " -> Regenerating inputs/customers/customers/create"
   Tangany::Customers::CustomersInputsGenerator.new.create
-  puts " -> Regenerating customers/update"
+
+  puts " -> Regenerating responses/customers/customers/create"
+  Tangany::Customers::CustomersResponsesGenerator.new.create
+
+  puts " -> Regenerating inputs/customers/customers/update"
   Tangany::Customers::CustomersInputsGenerator.new.update
 
-  puts
-  puts "== Regenerating customers responses ".ljust(80, "=")
-  puts " -> Regenerating customers/retrieve"
-  Tangany::Customers::CustomersResponsesGenerator.new.retrieve
-  puts " -> Regenerating customers/list"
-  Tangany::Customers::CustomersResponsesGenerator.new.list
-  puts " -> Regenerating customers/create"
-  Tangany::Customers::CustomersResponsesGenerator.new.create
-  puts " -> Regenerating customers/delete"
-  Tangany::Customers::CustomersResponsesGenerator.new.delete
-  puts " -> Regenerating customers/update"
+  puts " -> Regenerating responses/customers/customers/update"
   Tangany::Customers::CustomersResponsesGenerator.new.update
+
+  puts " -> Regenerating responses/customers/customers/delete"
+  Tangany::Customers::CustomersResponsesGenerator.new.delete
 end

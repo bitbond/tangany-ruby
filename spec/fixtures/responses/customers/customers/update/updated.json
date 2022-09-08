@@ -1,55 +1,55 @@
 {
-  "id": "04ecdad3-736c-459b-867f-ebc9dcddf569",
+  "id": "760aad57-39c3-4864-977d-af032df81e55",
   "person": {
-    "firstName": "Lilliana",
-    "lastName": "Konopelski",
-    "gender": "F",
-    "birthDate": "1961-01-27",
-    "birthName": "Dionne",
-    "birthPlace": "Troyberg",
-    "birthCountry": "FK",
-    "nationality": "GR",
+    "firstName": "Robin",
+    "lastName": "Stark",
+    "gender": "X",
+    "birthDate": "1964-08-20",
+    "birthName": "Benjamin",
+    "birthPlace": "Vivianbury",
+    "birthCountry": "LV",
+    "nationality": "EG",
     "address": {
-      "country": "PE",
-      "city": "Lauraleeburgh",
-      "postcode": "52740",
-      "streetName": "Burl Lodge",
-      "streetNumber": "37204"
+      "country": "AL",
+      "city": "East Donte",
+      "postcode": "55314-3191",
+      "streetName": "Volkman Bypass",
+      "streetNumber": "2836"
     },
-    "email": "yasmine.rath@schmeler.net",
+    "email": "sang@hintz-walter.com",
     "kyc": {
-      "id": "bd86bfba-c3bf-4182-b3b6-da67dc8359ec",
-      "date": "2021-12-18",
-      "method": "no_verification",
+      "id": "71d73029-b146-422e-b915-6af9d0de8ecd",
+      "date": "2022-07-10",
+      "method": "auto_ident",
       "document": {
-        "country": "AR",
-        "nationality": "TJ",
-        "number": "757-93-3958",
-        "issuedBy": "Purdy Group",
-        "issueDate": "2018-01-12",
-        "validUntil": "2028-01-12",
+        "country": "UM",
+        "nationality": "LT",
+        "number": "321-70-0971",
+        "issuedBy": "Flatley LLC",
+        "issueDate": "2018-05-02",
+        "validUntil": "2028-05-02",
         "type": "passport"
       }
     },
     "pep": {
       "isExposed": false,
-      "checkDate": "2020-11-09",
-      "source": "Dicki, Dietrich and Prohaska",
+      "checkDate": "2018-12-02",
+      "source": "Greenfelder, Boyle and Walsh",
       "reason": null,
       "isSanctioned": false
     }
   },
   "contract": {
     "isSigned": true,
-    "signedDate": "2017-10-01",
-    "isCancelled": true,
-    "cancelledDate": "2021-05-03"
+    "signedDate": "2020-10-23",
+    "isCancelled": false,
+    "cancelledDate": null
   },
   "additional_attributes": {
-    "username": "hilton",
-    "email": "dallas_ruecker@durgan.com"
+    "username": "williams_dicki",
+    "email": "eusebio@rath.name"
   },
   "_links": {
-    "documents": "/customers/04ecdad3-736c-459b-867f-ebc9dcddf569/documents"
+    "documents": "/customers/760aad57-39c3-4864-977d-af032df81e55/documents"
   }
 }

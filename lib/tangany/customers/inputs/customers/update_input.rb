@@ -4,6 +4,7 @@ module Tangany
   module Customers
     module Customers
       class UpdateInput < Input
+        attribute :id, Types::String
         attribute :person, Dry::Struct.meta(omittable: true) do
           attribute :lastName?, Types::String.constrained(max_size: 50)
           attribute :address, Dry::Struct.meta(omittable: true) do
