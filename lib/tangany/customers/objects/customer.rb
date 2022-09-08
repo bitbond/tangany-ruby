@@ -6,7 +6,7 @@ module Tangany
       attribute :id, Types::String
       attribute? :person, Person
       attribute? :contract, Contract
-      attribute? :additional_attributes, Types::Hash
+      attribute? :additionalAttributes, Types::Hash
       attribute? :_links, Types::Hash
     end
   end

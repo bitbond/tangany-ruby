@@ -25,7 +25,7 @@ module Tangany
       handle_response(client.connection.patch do |request|
         request.url(url)
         request.body = body
-        request.headers = default_headers.merge(headers)
+        request.headers = default_headers.merge({"Content-Type" => "application/json-patch+json"}.merge(headers))
       end)
     end
 
@@ -47,11 +47,12 @@ module Tangany
 
     def handle_response(response)
       case response.status
-      when 404, 409
+      when 400, 404, 409
         raise RequestError.new(
           response.body[:message],
           activity_id: response.headers["tangany-activity-id"],
-          status_code: response.body[:statusCode]
+          status_code: response.body[:statusCode],
+          validation_errors: response.body[:validationErrors]
         )
       when 412
         raise RequestError.new(

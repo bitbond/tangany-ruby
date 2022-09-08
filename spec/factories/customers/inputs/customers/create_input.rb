@@ -7,6 +7,7 @@ FactoryBot.define do
     initialize_with { new(attributes) }
 
     id { Faker::Internet.uuid }
+    environment { "testing" }
     person do
       is_exposed = Faker::Boolean.boolean
       issue_date = Faker::Date.backward(days: 365 * 5).to_s
@@ -52,14 +53,15 @@ FactoryBot.define do
     end
     contract do
       is_cancelled = Faker::Boolean.boolean
+      is_signed = Faker::Boolean.boolean
       signed_date = Faker::Date.backward(days: 365 * 5).to_s
       {
-        isSigned: Faker::Boolean.boolean,
-        signedDate: signed_date,
+        isSigned: is_signed,
+        signedDate: is_signed ? signed_date : nil,
         isCancelled: is_cancelled,
         cancelledDate: is_cancelled ? Faker::Date.between(from: signed_date, to: Date.today).to_s : nil
       }
     end
-    additional_attributes { Faker::Internet.user }
+    additionalAttributes { Faker::Internet.user }
   end
 end

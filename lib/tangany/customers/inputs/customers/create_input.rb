@@ -9,6 +9,7 @@ module Tangany
         ALLOWED_PERSON_KYC_METHODS = ["video_ident", "id_copy", "auto_ident", "in_person", "no_verification"].freeze
 
         attribute :id, Types::String
+        attribute :environment, Types::String.constrained(included_in: %w[production testing])
         attribute :person do
           attribute :firstName, Types::String.constrained(max_size: 50)
           attribute :lastName, Types::String.constrained(max_size: 50)
@@ -54,7 +55,7 @@ module Tangany
           attribute :isCancelled?, Types::Bool
           attribute :cancelledDate?, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP).optional
         end
-        attribute :additional_attributes, Types::Hash
+        attribute :additionalAttributes, Types::Hash
       end
     end
   end

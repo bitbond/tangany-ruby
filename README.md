@@ -45,7 +45,7 @@ require 'tangany'
 Tangany.customers_subscription = '...'
 
 # initialize the client
-customers_client = Tangany::Customers::client.new
+customers_client = Tangany::Customers::Client.new
 
 # list customers
 customers_client.customers.list(limit: 21, start: 42)

@@ -29,7 +29,7 @@ module Tangany
           attribute :isCancelled?, Types::Bool
           attribute :cancelledDate?, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP).optional
         end
-        attribute :additional_attributes?, Types::Hash
+        attribute :additionalAttributes?, Types::Hash
       end
     end
   end
