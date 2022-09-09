@@ -91,12 +91,13 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#list" do
-    subject(:customers) { client.customers.list(limit: limit, start: start) }
+    subject(:customers) { client.customers.list(limit: limit, start: start, sort: sort) }
 
     let(:fixture) { "customers/list/paginated" }
     let(:limit) { 1 }
     let(:path) { "customers?limit=#{limit}&start=#{start}" }
     let(:start) { 1 }
+    let(:sort) { "asc" }
 
     it "returns a collection" do
       expect(customers).to(be_a(Tangany::Collection))
