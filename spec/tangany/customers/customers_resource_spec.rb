@@ -95,7 +95,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
 
     let(:fixture) { "customers/list/paginated" }
     let(:limit) { 1 }
-    let(:path) { "customers?limit=#{limit}&start=#{start}" }
+    let(:path) { "customers?limit=#{limit}&sort=#{sort}&start=#{start}" }
     let(:start) { 1 }
     let(:sort) { "asc" }
 
