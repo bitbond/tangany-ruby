@@ -38,7 +38,7 @@ RSpec.describe(Tangany::Collection) do
     end
 
     context "with a paginated resultset" do
-      let(:path) { "customers?limit=1&start=1" }
+      let(:path) { "customers?limit=1&sort=asc&start=1" }
       let(:fixture) { "paginated" }
 
       it "initializes a non-empty collection" do
@@ -50,11 +50,11 @@ RSpec.describe(Tangany::Collection) do
       end
 
       it "has a next path" do
-        expect(collection.next_path).to(eq("/customers?start=2&limit=1"))
+        expect(collection.next_path).to(eq("/customers?start=2&limit=1&sort=asc"))
       end
 
       it "has a previous path" do
-        expect(collection.previous_path).to(eq("/customers?start=0&limit=1"))
+        expect(collection.previous_path).to(eq("/customers?start=0&limit=1&sort=asc"))
       end
 
       it "fills the collection with the correct type" do

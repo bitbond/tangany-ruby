@@ -120,8 +120,8 @@ module Tangany
             }
           end,
           _links: {
-            next: customer_ids.present? ? "/customers?start=2&limit=1" : nil,
-            previous: customer_ids.present? ? "/customers?start=0&limit=1" : nil
+            next: customer_ids.present? ? "/customers?start=2&limit=1&sort=asc" : nil,
+            previous: customer_ids.present? ? "/customers?start=0&limit=1&sort=asc" : nil
           }
         }
       end

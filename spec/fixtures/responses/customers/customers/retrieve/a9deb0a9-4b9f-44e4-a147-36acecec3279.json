@@ -1,0 +1,55 @@
+{
+  "id": "a9deb0a9-4b9f-44e4-a147-36acecec3279",
+  "person": {
+    "firstName": "Newton",
+    "lastName": "Hintz",
+    "gender": "M",
+    "birthDate": "1994-09-10",
+    "birthName": "Owen",
+    "birthPlace": "South Anitafurt",
+    "birthCountry": "PR",
+    "nationality": "NC",
+    "address": {
+      "country": "CD",
+      "city": "Jenkinsberg",
+      "postcode": "49777",
+      "streetName": "Bruen Village",
+      "streetNumber": "8439"
+    },
+    "email": "laureen_mertz@kling-hettinger.name",
+    "kyc": {
+      "id": "5218b56b-3e00-4021-9000-16616550cbaa",
+      "date": "2022-06-04",
+      "method": "in_person",
+      "document": {
+        "country": "JM",
+        "nationality": "AZ",
+        "number": "207-47-3849",
+        "issuedBy": "Sanford-VonRueden",
+        "issueDate": "2022-07-24",
+        "validUntil": "2032-07-24",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": true,
+      "checkDate": "2020-10-20",
+      "source": "Frami-Frami",
+      "reason": "Dicta et quo aperiam.",
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2021-07-18",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additionalAttributes": {
+    "username": "monserrate",
+    "email": "milan_mccullough@howell.name"
+  },
+  "_links": {
+    "documents": "/customers/a9deb0a9-4b9f-44e4-a147-36acecec3279/documents"
+  }
+}

@@ -1,55 +1,55 @@
 {
-  "id": "20ebc16a-afaf-4d73-af23-226582860ea7",
+  "id": "57fabc91-2ca4-40b5-9ccd-de033a2165ab",
   "person": {
-    "firstName": "Eunice",
-    "lastName": "Berge",
+    "firstName": "Jodee",
+    "lastName": "McCullough",
     "gender": "M",
-    "birthDate": "2000-11-26",
-    "birthName": "Georgette",
-    "birthPlace": "East Lentown",
-    "birthCountry": "UG",
-    "nationality": "PS",
+    "birthDate": "1973-03-09",
+    "birthName": "Roxanne",
+    "birthPlace": "Harveyland",
+    "birthCountry": "FK",
+    "nationality": "ML",
     "address": {
-      "country": "GA",
-      "city": "Jacobiborough",
-      "postcode": "71561",
-      "streetName": "Salvatore Terrace",
-      "streetNumber": "672"
+      "country": "IS",
+      "city": "Lake Dorcas",
+      "postcode": "79521-9396",
+      "streetName": "Kiehn Trail",
+      "streetNumber": "99987"
     },
-    "email": "ashli.christiansen@connelly-mraz.io",
+    "email": "lincoln_sanford@hessel.net",
     "kyc": {
-      "id": "32855dcf-5ded-42ca-8a25-6c041d2d2dc4",
-      "date": "2022-05-29",
-      "method": "in_person",
+      "id": "fd7a72b2-5848-4dfa-9e54-1412bab32bb9",
+      "date": "2022-04-20",
+      "method": "no_verification",
       "document": {
-        "country": "PL",
-        "nationality": "PG",
-        "number": "416-68-4641",
-        "issuedBy": "Klein, Mertz and Purdy",
-        "issueDate": "2021-10-21",
-        "validUntil": "2031-10-21",
+        "country": "CX",
+        "nationality": "PK",
+        "number": "082-16-0429",
+        "issuedBy": "Kessler, Mayert and Senger",
+        "issueDate": "2020-12-13",
+        "validUntil": "2030-12-13",
         "type": "passport"
       }
     },
     "pep": {
-      "isExposed": true,
-      "checkDate": "2017-10-25",
-      "source": "Haley and Sons",
-      "reason": "Veritatis nam atque necessitatibus.",
-      "isSanctioned": true
+      "isExposed": false,
+      "checkDate": "2019-08-15",
+      "source": "Emard-Von",
+      "reason": null,
+      "isSanctioned": false
     }
   },
   "contract": {
-    "isSigned": false,
-    "signedDate": "2019-05-23",
-    "isCancelled": false,
-    "cancelledDate": null
+    "isSigned": true,
+    "signedDate": "2019-06-15",
+    "isCancelled": true,
+    "cancelledDate": "2022-01-18"
   },
   "additionalAttributes": {
-    "username": "caprice",
-    "email": "stanley.dickens@franecki-nolan.io"
+    "username": "peter_wolf",
+    "email": "rhiannon.windler@kuphal.name"
   },
   "_links": {
-    "documents": "/customers/20ebc16a-afaf-4d73-af23-226582860ea7/documents"
+    "documents": "/customers/57fabc91-2ca4-40b5-9ccd-de033a2165ab/documents"
   }
 }
