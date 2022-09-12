@@ -2,32 +2,31 @@ name: Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
   pull_request:
+    branches: [main]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
-        ruby:
-          - '2.7.5' # FIXME is minor version needed?
-          - '3.0.4' # FIXME is minor version needed?
-          - '3.1.2' # FIXME is minor version needed?
+        os: [ubuntu-latest]
+        ruby-version: [2.7', '3.0', '3.1']
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
-      - name: StandardRb check
+      - name: StandardRb check for Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
         run: bundle exec standardrb
-      - name: Quality check
+      - name: Quality check for Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
         run: bundle exec rake quality_check
-      - name: Run tests
+      - name: Run tests for Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
         run: bundle exec rspec
