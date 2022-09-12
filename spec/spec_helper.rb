@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "byebug"
+require "rake"
 require "simplecov"
 require "simplecov_json_formatter"
 require "webmock/rspec"
@@ -18,6 +19,8 @@ require_relative "support/request_helpers"
 
 RSpec.configure do |config|
   config.before(:suite) do
+    load("Rakefile")
+    Rake::Task["regenerate_fixtures"].invoke
     Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
   end
   config.disable_monkey_patching!

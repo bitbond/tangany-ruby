@@ -32,6 +32,7 @@ module Tangany
       private
 
       def cleanup(folder)
+        FileUtils.mkdir_p("#{inputs_root_folder}/#{folder}")
         Dir.glob("#{inputs_root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
       end
     end

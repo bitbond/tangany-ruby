@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "fileutils"
+
 module Tangany
   module Customers
     class CustomersResponsesGenerator
@@ -88,6 +90,7 @@ module Tangany
       private
 
       def cleanup(folder)
+        FileUtils.mkdir_p("#{responses_root_folder}/#{folder}")
         Dir.glob("#{responses_root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
       end
 
