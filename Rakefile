@@ -26,6 +26,8 @@ task :regenerate_fixtures do
   puts
   puts "== Regenerating customers fixtures ".ljust(80, "=")
 
+  # Customers
+
   puts " -> Regenerating responses/customers/customers/retrieve"
   Tangany::Customers::CustomersResponsesGenerator.new.retrieve
 
@@ -46,4 +48,12 @@ task :regenerate_fixtures do
 
   puts " -> Regenerating responses/customers/customers/delete"
   Tangany::Customers::CustomersResponsesGenerator.new.delete
+
+  # Wallet links
+
+  puts " -> Regenerating responses/customers/wallet_links/retrieve"
+  Tangany::Customers::WalletLinksResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating responses/customers/wallet_links/list"
+  Tangany::Customers::WalletLinksResponsesGenerator.new.list
 end
