@@ -1,0 +1,55 @@
+{
+  "id": "c93da159-c313-4dfe-860f-d6d16dc65738",
+  "person": {
+    "firstName": "Leonard",
+    "lastName": "Becker",
+    "gender": "X",
+    "birthDate": "1972-02-03",
+    "birthName": "Tai",
+    "birthPlace": "Collinsshire",
+    "birthCountry": "MD",
+    "nationality": "GM",
+    "address": {
+      "country": "NR",
+      "city": "Romaguerafort",
+      "postcode": "11988",
+      "streetName": "Kieth Branch",
+      "streetNumber": "32272"
+    },
+    "email": "etta@greenholt.net",
+    "kyc": {
+      "id": "8ca430a3-31a2-4f56-82c1-9e5977f480d8",
+      "date": "2021-09-28",
+      "method": "no_verification",
+      "document": {
+        "country": "SK",
+        "nationality": "TJ",
+        "number": "525-03-5644",
+        "issuedBy": "Conn, Gibson and Jakubowski",
+        "issueDate": "2021-08-10",
+        "validUntil": "2031-08-10",
+        "type": "id_card"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2021-09-05",
+      "source": "Gleichner, Kuvalis and Thompson",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": false,
+    "signedDate": "2022-05-15",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additionalAttributes": {
+    "username": "dawn",
+    "email": "arielle@hammes-mayert.name"
+  },
+  "_links": {
+    "documents": "/customers/c93da159-c313-4dfe-860f-d6d16dc65738/documents"
+  }
+}
