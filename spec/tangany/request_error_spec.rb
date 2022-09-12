@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Tangany::RequestError do
   describe "#new" do
     subject(:error) { described_class.new(message, validation_errors: validation_errors) }
