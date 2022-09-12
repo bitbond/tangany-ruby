@@ -4,8 +4,13 @@
 /coverage/
 /doc/
 /pkg/
+/spec/fixtures/inputs/
+/spec/fixtures/responses/
 /spec/reports/
 /tmp/
 
 .byebug_history
 .rspec_status
+
+!/spec/fixtures/inputs/.keep
+!/spec/fixtures/responses/.keep
