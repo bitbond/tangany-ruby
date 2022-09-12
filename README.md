@@ -99,23 +99,13 @@ bin/console
 
 ### Testing
 
-If Tangany API changes, edit the `spec/factories` and the `spec/generators` accordingly, then regenerate all the fixtures:
-
-```sh
-rake regenerate_fixtures
-```
-
-Run all tests:
+If Tangany API changes, edit the `spec/factories` and the `spec/generators` accordingly, then run all tests:
 
 ```sh
 rspec
 ```
 
-Run a single test suite:
-
-```sh
-rspec spec/tangany/customers/client_spec.rb
-```
+Fixtures will be regenerated automatically each time you run the tests.
 
 ### Linting and code quality
 
