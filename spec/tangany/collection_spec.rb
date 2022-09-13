@@ -62,11 +62,20 @@ RSpec.describe(Tangany::Collection) do
       end
 
       it "fills the collection with the correct attributes" do
-        expected_id = Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
-          File.basename(file, ".json")
-        end.sort[1]
+        expected_id = fetch_expected_id
         expect(collection.data.first.id).to(eq(expected_id))
       end
     end
+  end
+
+  private
+
+  def fetch_expected_id
+    Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
+      id = File.basename(file, ".json")
+      next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+      id
+    end.compact.sort[1]
   end
 end
