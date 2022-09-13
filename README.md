@@ -48,7 +48,7 @@ Tangany.customers_subscription = '...'
 customers_client = Tangany::Customers::Client.new
 
 # list customers
-customers_client.customers.list(limit: 21, start: 42)
+customers_client.customers.list(limit: 21, sort: :asc, start: 42)
 
 # retrieve single customer
 customers_client.customers.retrieve('cus_123456789')
@@ -77,6 +77,9 @@ customers_client.customers.update(
 
 # delete customer
 customers_client.customers.delete('cus_123456789')
+
+# list wallet links
+customers_client.wallet_links.list(limit: 21, sort: :asc, start: 42)
 ```
 
 ---
