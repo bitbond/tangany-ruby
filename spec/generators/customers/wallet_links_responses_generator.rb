@@ -31,7 +31,7 @@ module Tangany
         # cleanup
         cleanup("retrieve")
 
-        # valid wallet_links
+        # valid wallet_link
         3.times do
           wallet_link = FactoryBot.build(:customers_objects_wallet_link)
           File.write("#{responses_root_folder}/retrieve/#{wallet_link.id}.json", JSON.pretty_generate(JSON.parse(wallet_link.to_json)))

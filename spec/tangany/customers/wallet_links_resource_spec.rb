@@ -17,7 +17,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
 
     let(:fixture) { "wallet_links/list/paginated" }
     let(:limit) { 1 }
-    let(:path) { "wallet_links?limit=#{limit}&sort=#{sort}&start=#{start}" }
+    let(:path) { "wallet-links?limit=#{limit}&sort=#{sort}&start=#{start}" }
     let(:start) { 1 }
     let(:sort) { "asc" }
 
