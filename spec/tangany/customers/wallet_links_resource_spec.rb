@@ -12,6 +12,55 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     stub_customers_request(stubs, path, method: method, body: body, response: stubbed_response)
   end
 
+  describe "#create" do
+    subject(:wallet_link) { client.wallet_links.create(**input) }
+
+    let(:body) { input.to_json }
+    let(:method) { :post }
+    let(:path) { "wallet-links" }
+
+    context "with a valid payload" do
+      let(:input) do
+        JSON.parse(
+          File.read("spec/fixtures/inputs/customers/wallet_links/create/valid_input.json"),
+          symbolize_names: true
+        )
+      end
+      let(:fixture) { "wallet_links/create/created" }
+
+      it "creates a wallet link" do
+        expect { wallet_link }.not_to(raise_error)
+      end
+    end
+
+    context "with an invalid payload" do
+      let(:input) { {foo: :bar} }
+      let(:fixture) { "wallet_links/create/created" }
+
+      it "raises a Dry::Struct::Error" do
+        expect { wallet_link }.to(raise_error(Dry::Struct::Error))
+      end
+    end
+
+    context "with a conflicting payload" do
+      let(:input) do
+        JSON.parse(
+          File.read("spec/fixtures/inputs/customers/wallet_links/create/valid_input.json"),
+          symbolize_names: true
+        )
+      end
+      let(:fixture) { "wallet_links/create/conflicting" }
+      let(:status) { 409 }
+
+      it "raises an error" do
+        expect { wallet_link }.to(
+          raise_error(Tangany::RequestError)
+          .with_message(/WalletLink with ID "[^"]+" already exists/)
+        )
+      end
+    end
+  end
+
   describe "#list" do
     subject(:wallet_links) { client.wallet_links.list(limit: limit, sort: sort, start: start) }
 

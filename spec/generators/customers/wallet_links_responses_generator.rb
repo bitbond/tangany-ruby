@@ -10,6 +10,22 @@ module Tangany
         @responses_root_folder = "spec/fixtures/responses/customers/wallet_links"
       end
 
+      def create
+        # cleanup
+        cleanup("create")
+
+        # created
+        File.write("#{responses_root_folder}/create/created.json", JSON.pretty_generate({}))
+
+        # conflicting
+        customer_id = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))["id"]
+        File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
+          statusCode: 409,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "WalletLink with ID \"#{customer_id}\" already exists."
+        }))
+      end
+
       def list
         # cleanup
         cleanup("list")
