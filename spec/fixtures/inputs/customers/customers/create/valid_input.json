@@ -1,0 +1,53 @@
+{
+  "id": "f1ce52f8-2325-414c-adaf-b46633b7bed2",
+  "environment": "testing",
+  "person": {
+    "firstName": "Tommie",
+    "lastName": "Kshlerin",
+    "gender": "X",
+    "birthDate": "1985-01-11",
+    "birthName": "Rene",
+    "birthPlace": "Port Danaport",
+    "birthCountry": "CA",
+    "nationality": "PA",
+    "address": {
+      "country": "CH",
+      "city": "Marcelborough",
+      "postcode": "67932",
+      "streetName": "Carroll Dale",
+      "streetNumber": "358"
+    },
+    "email": "angele_ledner@hackett.name",
+    "kyc": {
+      "id": "325bcb68-8569-4def-a1e0-4517cd986ebe",
+      "date": "2021-09-26",
+      "method": "no_verification",
+      "document": {
+        "country": "BL",
+        "nationality": "MG",
+        "number": "896-15-2207",
+        "issuedBy": "Abernathy Group",
+        "issueDate": "2020-10-07",
+        "validUntil": "2030-10-07",
+        "type": "passport"
+      }
+    },
+    "pep": {
+      "isExposed": false,
+      "checkDate": "2019-10-26",
+      "source": "Harvey-Waelchi",
+      "reason": null,
+      "isSanctioned": false
+    }
+  },
+  "contract": {
+    "isSigned": true,
+    "signedDate": "2022-06-08",
+    "isCancelled": false,
+    "cancelledDate": null
+  },
+  "additionalAttributes": {
+    "username": "jana",
+    "email": "mallie@schaefer.biz"
+  }
+}

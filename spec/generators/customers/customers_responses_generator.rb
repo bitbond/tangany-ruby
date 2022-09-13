@@ -5,10 +5,10 @@ require "fileutils"
 module Tangany
   module Customers
     class CustomersResponsesGenerator
-      attr_reader :inputs_root_folder, :responses_root_folder
+      attr_reader :contracts_root_folder, :responses_root_folder
 
       def initialize
-        @inputs_root_folder = "spec/fixtures/inputs/customers/customers"
+        @contracts_root_folder = "spec/fixtures/contracts/customers/customers"
         @responses_root_folder = "spec/fixtures/responses/customers/customers"
       end
 
@@ -21,7 +21,7 @@ module Tangany
         FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
 
         # conflicting
-        customer_id = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))["id"]
+        customer_id = JSON.parse(File.read("#{contracts_root_folder}/create/valid_contract.json"))["id"]
         File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
           statusCode: 409,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",

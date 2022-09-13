@@ -8,7 +8,7 @@ FactoryBot.define do
 
     id { Faker::Internet.uuid }
     date { Faker::Date.backward(days: 365).to_s }
-    add_attribute(:method) { Tangany::Customers::Customers::CreateInput::ALLOWED_PERSON_KYC_METHODS.sample }
+    add_attribute(:method) { Tangany::Customers::Customers::CreateContract::ALLOWED_PERSON_KYC_METHODS.sample }
     association :document, factory: :customers_objects_document
   end
 end

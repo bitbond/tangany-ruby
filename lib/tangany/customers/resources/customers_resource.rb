@@ -4,8 +4,8 @@ module Tangany
   module Customers
     class CustomersResource < Resource
       def create(**attributes)
-        input = Tangany::Customers::Customers::CreateInput.new(attributes)
-        Customer.new(post_request("customers", body: input.to_json).body)
+        contract = Tangany::Customers::Customers::CreateContract.new(attributes)
+        Customer.new(post_request("customers", body: contract.to_json).body)
       end
 
       def delete(customer_id)
@@ -24,19 +24,19 @@ module Tangany
         response = get_request("customers/#{attributes[:id]}")
 
         customer_hash = Customer.new(response.body).to_h
-        update_input_hash = Tangany::Customers::Customers::UpdateInput.new(attributes).to_h
+        update_contract_hash = Tangany::Customers::Customers::UpdateContract.new(attributes).to_h
 
         Customer.new(patch_request(
           "customers/#{attributes[:id]}",
-          body: build_update_body_json(customer_hash, update_input_hash),
+          body: build_update_body_json(customer_hash, update_contract_hash),
           headers: {"If-Match" => response.headers["If-Match"]}
         ).body)
       end
 
       private
 
-      def build_update_body_json(customer_hash, update_input_hash)
-        merged_hash = customer_hash.deep_merge(update_input_hash)
+      def build_update_body_json(customer_hash, update_contract_hash)
+        merged_hash = customer_hash.deep_merge(update_contract_hash)
         hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
         hash_diff.to_operations_json
       end

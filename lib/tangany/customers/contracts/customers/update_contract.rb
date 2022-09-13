@@ -3,7 +3,7 @@
 module Tangany
   module Customers
     module Customers
-      class UpdateInput < Input
+      class UpdateContract < Contract
         attribute :id, Types::String
         attribute :person, Dry::Struct.meta(omittable: true) do
           attribute :lastName?, Types::String.constrained(max_size: 50)

@@ -13,7 +13,7 @@ require_relative "tangany/resource"
 require_relative "tangany/types"
 require_relative "tangany/version"
 
-require_relative "tangany/input"
+require_relative "tangany/contract"
 
 require_relative "tangany/object"
 require_relative "tangany/operation"

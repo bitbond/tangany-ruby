@@ -13,16 +13,16 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
   end
 
   describe "#create" do
-    subject(:wallet_link) { client.wallet_links.create(**input) }
+    subject(:wallet_link) { client.wallet_links.create(**contract) }
 
-    let(:body) { input.to_json }
+    let(:body) { contract.to_json }
     let(:method) { :post }
     let(:path) { "wallet-links" }
 
     context "with a valid payload" do
-      let(:input) do
+      let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/inputs/customers/wallet_links/create/valid_input.json"),
+          File.read("spec/fixtures/contracts/customers/wallet_links/create/valid_contract.json"),
           symbolize_names: true
         )
       end
@@ -34,7 +34,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     end
 
     context "with an invalid payload" do
-      let(:input) { {foo: :bar} }
+      let(:contract) { {foo: :bar} }
       let(:fixture) { "wallet_links/create/created" }
 
       it "raises a Dry::Struct::Error" do
@@ -43,9 +43,9 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     end
 
     context "with a conflicting payload" do
-      let(:input) do
+      let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/inputs/customers/wallet_links/create/valid_input.json"),
+          File.read("spec/fixtures/contracts/customers/wallet_links/create/valid_contract.json"),
           symbolize_names: true
         )
       end

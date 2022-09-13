@@ -3,7 +3,7 @@
 module Tangany
   module Customers
     module WalletLinks
-      class CreateInput < Input
+      class CreateContract < Contract
         ALLOWED_TYPES = ["mpc", "waas"].freeze
         ALLOWED_ASSETS = %w[
           AAVE
