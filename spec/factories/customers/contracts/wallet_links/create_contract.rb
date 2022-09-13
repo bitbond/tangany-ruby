@@ -4,7 +4,7 @@ require "factory_bot"
 
 FactoryBot.define do
   factory :customers_contracts_wallet_links_create, class: "Tangany::Customers::WalletLinks::CreateContract" do
-    initialize_with { new(attributes) }
+    initialize_with { new.call(attributes) }
 
     id { Faker::Internet.uuid }
     type { Tangany::Customers::WalletLinks::CreateContract::ALLOWED_TYPES.sample }

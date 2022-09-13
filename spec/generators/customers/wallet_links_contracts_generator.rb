@@ -6,8 +6,8 @@ module Tangany
       attr_reader :contracts_root_folder, :responses_root_folder
 
       def initialize
-        @contracts_root_folder = "spec/fixtures/contracts/customers/wallet_links"
-        @responses_root_folder = "spec/fixtures/responses/customers/wallet_links"
+        @contracts_root_folder = "spec/fixtures/generated/contracts/customers/wallet_links"
+        @responses_root_folder = "spec/fixtures/generated/responses/customers/wallet_links"
       end
 
       def create
@@ -16,7 +16,7 @@ module Tangany
 
         # valid_contract.json
         contract = FactoryBot.build(:customers_contracts_wallet_links_create)
-        File.write("#{contracts_root_folder}/create/valid_contract.json", JSON.pretty_generate(JSON.parse(contract.to_json)))
+        File.write("#{contracts_root_folder}/create/valid_contract.json", JSON.pretty_generate(JSON.parse(contract.to_h.to_json)))
       end
 
       private

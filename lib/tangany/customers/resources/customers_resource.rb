@@ -4,8 +4,8 @@ module Tangany
   module Customers
     class CustomersResource < Resource
       def create(**attributes)
-        contract = Tangany::Customers::Customers::CreateContract.new(attributes)
-        Customer.new(post_request("customers", body: contract.to_json).body)
+        contract = Tangany::Customers::Customers::CreateContract.new.call!(attributes)
+        Customer.new(post_request("customers", body: contract.to_h.to_json).body)
       end
 
       def delete(customer_id)
@@ -24,7 +24,7 @@ module Tangany
         response = get_request("customers/#{attributes[:id]}")
 
         customer_hash = Customer.new(response.body).to_h
-        update_contract_hash = Tangany::Customers::Customers::UpdateContract.new(attributes).to_h
+        update_contract_hash = Tangany::Customers::Customers::UpdateContract.new.call!(attributes).to_h
 
         Customer.new(patch_request(
           "customers/#{attributes[:id]}",

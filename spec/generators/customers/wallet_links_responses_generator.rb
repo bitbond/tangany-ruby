@@ -6,8 +6,8 @@ module Tangany
       attr_reader :contracts_root_folder, :responses_root_folder
 
       def initialize
-        @contracts_root_folder = "spec/fixtures/contracts/customers/wallet_links"
-        @responses_root_folder = "spec/fixtures/responses/customers/wallet_links"
+        @contracts_root_folder = "spec/fixtures/generated/contracts/customers/wallet_links"
+        @responses_root_folder = "spec/fixtures/generated/responses/customers/wallet_links"
       end
 
       def create

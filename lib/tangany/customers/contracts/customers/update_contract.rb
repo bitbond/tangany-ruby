@@ -4,32 +4,36 @@ module Tangany
   module Customers
     module Customers
       class UpdateContract < Contract
-        attribute :id, Types::String
-        attribute :person, Dry::Struct.meta(omittable: true) do
-          attribute :lastName?, Types::String.constrained(max_size: 50)
-          attribute :address, Dry::Struct.meta(omittable: true) do
-            attribute :country?, Types::String.constrained(format: COUNTRY_REGEXP)
-            attribute :city?, Types::String.constrained(max_size: 50)
-            attribute :postcode?, Types::String.constrained(max_size: 50)
-            attribute :streetName?, Types::String.constrained(max_size: 50)
-            attribute :streetNumber?, Types::String.constrained(max_size: 50)
+        schema do
+          config.validate_keys = true
+
+          required(:id).filled(:string)
+          optional(:person).hash do
+            optional(:lastName).filled(:string, max_size?: 50)
+            optional(:address).hash do
+              optional(:country).filled(:string, format?: COUNTRY_REGEXP)
+              optional(:city).filled(:string, max_size?: 50)
+              optional(:postcode).filled(:string, max_size?: 50)
+              optional(:streetName).filled(:string, max_size?: 50)
+              optional(:streetNumber).filled(:string, max_size?: 50)
+            end
+            optional(:email).filled(:string, max_size?: 255)
+            optional(:pep).hash do
+              optional(:isExposed).filled(:bool)
+              optional(:checkDate).filled(:string, format?: DATE_REGEXP)
+              optional(:source).maybe(:string, max_size?: 255)
+              optional(:reason).maybe(:string)
+              optional(:isSanctioned).filled(:bool)
+            end
           end
-          attribute :email?, Types::String.constrained(max_size: 255)
-          attribute :pep, Dry::Struct.meta(omittable: true) do
-            attribute :isExposed?, Types::Bool
-            attribute :checkDate?, Types::String.constrained(format: DATE_REGEXP)
-            attribute :source?, Types::String.constrained(max_size: 255).optional
-            attribute :reason?, Types::String.optional
-            attribute :isSanctioned?, Types::Bool
+          optional(:contract).hash do
+            optional(:isSigned).filled(:bool)
+            optional(:signedDate).filled(:string, format?: DATETIME_OPTIONAL_REGEXP) # can also be nil
+            optional(:isCancelled).filled(:bool)
+            optional(:cancelledDate).filled(:string, format?: DATETIME_OPTIONAL_REGEXP) # can also be nil
           end
+          optional(:additionalAttributes).filled(:hash)
         end
-        attribute :contract, Dry::Struct.meta(omittable: true) do
-          attribute :isSigned?, Types::Bool
-          attribute :signedDate?, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP).optional
-          attribute :isCancelled?, Types::Bool
-          attribute :cancelledDate?, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP).optional
-        end
-        attribute :additionalAttributes?, Types::Hash
       end
     end
   end

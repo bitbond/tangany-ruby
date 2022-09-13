@@ -31,14 +31,18 @@ module Tangany
           XLM
         ].freeze
 
-        attribute :id, Types::String
-        attribute :type, Types::String.constrained(included_in: ALLOWED_TYPES)
-        attribute? :address, Types::String
-        attribute? :assetId, Types::String.constrained(included_in: ALLOWED_ASSETS)
-        attribute? :vaultUrl, Types::String.constrained(format: URI::DEFAULT_PARSER.make_regexp)
-        attribute? :vaultWalletId, Types::String
-        attribute? :assignment do
-          attribute :customerId, Types::String
+        schema do
+          config.validate_keys = true
+
+          required(:id).filled(:string)
+          required(:type).filled(:string, included_in?: ALLOWED_TYPES)
+          optional(:address).filled(:string)
+          optional(:assetId).filled(:string, included_in?: ALLOWED_ASSETS)
+          optional(:vaultUrl).filled(:string, format?: URI::DEFAULT_PARSER.make_regexp)
+          optional(:vaultWalletId).filled(:string)
+          required(:assignment).hash do
+            required(:customerId).filled(:string)
+          end
         end
       end
     end

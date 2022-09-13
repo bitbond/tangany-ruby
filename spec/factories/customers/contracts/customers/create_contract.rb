@@ -4,7 +4,7 @@ require "factory_bot"
 
 FactoryBot.define do
   factory :customers_contracts_customers_create, class: "Tangany::Customers::Customers::CreateContract" do
-    initialize_with { new(attributes) }
+    initialize_with { new.call(attributes) }
 
     id { Faker::Internet.uuid }
     environment { "testing" }

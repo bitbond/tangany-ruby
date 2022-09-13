@@ -4,13 +4,11 @@
 /coverage/
 /doc/
 /pkg/
-/spec/fixtures/contracts/
-/spec/fixtures/responses/
+/spec/fixtures/generated/
 /spec/reports/
 /tmp/
 
 .byebug_history
 .rspec_status
 
-!/spec/fixtures/contracts/.keep
-!/spec/fixtures/responses/.keep
+!/spec/fixtures/generated/.keep

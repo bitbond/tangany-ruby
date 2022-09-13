@@ -15,14 +15,14 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
   describe "#create" do
     subject(:wallet_link) { client.wallet_links.create(**contract) }
 
-    let(:body) { contract.to_json }
+    let(:body) { contract.to_h.to_json }
     let(:method) { :post }
     let(:path) { "wallet-links" }
 
     context "with a valid payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/contracts/customers/wallet_links/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/contracts/customers/wallet_links/create/valid_contract.json"),
           symbolize_names: true
         )
       end
@@ -38,14 +38,14 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       let(:fixture) { "wallet_links/create/created" }
 
       it "raises a Dry::Struct::Error" do
-        expect { wallet_link }.to(raise_error(Dry::Struct::Error))
+        expect { wallet_link }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
       end
     end
 
     context "with a conflicting payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/contracts/customers/wallet_links/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/contracts/customers/wallet_links/create/valid_contract.json"),
           symbolize_names: true
         )
       end

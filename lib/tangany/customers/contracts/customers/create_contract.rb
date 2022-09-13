@@ -8,54 +8,58 @@ module Tangany
         ALLOWED_PERSON_KYC_DOCUMENT_TYPES = ["id_card", "passport"].freeze
         ALLOWED_PERSON_KYC_METHODS = ["video_ident", "id_copy", "auto_ident", "in_person", "no_verification"].freeze
 
-        attribute :id, Types::String
-        attribute :environment, Types::String.constrained(included_in: %w[production testing])
-        attribute :person do
-          attribute :firstName, Types::String.constrained(max_size: 50)
-          attribute :lastName, Types::String.constrained(max_size: 50)
-          attribute :gender, Types::String.constrained(included_in: ALLOWED_PERSON_GENDERS)
-          attribute :birthDate, Types::String.constrained(format: DATE_REGEXP)
-          attribute :birthName, Types::String.constrained(max_size: 50)
-          attribute :birthPlace, Types::String.constrained(max_size: 50)
-          attribute :birthCountry, Types::String.constrained(format: COUNTRY_REGEXP)
-          attribute :nationality, Types::String.constrained(format: COUNTRY_REGEXP)
-          attribute :address do
-            attribute :country, Types::String.constrained(format: COUNTRY_REGEXP)
-            attribute :city, Types::String.constrained(max_size: 50)
-            attribute :postcode, Types::String.constrained(max_size: 50)
-            attribute :streetName, Types::String.constrained(max_size: 50)
-            attribute :streetNumber, Types::String.constrained(max_size: 50)
-          end
-          attribute :email, Types::String.constrained(max_size: 255)
-          attribute :kyc do
-            attribute :id, Types::String.constrained(max_size: 150)
-            attribute :date, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP)
-            attribute :method, Types::String.constrained(included_in: ALLOWED_PERSON_KYC_METHODS)
-            attribute :document do
-              attribute :country, Types::String.constrained(format: COUNTRY_REGEXP)
-              attribute :nationality, Types::String.constrained(format: COUNTRY_REGEXP)
-              attribute :number, Types::String.constrained(max_size: 50)
-              attribute :issuedBy, Types::String.constrained(max_size: 50)
-              attribute :issueDate, Types::String.constrained(format: DATE_REGEXP)
-              attribute :validUntil, Types::String.constrained(format: DATE_REGEXP)
-              attribute :type, Types::String.constrained(included_in: ALLOWED_PERSON_KYC_DOCUMENT_TYPES)
+        schema do
+          config.validate_keys = true
+
+          required(:id).filled(:string)
+          required(:environment).filled(:string, included_in?: %w[production testing])
+          required(:person).hash do
+            required(:firstName).filled(:string, max_size?: 50)
+            required(:lastName).filled(:string, max_size?: 50)
+            required(:gender).filled(:string, included_in?: ALLOWED_PERSON_GENDERS)
+            required(:birthDate).filled(:string, format?: DATE_REGEXP)
+            required(:birthName).filled(:string, max_size?: 50)
+            required(:birthPlace).filled(:string, max_size?: 50)
+            required(:birthCountry).filled(:string, format?: COUNTRY_REGEXP)
+            required(:nationality).filled(:string, format?: COUNTRY_REGEXP)
+            required(:address).hash do
+              required(:country).filled(:string, format?: COUNTRY_REGEXP)
+              required(:city).filled(:string, max_size?: 50)
+              required(:postcode).filled(:string, max_size?: 50)
+              required(:streetName).filled(:string, max_size?: 50)
+              required(:streetNumber).filled(:string, max_size?: 50)
+            end
+            required(:email).filled(:string, max_size?: 255)
+            required(:kyc).hash do
+              required(:id).filled(:string, max_size?: 150)
+              required(:date).filled(:string, format?: DATETIME_OPTIONAL_REGEXP)
+              required(:method).filled(:string, included_in?: ALLOWED_PERSON_KYC_METHODS)
+              required(:document).hash do
+                required(:country).filled(:string, format?: COUNTRY_REGEXP)
+                required(:nationality).filled(:string, format?: COUNTRY_REGEXP)
+                required(:number).filled(:string, max_size?: 50)
+                required(:issuedBy).filled(:string, max_size?: 50)
+                required(:issueDate).filled(:string, format?: DATE_REGEXP)
+                required(:validUntil).filled(:string, format?: DATE_REGEXP)
+                required(:type).filled(:string, included_in?: ALLOWED_PERSON_KYC_DOCUMENT_TYPES)
+              end
+            end
+            required(:pep).hash do
+              required(:isExposed).filled(:bool)
+              required(:checkDate).filled(:string, format?: DATE_REGEXP)
+              required(:source).maybe(:string, max_size?: 255)
+              optional(:reason).maybe(:string)
+              required(:isSanctioned).filled(:bool)
             end
           end
-          attribute :pep do
-            attribute :isExposed, Types::Bool
-            attribute :checkDate, Types::String.constrained(format: DATE_REGEXP)
-            attribute :source, Types::String.constrained(max_size: 255).optional
-            attribute :reason?, Types::String.optional
-            attribute :isSanctioned?, Types::Bool
+          required(:contract).hash do
+            required(:isSigned).filled(:bool)
+            required(:signedDate).maybe(:string, format?: DATETIME_OPTIONAL_REGEXP)
+            optional(:isCancelled).filled(:bool)
+            optional(:cancelledDate).maybe(:string, format?: DATETIME_OPTIONAL_REGEXP)
           end
+          required(:additionalAttributes).filled(:hash)
         end
-        attribute :contract do
-          attribute :isSigned, Types::Bool
-          attribute :signedDate, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP).optional
-          attribute :isCancelled?, Types::Bool
-          attribute :cancelledDate?, Types::String.constrained(format: DATETIME_OPTIONAL_REGEXP).optional
-        end
-        attribute :additionalAttributes, Types::Hash
       end
     end
   end

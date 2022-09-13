@@ -6,8 +6,8 @@ module Tangany
       attr_reader :contracts_root_folder, :responses_root_folder
 
       def initialize
-        @contracts_root_folder = "spec/fixtures/contracts/customers/customers"
-        @responses_root_folder = "spec/fixtures/responses/customers/customers"
+        @contracts_root_folder = "spec/fixtures/generated/contracts/customers/customers"
+        @responses_root_folder = "spec/fixtures/generated/responses/customers/customers"
       end
 
       def create
@@ -16,7 +16,7 @@ module Tangany
 
         # valid_contract.json
         contract = FactoryBot.build(:customers_contracts_customers_create)
-        File.write("#{contracts_root_folder}/create/valid_contract.json", JSON.pretty_generate(JSON.parse(contract.to_json)))
+        File.write("#{contracts_root_folder}/create/valid_contract.json", JSON.pretty_generate(JSON.parse(contract.to_h.to_json)))
       end
 
       def update
@@ -26,7 +26,7 @@ module Tangany
         # valid_contract.json
         customer_id = File.basename(Dir.glob("#{responses_root_folder}/retrieve/*.json").min, ".json")
         contract = FactoryBot.build(:customers_contracts_customers_update, id: customer_id)
-        File.write("#{contracts_root_folder}/update/valid_contract.json", JSON.pretty_generate(JSON.parse(contract.to_json)))
+        File.write("#{contracts_root_folder}/update/valid_contract.json", JSON.pretty_generate(JSON.parse(contract.to_h.to_json)))
       end
 
       private

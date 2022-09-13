@@ -16,14 +16,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   describe "#create" do
     subject(:customer) { client.customers.create(**contract) }
 
-    let(:body) { contract.to_json }
+    let(:body) { contract.to_h.to_json }
     let(:method) { :post }
     let(:path) { "customers" }
 
     context "with a valid payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/contracts/customers/customers/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/contracts/customers/customers/create/valid_contract.json"),
           symbolize_names: true
         )
       end
@@ -39,14 +39,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       let(:fixture) { "customers/create/created" }
 
       it "raises a Dry::Struct::Error" do
-        expect { customer }.to(raise_error(Dry::Struct::Error))
+        expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
       end
     end
 
     context "with a conflicting payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/contracts/customers/customers/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/contracts/customers/customers/create/valid_contract.json"),
           symbolize_names: true
         )
       end
@@ -188,17 +188,17 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       context "with a valid payload" do
         let(:body) do
           customer_hash = Tangany::Customers::Customer.new(JSON.parse(
-            File.read("spec/fixtures/responses/customers/customers/retrieve/#{customer_id}.json"),
+            File.read("spec/fixtures/generated/responses/customers/customers/retrieve/#{customer_id}.json"),
             symbolize_names: true
           )).to_h
-          update_contract_hash = Tangany::Customers::Customers::UpdateContract.new(contract).to_h
+          update_contract_hash = Tangany::Customers::Customers::UpdateContract.new.call!(contract).to_h
           merged_hash = customer_hash.deep_merge(update_contract_hash)
           hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
           hash_diff.to_operations_json
         end
         let(:contract) do
           JSON.parse(
-            File.read("spec/fixtures/contracts/customers/customers/update/valid_contract.json"),
+            File.read("spec/fixtures/generated/contracts/customers/customers/update/valid_contract.json"),
             symbolize_names: true
           )
         end
@@ -212,7 +212,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
         let(:contract) { {id: customer_id, foo: :bar} }
 
         it "raises a Dry::Struct::Error" do
-          expect { customer }.to(raise_error(Dry::Struct::Error))
+          expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
         end
       end
 
@@ -244,7 +244,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   private
 
   def fetch_customer_id
-    Dir.glob("spec/fixtures/responses/customers/customers/retrieve/*.json").map do |file|
+    Dir.glob("spec/fixtures/generated/responses/customers/customers/retrieve/*.json").map do |file|
       id = File.basename(file, ".json")
       next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
 

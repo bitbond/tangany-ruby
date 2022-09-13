@@ -4,8 +4,8 @@ module Tangany
   module Customers
     class WalletLinksResource < Resource
       def create(**attributes)
-        contract = Tangany::Customers::WalletLinks::CreateContract.new(attributes)
-        post_request("wallet-links", body: contract.to_json)
+        contract = Tangany::Customers::WalletLinks::CreateContract.new.call!(attributes)
+        post_request("wallet-links", body: contract.to_h.to_json)
       end
 
       def list(**params)
