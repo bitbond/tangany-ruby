@@ -1,13 +1,16 @@
 require "faraday"
 
 module Tangany
-  module Customers
+  module Custody
     class Client
-      attr_reader :adapter, :subscription
+      attr_reader :adapter, :client_id, :client_secret, :subscription, :vault_url
 
       def initialize(adapter: Faraday.default_adapter, stubs: nil)
         @adapter = adapter
+        @client_id = Tangany.client_id
+        @client_secret = Tangany.client_secret
         @subscription = Tangany.subscription
+        @vault_url = Tangany.vault_url
 
         @stubs = stubs
       end
@@ -17,16 +20,8 @@ module Tangany
           faraday.adapter(adapter, @stubs)
           faraday.request(:json)
           faraday.response(:json, content_type: /\bjson$/, parser_options: {symbolize_names: true})
-          faraday.url_prefix = Tangany.customers_base_url
+          faraday.url_prefix = Tangany.custody_base_url
         end
-      end
-
-      def customers
-        CustomersResource.new(self)
-      end
-
-      def wallet_links
-        WalletLinksResource.new(self)
       end
     end
   end

@@ -16,6 +16,7 @@ require_relative "tangany/contract"
 require_relative "tangany/object"
 require_relative "tangany/operation"
 
+require_relative "tangany/custody"
 require_relative "tangany/customers"
 
 module Tangany
@@ -27,9 +28,16 @@ module Tangany
     attr_reader :config
 
     def_delegators :config,
+      :client_id,
+      :client_id=,
+      :client_secret,
+      :client_secret=,
+      :custody_base_url,
       :customers_base_url,
+      :customers_version,
       :subscription,
       :subscription=,
-      :customers_version
+      :vault_url,
+      :vault_url=
   end
 end

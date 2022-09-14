@@ -12,9 +12,11 @@ RSpec.describe(Tangany) do
       end
     end
 
-    it "allows subscription to be configured" do
-      described_class.subscription = "test"
-      expect(described_class.subscription).to(eq("test"))
+    %i[client_id client_secret subscription vault_url].each do |attribute|
+      it "allows #{attribute} to be configured" do
+        described_class.send("#{attribute}=", "test")
+        expect(described_class.send(attribute)).to(eq("test"))
+      end
     end
   end
 end
