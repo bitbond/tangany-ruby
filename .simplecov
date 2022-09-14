@@ -2,6 +2,8 @@ SimpleCov.configure do
   add_filter "/lib/tangany/version.rb"
   add_filter "/spec/"
 
+  add_group "Core Extensions", "lib/core_ext"
+  add_group "Custody", "lib/tangany/custody"
   add_group "Customers", "lib/tangany/customers"
 
   enable_coverage :branch
