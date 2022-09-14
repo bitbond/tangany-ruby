@@ -30,8 +30,8 @@ module Tangany
 
     def_delegators :config,
       :customers_base_url,
-      :customers_subscription,
-      :customers_subscription=,
+      :subscription,
+      :subscription=,
       :customers_version
   end
 end

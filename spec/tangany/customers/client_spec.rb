@@ -9,7 +9,7 @@ RSpec.describe(Tangany::Customers::Client) do
     end
 
     it "has a subscription" do
-      expect(client.subscription).to(eq(Tangany.customers_subscription))
+      expect(client.subscription).to(eq(Tangany.subscription))
     end
   end
 end

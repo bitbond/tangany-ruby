@@ -13,7 +13,7 @@ require "tangany"
 # require "pry"
 # Pry.start
 
-Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
+Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
 
 require "irb"
 IRB.start(__FILE__)

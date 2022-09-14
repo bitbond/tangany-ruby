@@ -38,11 +38,11 @@ gem 'tangany'
 
 ## Usage
 
-The library needs to be configured with your account's secrets. Set `Tangany.customers_subscription` to its value:
+The library needs to be configured with your account's secrets. Set `Tangany.subscription` to its value:
 
 ```ruby
 require 'tangany'
-Tangany.customers_subscription = '...'
+Tangany.subscription = '...'
 
 # initialize the client
 customers_client = Tangany::Customers::Client.new

@@ -14,9 +14,9 @@ RSpec.describe(Tangany) do
       end
     end
 
-    it "allows customers_subscription to be configured" do
-      described_class.customers_subscription = "test"
-      expect(described_class.customers_subscription).to(eq("test"))
+    it "allows subscription to be configured" do
+      described_class.subscription = "test"
+      expect(described_class.subscription).to(eq("test"))
     end
   end
 end
