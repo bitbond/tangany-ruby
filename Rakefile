@@ -34,14 +34,14 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/customers/list"
   Tangany::Customers::CustomersResponsesGenerator.new.list
 
-  puts " -> Regenerating contracts/customers/customers/create"
-  Tangany::Customers::CustomersContractsGenerator.new.create
+  puts " -> Regenerating inputs/customers/customers/create"
+  Tangany::Customers::CustomersInputsGenerator.new.create
 
   puts " -> Regenerating responses/customers/customers/create"
   Tangany::Customers::CustomersResponsesGenerator.new.create
 
-  puts " -> Regenerating contracts/customers/customers/update"
-  Tangany::Customers::CustomersContractsGenerator.new.update
+  puts " -> Regenerating inputs/customers/customers/update"
+  Tangany::Customers::CustomersInputsGenerator.new.update
 
   puts " -> Regenerating responses/customers/customers/update"
   Tangany::Customers::CustomersResponsesGenerator.new.update
@@ -57,8 +57,8 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/wallet_links/list"
   Tangany::Customers::WalletLinksResponsesGenerator.new.list
 
-  puts " -> Regenerating contracts/customers/wallet_links/create"
-  Tangany::Customers::WalletLinksContractsGenerator.new.create
+  puts " -> Regenerating inputs/customers/wallet_links/create"
+  Tangany::Customers::WalletLinksInputsGenerator.new.create
 
   puts " -> Regenerating responses/customers/wallet_links/create"
   Tangany::Customers::WalletLinksResponsesGenerator.new.create

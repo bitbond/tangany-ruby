@@ -23,7 +23,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a valid payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/generated/contracts/customers/customers/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
           symbolize_names: true
         )
       end
@@ -46,7 +46,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a conflicting payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/generated/contracts/customers/customers/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
           symbolize_names: true
         )
       end
@@ -198,7 +198,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
         end
         let(:contract) do
           JSON.parse(
-            File.read("spec/fixtures/generated/contracts/customers/customers/update/valid_contract.json"),
+            File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
             symbolize_names: true
           )
         end

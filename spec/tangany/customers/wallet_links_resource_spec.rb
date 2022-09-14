@@ -22,7 +22,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     context "with a valid payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/generated/contracts/customers/wallet_links/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
           symbolize_names: true
         )
       end
@@ -45,7 +45,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     context "with a conflicting payload" do
       let(:contract) do
         JSON.parse(
-          File.read("spec/fixtures/generated/contracts/customers/wallet_links/create/valid_contract.json"),
+          File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
           symbolize_names: true
         )
       end
