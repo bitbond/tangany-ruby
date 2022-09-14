@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany) do
   context "with forwardable configuration" do
     context "with internal configuration" do

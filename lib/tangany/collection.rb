@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Tangany
   class Collection
     attr_reader :data, :total, :next_path, :previous_path

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module RequestHelpers
   def stub_customers_response(fixture:, status: 200, headers: {})
     [status, default_headers.merge(headers), File.read("spec/fixtures/generated/responses/customers/#{fixture}.json")]

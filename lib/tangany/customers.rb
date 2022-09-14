@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative "customers/client"
 
 require_relative "customers/contracts"

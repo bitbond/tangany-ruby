@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Tangany
   class Operation < Dry::Struct
     JSON_POINTER_REGEXP = %r{(/[^/]+)+}

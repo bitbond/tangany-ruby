@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany::Collection) do
   context "with a response" do
     subject(:collection) { described_class.from_response(response, type: type) }

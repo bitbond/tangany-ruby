@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Tangany
   class Config
     attr_accessor :subscription

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Tangany
   class Object < Dry::Struct
     def to_json

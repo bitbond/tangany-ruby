@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany::Customers::WalletLinksResource) do
   let(:body) { "{}" }
   let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }

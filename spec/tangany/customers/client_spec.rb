@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany::Customers::Client) do
   context "when initialized" do
     subject(:client) { described_class.new }

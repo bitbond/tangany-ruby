@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative "objects/address"
 require_relative "objects/contract"
 require_relative "objects/document"
