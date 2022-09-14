@@ -39,10 +39,6 @@ module Tangany
 
     attr_reader :client
 
-    def default_headers
-      {"tangany-subscription" => client.subscription}
-    end
-
     def handle_response(response)
       case response.status
       when 400, 404, 409
