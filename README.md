@@ -40,12 +40,11 @@ gem 'tangany'
 
 The library needs to be configured with your account's secrets.
 
+### Customers API
+
 ```ruby
 require 'tangany'
-Tangany.client_id = '...'
-Tangany.client_secret = '...'
 Tangany.subscription = '...'
-Tangany.vault_url = '...'
 
 # initialize the client
 customers_client = Tangany::Customers::Client.new
@@ -83,6 +82,19 @@ customers_client.customers.delete('cus_123456789')
 
 # list wallet links
 customers_client.wallet_links.list(limit: 21, sort: :asc, start: 42)
+```
+
+### Custody API
+
+```ruby
+require 'tangany'
+Tangany.client_id = '...'
+Tangany.client_secret = '...'
+Tangany.subscription = '...'
+Tangany.vault_url = '...'
+
+# initialize the client
+custody_client = Tangany::Custody::Client.new
 ```
 
 ---
