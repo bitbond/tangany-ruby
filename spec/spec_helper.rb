@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "byebug"
 require "rake"
 require "simplecov"
@@ -21,7 +19,10 @@ RSpec.configure do |config|
   config.before(:suite) do
     load("Rakefile")
     Rake::Task["regenerate_fixtures"].invoke
-    Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
+    Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")
+    Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
+    Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
+    Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
   end
   config.disable_monkey_patching!
   config.example_status_persistence_file_path = ".rspec_status"

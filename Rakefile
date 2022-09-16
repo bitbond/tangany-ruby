@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "byebug"
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
@@ -62,4 +60,12 @@ task :regenerate_fixtures do
 
   puts " -> Regenerating responses/customers/wallet_links/create"
   Tangany::Customers::WalletLinksResponsesGenerator.new.create
+
+  # Custody
+
+  puts " -> Regenerating responses/custody/wallets/retrieve"
+  Tangany::Custody::WalletsResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating responses/custody/wallets/list"
+  Tangany::Custody::WalletsResponsesGenerator.new.list
 end

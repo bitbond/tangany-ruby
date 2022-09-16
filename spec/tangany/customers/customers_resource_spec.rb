@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany::Customers::CustomersResource) do
   let(:body) { "{}" }
   let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
@@ -160,12 +158,12 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#update" do
-    subject(:customer) { client.customers.update(**contract) }
+    subject(:customer) { client.customers.update(**params) }
 
     let(:fixture) { "customers/update/#{customer_id}" }
     let(:if_match_header) { "etag" }
-    let(:contract) { {id: customer_id} }
     let(:method) { :patch }
+    let(:params) { {id: customer_id} }
     let(:path) { "customers/#{customer_id}" }
 
     before do
@@ -191,12 +189,12 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
             File.read("spec/fixtures/generated/responses/customers/customers/retrieve/#{customer_id}.json"),
             symbolize_names: true
           )).to_h
-          update_contract_hash = Tangany::Customers::Customers::UpdateContract.new.call!(contract).to_h
-          merged_hash = customer_hash.deep_merge(update_contract_hash)
+          safe_params = Tangany::Customers::Customers::UpdateContract.new.to_safe_params!(params)
+          merged_hash = customer_hash.deep_merge(safe_params)
           hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
           hash_diff.to_operations_json
         end
-        let(:contract) do
+        let(:params) do
           JSON.parse(
             File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
             symbolize_names: true
@@ -209,7 +207,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       end
 
       context "with an invalid payload" do
-        let(:contract) { {id: customer_id, foo: :bar} }
+        let(:params) { {id: customer_id, foo: :bar} }
 
         it "raises a Dry::Struct::Error" do
           expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))

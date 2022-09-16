@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Tangany
   class Resource
     def initialize(client)
@@ -41,13 +39,9 @@ module Tangany
 
     attr_reader :client
 
-    def default_headers
-      {"tangany-subscription" => client.subscription}
-    end
-
     def handle_response(response)
       case response.status
-      when 400, 404, 409
+      when 400, 401, 404, 409
         raise RequestError.new(
           response.body[:message],
           activity_id: response.headers["tangany-activity-id"],

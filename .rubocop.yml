@@ -12,6 +12,6 @@ AllCops:
   NewCops: enable
 
 RSpec/MultipleMemoizedHelpers:
-  Max: 12
+  Max: 14
 RSpec/NestedGroups:
   Max: 4

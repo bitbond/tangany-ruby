@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe HashDiff::Comparison do
   let(:original_hash) { {a: 1, b: 2, c: 3} }
 

@@ -1,16 +1,13 @@
-# frozen_string_literal: true
-
 require "faraday"
 
 module Tangany
   module Customers
     class Client
-      attr_reader :adapter
-      attr_reader :subscription
+      attr_reader :adapter, :subscription
 
       def initialize(adapter: Faraday.default_adapter, stubs: nil)
         @adapter = adapter
-        @subscription = Tangany.customers_subscription
+        @subscription = Tangany.subscription
 
         @stubs = stubs
       end

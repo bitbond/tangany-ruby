@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany::Object) do
   context "with a response" do
     subject(:object) { Tangany::Customers::Customer.new(id: id) }

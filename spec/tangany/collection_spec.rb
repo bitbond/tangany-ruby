@@ -1,13 +1,11 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany::Collection) do
   context "with a response" do
-    subject(:collection) { described_class.from_response(response, type: type) }
+    subject(:collection) { Tangany::Customers::Collection.from_response(response, type: type) }
 
     let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
     let(:path) { "customers/list" }
     let(:response) do
-      client.connection.get(path, {}, {"tangany-subscription" => Tangany.customers_subscription})
+      client.connection.get(path, {}, {"tangany-subscription" => Tangany.subscription})
     end
     let(:stubbed_response) { stub_customers_response(fixture: "customers/list/#{fixture}") }
     let(:stubs) { Faraday::Adapter::Test::Stubs.new }

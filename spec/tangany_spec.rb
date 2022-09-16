@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe(Tangany) do
   context "with forwardable configuration" do
     context "with internal configuration" do
@@ -14,9 +12,11 @@ RSpec.describe(Tangany) do
       end
     end
 
-    it "allows customers_subscription to be configured" do
-      described_class.customers_subscription = "test"
-      expect(described_class.customers_subscription).to(eq("test"))
+    %i[client_id client_secret subscription vault_url].each do |attribute|
+      it "allows #{attribute} to be configured" do
+        described_class.send("#{attribute}=", "test")
+        expect(described_class.send(attribute)).to(eq("test"))
+      end
     end
   end
 end

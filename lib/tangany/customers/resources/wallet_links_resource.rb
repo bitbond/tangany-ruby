@@ -1,11 +1,9 @@
-# frozen_string_literal: true
-
 module Tangany
   module Customers
     class WalletLinksResource < Resource
-      def create(**attributes)
-        contract = Tangany::Customers::WalletLinks::CreateContract.new.call!(attributes)
-        post_request("wallet-links", body: contract.to_h.to_json)
+      def create(**params)
+        safe_params = Tangany::Customers::WalletLinks::CreateContract.new.to_safe_params!(params)
+        post_request("wallet-links", body: safe_params.to_json)
       end
 
       def list(**params)

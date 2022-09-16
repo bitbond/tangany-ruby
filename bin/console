@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
 
 require "bundler/setup"
 require "byebug"
@@ -13,7 +12,10 @@ require "tangany"
 # require "pry"
 # Pry.start
 
-Tangany.customers_subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
+Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")
+Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
+Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
+Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
 
 require "irb"
 IRB.start(__FILE__)
