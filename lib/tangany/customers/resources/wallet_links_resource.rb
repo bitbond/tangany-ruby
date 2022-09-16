@@ -2,8 +2,7 @@ module Tangany
   module Customers
     class WalletLinksResource < Resource
       def create(**params)
-        safe_params = Tangany::Customers::WalletLinks::CreateContract.new.to_safe_params!(params)
-        post_request("wallet-links", body: safe_params.to_json)
+        post_request("wallet-links", body: sanitize_params!(params).to_json)
       end
 
       def list(**params)

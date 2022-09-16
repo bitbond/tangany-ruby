@@ -2,8 +2,7 @@ module Tangany
   module Customers
     class CustomersResource < Resource
       def create(**params)
-        safe_params = Tangany::Customers::Customers::CreateContract.new.to_safe_params!(params)
-        Customer.new(post_request("customers", body: safe_params.to_json).body)
+        Customer.new(post_request("customers", body: sanitize_params!(params).to_json).body)
       end
 
       def delete(customer_id)
@@ -19,7 +18,7 @@ module Tangany
       end
 
       def update(**params)
-        safe_params = Tangany::Customers::Customers::UpdateContract.new.to_safe_params!(params)
+        safe_params = sanitize_params!(params)
         customer_id = safe_params[:id]
 
         retrieve_response = get_request("customers/#{customer_id}")

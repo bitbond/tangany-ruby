@@ -58,5 +58,12 @@ module Tangany
         response
       end
     end
+
+    def sanitize_params!(params)
+      action_name = caller_locations(1..1).first.label
+      resource_name = self.class.name.gsub("Resource", "")
+      contract = "#{resource_name}::#{action_name.camelcase}Contract".constantize
+      contract.new.to_safe_params!(params)
+    end
   end
 end
