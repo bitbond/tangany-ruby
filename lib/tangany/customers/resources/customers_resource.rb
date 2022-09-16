@@ -10,7 +10,7 @@ module Tangany
       end
 
       def list(**params)
-        Collection.from_response(get_request("customers", params: params), type: Customer)
+        Collection.from_response(get_request("customers", params: sanitize_params!(params)), type: Customer)
       end
 
       def retrieve(customer_id)

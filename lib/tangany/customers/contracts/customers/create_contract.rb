@@ -69,7 +69,7 @@ module Tangany
           config.validate_keys = true
 
           required(:id).filled(:string)
-          required(:environment).filled(:string, included_in?: %w[production testing])
+          required(:environment).filled(:string, included_in?: Tangany::Customers::Customers::ListContract::ALLOWED_ENVIRONMENTS)
           required(:person).hash(PersonSchema)
           required(:contract).hash(ContractSchema)
           required(:additionalAttributes).hash(AdditionalAttributesSchema)
