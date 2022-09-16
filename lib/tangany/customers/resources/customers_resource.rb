@@ -1,9 +1,9 @@
 module Tangany
   module Customers
     class CustomersResource < Resource
-      def create(**attributes)
-        contract = Tangany::Customers::Customers::CreateContract.new.to_safe_params!(attributes)
-        Customer.new(post_request("customers", body: contract.to_json).body)
+      def create(**params)
+        safe_params = Tangany::Customers::Customers::CreateContract.new.to_safe_params!(params)
+        Customer.new(post_request("customers", body: safe_params.to_json).body)
       end
 
       def delete(customer_id)
@@ -18,23 +18,24 @@ module Tangany
         Customer.new(get_request("customers/#{customer_id}").body)
       end
 
-      def update(**attributes)
-        response = get_request("customers/#{attributes[:id]}")
+      def update(**params)
+        safe_params = Tangany::Customers::Customers::UpdateContract.new.to_safe_params!(params)
+        customer_id = safe_params[:id]
 
-        customer_hash = Customer.new(response.body).to_h
-        update_contract_hash = Tangany::Customers::Customers::UpdateContract.new.to_safe_params!(attributes)
+        retrieve_response = get_request("customers/#{customer_id}")
+        customer = Customer.new(retrieve_response.body)
 
         Customer.new(patch_request(
-          "customers/#{attributes[:id]}",
-          body: build_update_body_json(customer_hash, update_contract_hash),
-          headers: {"If-Match" => response.headers["If-Match"]}
+          "customers/#{customer_id}",
+          body: build_update_body_json(customer.to_h, safe_params),
+          headers: {"If-Match" => retrieve_response.headers["If-Match"]}
         ).body)
       end
 
       private
 
-      def build_update_body_json(customer_hash, update_contract_hash)
-        merged_hash = customer_hash.deep_merge(update_contract_hash)
+      def build_update_body_json(customer_hash, safe_params)
+        merged_hash = customer_hash.deep_merge(safe_params)
         hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
         hash_diff.to_operations_json
       end
