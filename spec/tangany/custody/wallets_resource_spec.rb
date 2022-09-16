@@ -11,11 +11,12 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
   end
 
   describe "#list" do
-    subject(:wallets) { client.wallets.list(limit: limit, sort: sort, start: start, tags: tags, xtags: xtags) }
+    subject(:wallets) { client.wallets.list(limit: limit, order: order, sort: sort, start: start, tags: tags, xtags: xtags) }
 
     let(:fixture) { "wallets/list/paginated" }
     let(:limit) { 1 }
-    let(:path) { "wallets?index=#{start}&limit=#{limit}&sort=#{sort}&tags=#{tags.join(",")}&xtags=#{xtags.join(",")}" }
+    let(:order) { "wallet" }
+    let(:path) { "wallets?index=1&limit=1&sort=wallet&tags=tag&xtags=xtag" }
     let(:start) { 1 }
     let(:sort) { "asc" }
     let(:tags) { [:tag] }

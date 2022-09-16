@@ -1,3 +1,4 @@
+require "active_support/core_ext/object/to_param"
 require "dry-validation"
 
 module Tangany
@@ -6,11 +7,11 @@ module Tangany
     DATE_REGEXP = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}}
     DATETIME_OPTIONAL_REGEXP = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z)?}
 
-    def call!(params)
+    def to_safe_params!(params)
       response = call(params)
       raise InputError, response.errors.to_h if response.failure?
 
-      response
+      response.to_h
     end
   end
 end

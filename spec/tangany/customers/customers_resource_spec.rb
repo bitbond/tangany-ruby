@@ -189,7 +189,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
             File.read("spec/fixtures/generated/responses/customers/customers/retrieve/#{customer_id}.json"),
             symbolize_names: true
           )).to_h
-          update_contract_hash = Tangany::Customers::Customers::UpdateContract.new.call!(contract).to_h
+          update_contract_hash = Tangany::Customers::Customers::UpdateContract.new.to_safe_params!(contract)
           merged_hash = customer_hash.deep_merge(update_contract_hash)
           hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
           hash_diff.to_operations_json
