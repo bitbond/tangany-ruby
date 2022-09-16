@@ -41,7 +41,7 @@ module Tangany
 
     def handle_response(response)
       case response.status
-      when 400, 404, 409
+      when 400, 401, 404, 409
         raise RequestError.new(
           response.body[:message],
           activity_id: response.headers["tangany-activity-id"],
