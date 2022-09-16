@@ -3,7 +3,6 @@ module Tangany
     module Wallets
       class ListContract < Contract
         ALLOWED_ORDERS = ["created", "security", "updated", "wallet"].freeze
-        ALLOWED_SORTS = ["asc", "desc"].freeze
 
         schema do
           config.validate_keys = true
