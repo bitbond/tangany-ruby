@@ -15,11 +15,11 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
 
     let(:fixture) { "wallets/list/paginated" }
     let(:limit) { 1 }
-    let(:path) { "wallets?limit=#{limit}&sort=#{sort}&start=#{start}" }
+    let(:path) { "wallets?index=#{start}&limit=#{limit}&sort=#{sort}&tags=#{tags.join(",")}&xtags=#{xtags.join(",")}" }
     let(:start) { 1 }
     let(:sort) { "asc" }
-    let(:tags) { [] }
-    let(:xtags) { [] }
+    let(:tags) { [:tag] }
+    let(:xtags) { [:xtag] }
 
     it "returns a collection" do
       expect(wallets).to(be_a(Tangany::Collection))
@@ -34,11 +34,11 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
     end
 
     it "has a next path" do
-      expect(wallets.next_path).to(eq("/wallets?start=2&limit=1&sort=#{sort}"))
+      expect(wallets.next_path).to(eq("/wallets?index=2&limit=1&sort=#{sort}"))
     end
 
     it "has a previous path" do
-      expect(wallets.previous_path).to(eq("/wallets?start=0&limit=1&sort=#{sort}"))
+      expect(wallets.previous_path).to(eq("/wallets?index=0&limit=1&sort=#{sort}"))
     end
   end
 end

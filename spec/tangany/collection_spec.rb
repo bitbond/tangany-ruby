@@ -1,6 +1,6 @@
 RSpec.describe(Tangany::Collection) do
   context "with a response" do
-    subject(:collection) { described_class.from_response(response, type: type) }
+    subject(:collection) { Tangany::Customers::Collection.from_response(response, type: type) }
 
     let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
     let(:path) { "customers/list" }

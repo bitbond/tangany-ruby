@@ -4,7 +4,7 @@ module RequestHelpers
   end
 
   def stub_custody_request(stubs, path, response:, method: :get, body: "{}")
-    arguments = [method, "/custody/#{path}"]
+    arguments = [method, "/v1/#{path}"]
     arguments << body if [:post, :put, :patch].include?(method)
     stubs.send(*arguments) { |_env| response }
   end

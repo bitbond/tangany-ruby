@@ -52,7 +52,7 @@ module Tangany
             total: wallets.size,
             hsm: 0
           },
-          lists: (wallets[1..1] || []).map do |wallet|
+          list: (wallets[1..1] || []).map do |wallet|
             {
               wallet: wallet,
               links: [{

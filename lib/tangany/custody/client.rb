@@ -23,6 +23,10 @@ module Tangany
           faraday.url_prefix = Tangany.custody_base_url
         end
       end
+
+      def wallets
+        WalletsResource.new(self)
+      end
     end
   end
 end
