@@ -2,8 +2,6 @@ module Tangany
   module Customers
     module WalletLinks
       class ListContract < Contract
-        ALLOWED_ORDERS = ["created", "security", "updated", "wallet"].freeze
-
         schema do
           config.validate_keys = true
 
