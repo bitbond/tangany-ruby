@@ -97,7 +97,22 @@ Tangany.vault_url = '...'
 custody_client = Tangany::Custody::Client.new
 
 # list wallets
-custody_client.wallets.list(limit: 21, order: 'wallet', sort: 'asc', start: 42, tags: ['tag1', 'tag2'], xtags: ['tag3', 'tag4'])
+custody_client.wallets.list(limit: 21, order: 'wallet', sort: 'asc', start: 42, tags: { tag0: 'tag 0', tag1: 'tag 1' }, xtags: { tag2: 'tag 2', tag3: 'tag 3' })
+
+# create wallet
+custody_client.wallets.create(
+  wallet: 'wallet-unique-name',
+  useHsm: false,
+  tags: [{
+    tag0: 'tag 0'
+  }, {
+    tag1: 'tag 1',
+  }, {
+    ...
+  }, {
+    tag9: 'tag 9'
+  }]
+)
 ```
 
 ---

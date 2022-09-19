@@ -10,6 +10,55 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
     stub_custody_request(stubs, path, method: method, body: body, response: stubbed_response)
   end
 
+  describe "#create" do
+    subject(:wallet) { client.wallets.create(**input) }
+
+    let(:body) { input.to_json }
+    let(:method) { :post }
+    let(:path) { "wallets" }
+
+    context "with a valid payload" do
+      let(:input) do
+        JSON.parse(
+          File.read("spec/fixtures/generated/inputs/custody/wallets/create/valid_input.json"),
+          symbolize_names: true
+        )
+      end
+      let(:fixture) { "wallets/create/created" }
+
+      it "creates a wallet" do
+        expect(wallet).to(be_a(Tangany::Custody::Wallet))
+      end
+    end
+
+    context "with an invalid payload" do
+      let(:input) { {foo: :bar} }
+      let(:fixture) { "wallets/create/created" }
+
+      it "raises a Dry::Struct::Error" do
+        expect { wallet }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
+      end
+    end
+
+    context "with a conflicting payload" do
+      let(:input) do
+        JSON.parse(
+          File.read("spec/fixtures/generated/inputs/custody/wallets/create/valid_input.json"),
+          symbolize_names: true
+        )
+      end
+      let(:fixture) { "wallets/create/conflicting" }
+      let(:status) { 409 }
+
+      it "raises an error" do
+        expect { wallet }.to(
+          raise_error(Tangany::RequestError)
+          .with_message(/Won't overwrite existing wallet with name [^"]+/)
+        )
+      end
+    end
+  end
+
   describe "#list" do
     subject(:wallets) { client.wallets.list(limit: limit, order: order, sort: sort, start: start, tags: tags, xtags: xtags) }
 

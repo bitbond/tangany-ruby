@@ -8,6 +8,23 @@ module Tangany
         @responses_root_folder = "spec/fixtures/generated/responses/custody/wallets"
       end
 
+      def create
+        # cleanup
+        cleanup("create")
+
+        # created
+        file = Dir.glob("#{responses_root_folder}/retrieve/*.json").min
+        FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
+
+        # conflicting
+        wallet = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))["wallet"]
+        File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
+          statusCode: 409,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "Won't overwrite existing wallet with name #{wallet}"
+        }))
+      end
+
       def list
         # cleanup
         cleanup("list")
