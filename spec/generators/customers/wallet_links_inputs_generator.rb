@@ -13,8 +13,8 @@ module Tangany
         cleanup("create")
 
         # valid_input.json
-        contract = FactoryBot.build(:customers_contracts_wallet_links_create)
-        File.write("#{inputs_root_folder}/create/valid_input.json", JSON.pretty_generate(JSON.parse(contract.to_h.to_json)))
+        safe_params = FactoryBot.build(:customers_contracts_wallet_links_create)
+        File.write("#{inputs_root_folder}/create/valid_input.json", JSON.pretty_generate(JSON.parse(safe_params.to_json)))
       end
 
       private

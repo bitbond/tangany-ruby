@@ -2,10 +2,6 @@ module Tangany
   module Customers
     module Customers
       class UpdateContract < Contract
-        AdditionalAttributesSchema = Dry::Schema.Params do
-          optional(:foo) # FIXME: required to have a valid "empty" schema
-        end
-
         AddressSchema = Dry::Schema.Params do
           optional(:country).filled(:string, format?: COUNTRY_REGEXP)
           optional(:city).filled(:string, max_size?: 50)
@@ -42,7 +38,6 @@ module Tangany
           required(:id).filled(:string)
           optional(:person).hash(PersonSchema)
           optional(:contract).hash(ContractSchema)
-          optional(:additionalAttributes).hash(AdditionalAttributesSchema)
         end
       end
     end

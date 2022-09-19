@@ -13,8 +13,8 @@ module Tangany
         cleanup("create")
 
         # valid_input.json
-        contract = FactoryBot.build(:customers_contracts_customers_create)
-        File.write("#{inputs_root_folder}/create/valid_input.json", JSON.pretty_generate(JSON.parse(contract.to_h.to_json)))
+        safe_params = FactoryBot.build(:customers_contracts_customers_create)
+        File.write("#{inputs_root_folder}/create/valid_input.json", JSON.pretty_generate(JSON.parse(safe_params.to_json)))
       end
 
       def update
@@ -23,8 +23,8 @@ module Tangany
 
         # valid_input.json
         customer_id = File.basename(Dir.glob("#{responses_root_folder}/retrieve/*.json").min, ".json")
-        contract = FactoryBot.build(:customers_contracts_customers_update, id: customer_id)
-        File.write("#{inputs_root_folder}/update/valid_input.json", JSON.pretty_generate(JSON.parse(contract.to_h.to_json)))
+        safe_params = FactoryBot.build(:customers_contracts_customers_update, id: customer_id)
+        File.write("#{inputs_root_folder}/update/valid_input.json", JSON.pretty_generate(JSON.parse(safe_params.to_json)))
       end
 
       private

@@ -6,10 +6,6 @@ module Tangany
         ALLOWED_PERSON_KYC_DOCUMENT_TYPES = ["id_card", "passport"].freeze
         ALLOWED_PERSON_KYC_METHODS = ["video_ident", "id_copy", "auto_ident", "in_person", "no_verification"].freeze
 
-        AdditionalAttributesSchema = Dry::Schema.Params do
-          optional(:foo) # FIXME: required to have a valid "empty" schema
-        end
-
         AddressSchema = Dry::Schema.Params do
           required(:country).filled(:string, format?: COUNTRY_REGEXP)
           required(:city).filled(:string, max_size?: 50)
@@ -72,7 +68,6 @@ module Tangany
           required(:environment).filled(:string, included_in?: Tangany::Customers::Customers::ListContract::ALLOWED_ENVIRONMENTS)
           required(:person).hash(PersonSchema)
           required(:contract).hash(ContractSchema)
-          required(:additionalAttributes).hash(AdditionalAttributesSchema)
         end
       end
     end

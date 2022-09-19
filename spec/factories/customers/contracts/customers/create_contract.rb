@@ -2,7 +2,7 @@ require "factory_bot"
 
 FactoryBot.define do
   factory :customers_contracts_customers_create, class: "Tangany::Customers::Customers::CreateContract" do
-    initialize_with { new.call(attributes) }
+    initialize_with { new.to_safe_params!(attributes) }
 
     id { Faker::Internet.uuid }
     environment { "testing" }
@@ -60,6 +60,5 @@ FactoryBot.define do
         cancelledDate: is_cancelled ? Faker::Date.between(from: signed_date, to: Date.today).to_s : nil
       }
     end
-    additionalAttributes { Faker::Internet.user }
   end
 end
