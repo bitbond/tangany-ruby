@@ -1,7 +1,6 @@
 RSpec.describe(Tangany::Customers::CustomersResource) do
   let(:body) { "{}" }
   let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
-  let(:contract) { nil }
   let(:method) { :get }
   let(:status) { 200 }
   let(:stubbed_response) { stub_customers_response(fixture: fixture, status: status) }
@@ -12,14 +11,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#create" do
-    subject(:customer) { client.customers.create(**contract) }
+    subject(:customer) { client.customers.create(**input) }
 
-    let(:body) { contract.to_h.to_json }
+    let(:body) { input.to_json }
     let(:method) { :post }
     let(:path) { "customers" }
 
     context "with a valid payload" do
-      let(:contract) do
+      let(:input) do
         JSON.parse(
           File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
           symbolize_names: true
@@ -33,7 +32,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with an invalid payload" do
-      let(:contract) { {foo: :bar} }
+      let(:input) { {foo: :bar} }
       let(:fixture) { "customers/create/created" }
 
       it "raises a Dry::Struct::Error" do
@@ -42,7 +41,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     end
 
     context "with a conflicting payload" do
-      let(:contract) do
+      let(:input) do
         JSON.parse(
           File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
           symbolize_names: true
