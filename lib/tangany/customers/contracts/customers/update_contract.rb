@@ -35,7 +35,6 @@ module Tangany
         schema do
           config.validate_keys = true
 
-          required(:id).filled(:string)
           optional(:person).hash(PersonSchema)
           optional(:contract).hash(ContractSchema)
         end

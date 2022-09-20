@@ -68,7 +68,7 @@ customers_client.customers.create(
 
 # update customer
 customers_client.customers.update(
-  id: 'cus_123456789',
+  'cus_123456789',
   person: {
     firstName: 'John',
     lastName: 'Doe',

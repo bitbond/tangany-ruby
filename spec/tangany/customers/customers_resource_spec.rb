@@ -157,12 +157,12 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#update" do
-    subject(:customer) { client.customers.update(**params) }
+    subject(:customer) { client.customers.update(customer_id, **params) }
 
     let(:fixture) { "customers/update/#{customer_id}" }
     let(:if_match_header) { "etag" }
     let(:method) { :patch }
-    let(:params) { {id: customer_id} }
+    let(:params) { {} }
     let(:path) { "customers/#{customer_id}" }
 
     before do
@@ -206,7 +206,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       end
 
       context "with an invalid payload" do
-        let(:params) { {id: customer_id, foo: :bar} }
+        let(:params) { {foo: :bar} }
 
         it "raises a Dry::Struct::Error" do
           expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))

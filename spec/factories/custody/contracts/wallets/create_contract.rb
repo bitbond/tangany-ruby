@@ -6,10 +6,10 @@ FactoryBot.define do
 
     wallet { Faker::Internet.uuid }
     useHsm { Faker::Boolean.boolean }
-    tags {
+    tags do
       [{
         tag1: Faker::Lorem.characters(number: 256)
       }]
-    }
+    end
   end
 end

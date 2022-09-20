@@ -17,9 +17,8 @@ module Tangany
         Customer.new(get_request("customers/#{customer_id}").body)
       end
 
-      def update(**params)
+      def update(customer_id, **params)
         safe_params = sanitize_params!(params)
-        customer_id = safe_params[:id]
 
         retrieve_response = get_request("customers/#{customer_id}")
         customer = Customer.new(retrieve_response.body)
@@ -29,14 +28,6 @@ module Tangany
           body: build_update_body_json(customer.to_h, safe_params),
           headers: {"If-Match" => retrieve_response.headers["If-Match"]}
         ).body)
-      end
-
-      private
-
-      def build_update_body_json(customer_hash, safe_params)
-        merged_hash = customer_hash.deep_merge(safe_params)
-        hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
-        hash_diff.to_operations_json
       end
     end
   end

@@ -22,8 +22,7 @@ module Tangany
         cleanup("update")
 
         # valid_input.json
-        customer_id = File.basename(Dir.glob("#{responses_root_folder}/retrieve/*.json").min, ".json")
-        safe_params = FactoryBot.build(:customers_contracts_customers_update, id: customer_id)
+        safe_params = FactoryBot.build(:customers_contracts_customers_update)
         File.write("#{inputs_root_folder}/update/valid_input.json", JSON.pretty_generate(JSON.parse(safe_params.to_json)))
       end
 
