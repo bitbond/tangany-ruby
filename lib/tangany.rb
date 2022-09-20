@@ -1,9 +1,7 @@
 require "forwardable"
-require "hash_diff"
-
-require_relative "core_ext/hash_diff/comparison"
 
 require_relative "tangany/error"
+require_relative "tangany/json_patch"
 
 require_relative "tangany/collection"
 require_relative "tangany/config"

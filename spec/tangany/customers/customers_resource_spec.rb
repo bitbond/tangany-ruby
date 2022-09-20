@@ -190,8 +190,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
           )).to_h
           safe_params = Tangany::Customers::Customers::UpdateContract.new.to_safe_params!(params)
           merged_hash = customer_hash.deep_merge(safe_params)
-          hash_diff = HashDiff::Comparison.new(merged_hash, customer_hash)
-          hash_diff.to_operations_json
+          Tangany::JsonPatch.new(customer_hash, merged_hash).generate.to_json
         end
         let(:params) do
           JSON.parse(

@@ -41,8 +41,7 @@ module Tangany
 
     def build_update_body_json(resource_hash, safe_params)
       merged_hash = resource_hash.deep_merge(safe_params)
-      hash_diff = HashDiff::Comparison.new(merged_hash, resource_hash)
-      hash_diff.to_operations_json
+      JsonPatch.new(resource_hash, merged_hash).generate.to_json
     end
 
     def handle_response(response)
