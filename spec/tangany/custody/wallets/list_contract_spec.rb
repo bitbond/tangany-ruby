@@ -16,8 +16,8 @@ RSpec.describe Tangany::Custody::Wallets::ListContract do
       context "with the order param set to `created`" do
         let(:params) { super().merge(order: "created") }
 
-        it "returns an empty hash" do
-          expect(to_safe_params).to eq({sort: "created"})
+        it "returns the sort param with the `createddesc` value" do
+          expect(to_safe_params).to eq({sort: "createddesc"})
         end
       end
 
