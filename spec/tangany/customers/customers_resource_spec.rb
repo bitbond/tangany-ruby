@@ -168,7 +168,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     before do
       stub_customers_request(
         stubs,
-        "customers/#{customer_id}",
+        path,
         method: :get,
         response: stub_customers_response(
           fixture: "customers/retrieve/#{customer_id}",
