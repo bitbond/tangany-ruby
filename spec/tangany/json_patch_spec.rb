@@ -1,11 +1,17 @@
 RSpec.describe Tangany::JsonPatch do
+  let(:json_patch) { described_class.new(old_hash, new_hash, prefix) }
+  let(:new_hash) { {foo: {foo: :bar, bar: :foo}, bar: :baz} }
+  let(:old_hash) { {foo: {foo: :bar, bar: :baz, baz: :foo}} }
+  let(:operations) {
+    [
+      {op: "add", path: "/bar", value: :baz},
+      {op: "remove", path: "/foo/baz"},
+      {op: "replace", path: "/foo/bar", value: :foo}
+    ]
+  }
+  let(:prefix) { "" }
+
   context "when initialized" do
-    subject(:json_patch) { described_class.new(old_hash, new_hash, prefix) }
-
-    let(:old_hash) { {foo: "bar"} }
-    let(:new_hash) { {foo: "baz"} }
-    let(:prefix) { "" }
-
     context "with an invalid old_hash" do
       let(:old_hash) { "foo" }
 
@@ -32,24 +38,22 @@ RSpec.describe Tangany::JsonPatch do
   end
 
   describe "#generate" do
-    subject(:generate) { json_patch.generate }
-
-    let(:json_patch) { described_class.new(old_hash, new_hash) }
-    let(:old_hash) { {foo: {foo: :bar, bar: :baz, baz: :foo}} }
-    let(:new_hash) { {foo: {foo: :bar, bar: :foo}, bar: :baz} }
-    let(:operations) {
-      [
-        {op: "add", path: "/bar", value: :baz},
-        {op: "remove", path: "/foo/baz"},
-        {op: "replace", path: "/foo/bar", value: :foo}
-      ]
-    }
+    before do
+      json_patch.generate
+    end
 
     it "returns an array of operations" do
-      expect(json_patch.generate.sort_by { |op| op[:path] }).to eq(operations.sort_by { |op| op[:path] })
+      expect(json_patch.operations.sort_by { |op| op[:path] }).to eq(operations.sort_by { |op| op[:path] })
     end
   end
 
   describe "to_json" do
+    before do
+      json_patch.generate
+    end
+
+    it "returns a JSON string" do
+      expect(json_patch.to_json).to eq(json_patch.operations.to_json)
+    end
   end
 end
