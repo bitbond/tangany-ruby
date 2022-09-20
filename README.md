@@ -99,9 +99,12 @@ custody_client = Tangany::Custody::Client.new
 # list wallets
 custody_client.wallets.list(limit: 21, order: 'wallet', sort: 'asc', start: 42, tags: { tag0: 'tag 0', tag1: 'tag 1' }, xtags: { tag2: 'tag 2', tag3: 'tag 3' })
 
+# retrieve single wallet
+custody_client.wallets.retrieve('wal_123456789')
+
 # create wallet
 custody_client.wallets.create(
-  wallet: 'wallet-unique-name',
+  wallet: 'wal_123456789',
   useHsm: false,
   tags: [{
     tag0: 'tag 0'

@@ -8,6 +8,10 @@ module Tangany
       def list(**params)
         Collection.from_response(get_request("wallets", params: sanitize_params!(params)), type: Wallet)
       end
+
+      def retrieve(wallet)
+        Wallet.new(get_request("wallet/#{wallet}").body)
+      end
     end
   end
 end

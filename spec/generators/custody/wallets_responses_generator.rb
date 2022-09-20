@@ -102,7 +102,7 @@ module Tangany
         {
           statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Wallet with name \"not_found\" was not found"
+          message: "No wallet found for given name: not_found"
         }
       end
     end

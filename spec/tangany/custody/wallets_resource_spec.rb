@@ -91,4 +91,42 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
       expect(wallets.previous_path).to(eq("/wallets?index=0&limit=1&sort=#{sort}"))
     end
   end
+
+  describe "#retrieve" do
+    subject(:wallet) { client.wallets.retrieve(wallet_id) }
+
+    let(:fixture) { "wallets/retrieve/#{wallet_id}" }
+    let(:path) { "wallet/#{wallet_id}" }
+
+    context "with a valid wallet" do
+      let(:wallet_id) { fetch_wallet_id }
+
+      it "returns a Wallet" do
+        expect(wallet).to(be_a(Tangany::Custody::Wallet))
+      end
+    end
+
+    context "with an invalid wallet" do
+      let(:wallet_id) { "not_found" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { wallet }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("No wallet found for given name: #{wallet_id}")
+        )
+      end
+    end
+  end
+
+  private
+
+  def fetch_wallet_id
+    Dir.glob("spec/fixtures/generated/responses/custody/wallets/retrieve/*.json").map do |file|
+      id = File.basename(file, ".json")
+      next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+      id
+    end.compact.min
+  end
 end
