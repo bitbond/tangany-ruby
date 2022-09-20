@@ -17,6 +17,15 @@ module Tangany
         File.write("#{inputs_root_folder}/create/valid_input.json", JSON.pretty_generate(JSON.parse(safe_params.to_json)))
       end
 
+      def update
+        # cleanup
+        cleanup("update")
+
+        # valid_input.json
+        safe_params = FactoryBot.build(:custody_contracts_wallets_update)
+        File.write("#{inputs_root_folder}/update/valid_input.json", JSON.pretty_generate(JSON.parse(safe_params.to_json)))
+      end
+
       private
 
       def cleanup(folder)

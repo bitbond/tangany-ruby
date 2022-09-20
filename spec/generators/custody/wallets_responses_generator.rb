@@ -56,6 +56,18 @@ module Tangany
         File.write("#{responses_root_folder}/retrieve/not_found.json", JSON.pretty_generate(not_found_response))
       end
 
+      def update
+        # cleanup
+        cleanup("update")
+
+        # updated
+        file = Dir.glob("#{responses_root_folder}/retrieve/*.json").min
+        FileUtils.cp(file, "#{responses_root_folder}/update/updated.json")
+
+        # invalid wallet
+        File.write("#{responses_root_folder}/update/not_found.json", JSON.pretty_generate(not_found_response))
+      end
+
       private
 
       def cleanup(folder)

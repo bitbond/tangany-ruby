@@ -74,4 +74,10 @@ task :regenerate_fixtures do
 
   puts " -> Regenerating responses/custody/wallets/create"
   Tangany::Custody::WalletsResponsesGenerator.new.create
+
+  puts " -> Regenerating inputs/custody/wallets/update"
+  Tangany::Custody::WalletsInputsGenerator.new.update
+
+  puts " -> Regenerating responses/custody/wallets/update"
+  Tangany::Custody::WalletsResponsesGenerator.new.update
 end

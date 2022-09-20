@@ -119,6 +119,88 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
     end
   end
 
+  describe "#update" do
+    subject(:wallet) { client.wallets.update(wallet_id, **params) }
+
+    let(:fixture) { "wallets/update/#{wallet_id}" }
+    let(:if_match_header) { "etag" }
+    let(:method) { :patch }
+    let(:params) { {} }
+    let(:path) { "wallet/#{wallet_id}" }
+
+    before do
+      stub_custody_request(
+        stubs,
+        path,
+        method: :get,
+        response: stub_custody_response(
+          fixture: "wallets/retrieve/#{wallet_id}",
+          headers: {"If-Match" => if_match_header},
+          status: status
+        )
+      )
+    end
+
+    context "with a valid wallet" do
+      let(:wallet_id) { fetch_wallet_id }
+      let(:fixture) { "wallets/update/updated" }
+
+      context "with a valid payload" do
+        let(:body) do
+          wallet_hash = Tangany::Custody::Wallet.new(JSON.parse(
+            File.read("spec/fixtures/generated/responses/custody/wallets/retrieve/#{wallet_id}.json"),
+            symbolize_names: true
+          )).to_h
+          safe_params = Tangany::Custody::Wallets::UpdateContract.new.to_safe_params!(params)
+          merged_hash = wallet_hash.deep_merge(safe_params)
+          hash_diff = HashDiff::Comparison.new(merged_hash, wallet_hash)
+          hash_diff.to_operations_json
+        end
+        let(:params) do
+          JSON.parse(
+            File.read("spec/fixtures/generated/inputs/custody/wallets/update/valid_input.json"),
+            symbolize_names: true
+          )
+        end
+
+        it "updates the wallet" do
+          expect(wallet).to(be_a(Tangany::Custody::Wallet))
+        end
+      end
+
+      context "with an invalid payload" do
+        let(:params) { {wallet: wallet_id, foo: :bar} }
+
+        it "raises a Dry::Struct::Error" do
+          expect { wallet }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
+        end
+      end
+
+      context "with a conflicting If-Match precondition" do
+        let(:status) { 412 }
+
+        it "raises an error" do
+          expect { wallet }.to(
+            raise_error(Tangany::RequestError)
+            .with_message("Mid-air edit collision detected")
+          )
+        end
+      end
+    end
+
+    context "with an invalid wallet" do
+      let(:wallet_id) { "not_found" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { wallet }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("No wallet found for given name: #{wallet_id}")
+        )
+      end
+    end
+  end
+
   private
 
   def fetch_wallet_id

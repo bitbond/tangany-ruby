@@ -116,6 +116,20 @@ custody_client.wallets.create(
     tag9: 'tag 9'
   }]
 )
+
+# update wallet
+custody_client.wallets.update(
+  'wal_123456789',
+  tags: [{
+    tag0: 'tag 0'
+  }, {
+    tag1: 'tag 1',
+  }, {
+    ...
+  }, {
+    tag9: 'tag 9'
+  }]
+)
 ```
 
 ---
