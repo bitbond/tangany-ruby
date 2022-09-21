@@ -14,39 +14,60 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     subject(:wallet_link) { client.wallet_links.create(**input) }
 
     let(:body) { input.to_json }
+    let(:input) do
+      JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
+        symbolize_names: true
+      )
+    end
     let(:method) { :post }
     let(:path) { "wallet-links" }
 
     context "with a valid payload" do
-      let(:input) do
-        JSON.parse(
-          File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
-          symbolize_names: true
-        )
-      end
       let(:fixture) { "wallet_links/create/created" }
 
       it "creates a wallet link" do
-        expect { wallet_link }.not_to(raise_error)
+        expect(wallet_link).to(be_a(Tangany::Customers::WalletLink))
       end
     end
 
     context "with an invalid payload" do
       let(:input) { {foo: :bar} }
       let(:fixture) { "wallet_links/create/created" }
+      let(:status) { 400 }
 
       it "raises a Dry::Struct::Error" do
         expect { wallet_link }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
       end
     end
 
-    context "with a conflicting payload" do
-      let(:input) do
-        JSON.parse(
-          File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
-          symbolize_names: true
+    context "with a not existing wallet" do
+      let(:fixture) { "wallet_links/create/not_existing_wallet" }
+      let(:status) { 400 }
+      let(:wallet_id) { "not-existing-wallet-id" }
+
+      it "raises a Dry::Struct::Error" do
+        expect { wallet_link }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("Wallet #{input[:vaultWalletId]} was not found in vault #{input[:vaultUrl]}")
         )
       end
+    end
+
+    context "with a not existing customer" do
+      let(:fixture) { "wallet_links/create/not_existing_customer" }
+      let(:status) { 404 }
+      let(:wallet_id) { "not-existing-wallet-id" }
+
+      it "raises a Dry::Struct::Error" do
+        expect { wallet_link }.to(
+          raise_error(Tangany::RequestError)
+          .with_message(/Customer with ID .+ was not found/)
+        )
+      end
+    end
+
+    context "with a conflicting payload" do
       let(:fixture) { "wallet_links/create/conflicting" }
       let(:status) { 409 }
 

@@ -12,15 +12,32 @@ module Tangany
         # cleanup
         cleanup("create")
 
+        input = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))
+        customer_id = input["id"]
+
         # created
-        File.write("#{responses_root_folder}/create/created.json", JSON.pretty_generate({}))
+        file = fetch_wallet_link_file_name
+        FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
 
         # conflicting
-        customer_id = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))["id"]
         File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
           statusCode: 409,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
           message: "WalletLink with ID \"#{customer_id}\" already exists."
+        }))
+
+        # not existing customer
+        File.write("#{responses_root_folder}/create/not_existing_customer.json", JSON.pretty_generate({
+          statusCode: 404,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "Customer with ID #{customer_id} was not found"
+        }))
+
+        # not existing wallet
+        File.write("#{responses_root_folder}/create/not_existing_wallet.json", JSON.pretty_generate({
+          statusCode: 400,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "Wallet #{input["vaultWalletId"]} was not found in vault #{input["vaultUrl"]}"
         }))
       end
 
@@ -60,6 +77,15 @@ module Tangany
       def cleanup(folder)
         FileUtils.mkdir_p("#{responses_root_folder}/#{folder}")
         Dir.glob("#{responses_root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
+      end
+
+      def fetch_wallet_link_file_name
+        Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
+          id = File.basename(file, ".json")
+          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+          file
+        end.compact.min
       end
 
       def list_response_from_wallet_links(wallet_links)

@@ -2,7 +2,7 @@ module Tangany
   module Customers
     class WalletLinksResource < Resource
       def create(**params)
-        post_request("wallet-links", body: sanitize_params!(params).to_json)
+        WalletLink.new(post_request("wallet-links", body: sanitize_params!(params).to_json).body)
       end
 
       def list(**params)

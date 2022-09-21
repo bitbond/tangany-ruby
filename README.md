@@ -50,7 +50,7 @@ Tangany.subscription = '...'
 customers_client = Tangany::Customers::Client.new
 
 # list customers
-collection = customers_client.customers.list(limit: 21, sort: :asc, start: 42)
+collection = customers_client.customers.list(limit: 21, sort: 'asc', start: 42)
 
 # retrieve single customer
 customer = customers_client.customers.retrieve('cus_123456789')
@@ -81,7 +81,16 @@ customer = customers_client.customers.update(
 response = customers_client.customers.delete('cus_123456789')
 
 # list wallet links
-collection = customers_client.wallet_links.list(limit: 21, sort: :asc, start: 42)
+collection = customers_client.wallet_links.list(limit: 21, sort: 'asc', start: 42)
+
+# create wallet link
+wallet_link = customers_client.wallet_links.create(
+  id: 'wl_123456789',
+  customerId: 'cus_123456789',
+  type: 'waas',
+  vaultUrl: 'https://vault.example.com',
+  vaultWalletId: 'wal_123456789'
+)
 ```
 
 ### Custody API
