@@ -59,6 +59,34 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
     end
   end
 
+  describe "#delete" do
+    subject(:wallet_recovery) { client.wallets.delete(wallet_id) }
+
+    let(:fixture) { "wallets/delete/#{wallet_id}" }
+    let(:method) { :delete }
+    let(:path) { "wallet/#{wallet_id}" }
+
+    context "with a valid wallet" do
+      let(:wallet_id) { fetch_wallet_id }
+
+      it "returns a wallet recovery object" do
+        expect(wallet_recovery).to(be_a(Tangany::Custody::WalletRecovery))
+      end
+    end
+
+    context "with an invalid wallet" do
+      let(:wallet_id) { "not_found" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { wallet_recovery }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("No wallet found for given name: #{wallet_id}")
+        )
+      end
+    end
+  end
+
   describe "#list" do
     subject(:wallets) { client.wallets.list(limit: limit, order: order, sort: sort, start: start, tags: tags, xtags: xtags) }
 

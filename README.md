@@ -130,6 +130,9 @@ custody_client.wallets.update(
     tag9: 'tag 9'
   }]
 )
+
+# delete customer
+custody_client.customers.delete('wal_123456789')
 ```
 
 ---

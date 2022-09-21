@@ -13,7 +13,7 @@ module Tangany
         cleanup("create")
 
         # created
-        file = Dir.glob("#{responses_root_folder}/retrieve/*.json").min
+        file = fetch_wallet_file_name
         FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
 
         # conflicting
@@ -23,6 +23,21 @@ module Tangany
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
           message: "Won't overwrite existing wallet with name #{wallet}"
         }))
+      end
+
+      def delete
+        # cleanup
+        cleanup("delete")
+
+        # deleted
+        wallet_id = File.basename(fetch_wallet_file_name, ".json")
+        File.write("#{responses_root_folder}/delete/#{wallet_id}.json", JSON.pretty_generate({
+          recoveryId: wallet_id,
+          scheduledPurgeDate: (Time.now + 90 * 24 * 60 * 60).utc.iso8601
+        }))
+
+        # invalid wallet
+        File.write("#{responses_root_folder}/delete/not_found.json", JSON.pretty_generate(not_found_response))
       end
 
       def list
@@ -61,7 +76,7 @@ module Tangany
         cleanup("update")
 
         # updated
-        file = Dir.glob("#{responses_root_folder}/retrieve/*.json").min
+        file = fetch_wallet_file_name
         FileUtils.cp(file, "#{responses_root_folder}/update/updated.json")
 
         # invalid wallet
@@ -73,6 +88,23 @@ module Tangany
       def cleanup(folder)
         FileUtils.mkdir_p("#{responses_root_folder}/#{folder}")
         Dir.glob("#{responses_root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
+      end
+
+      def deleted_response
+        {
+          statusCode: 404,
+          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
+          message: "Customer with ID \"deleted\" has been deleted"
+        }
+      end
+
+      def fetch_wallet_file_name
+        Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
+          id = File.basename(file, ".json")
+          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+          file
+        end.compact.min
       end
 
       def list_response_from_wallets(wallets)

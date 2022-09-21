@@ -5,12 +5,16 @@ module Tangany
         Wallet.new(post_request("wallets", body: sanitize_params!(params).to_json).body)
       end
 
+      def delete(wallet_id)
+        WalletRecovery.new(delete_request("wallet/#{wallet_id}").body)
+      end
+
       def list(**params)
         Collection.from_response(get_request("wallets", params: sanitize_params!(params)), type: Wallet)
       end
 
-      def retrieve(wallet)
-        Wallet.new(get_request("wallet/#{wallet}").body)
+      def retrieve(wallet_id)
+        Wallet.new(get_request("wallet/#{wallet_id}").body)
       end
 
       def update(wallet_id, **params)
