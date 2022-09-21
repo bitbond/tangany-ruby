@@ -15,7 +15,7 @@ module Tangany
         cleanup("create")
 
         # created
-        file = Dir.glob("#{responses_root_folder}/retrieve/*.json").min
+        file = fetch_customer_file_name
         FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
 
         # conflicting
@@ -32,7 +32,7 @@ module Tangany
         cleanup("delete")
 
         # deleted
-        customer_id = File.basename(Dir.glob("#{responses_root_folder}/retrieve/*.json").min, ".json")
+        customer_id = File.basename(fetch_customer_file_name, ".json")
         File.write("#{responses_root_folder}/delete/#{customer_id}.json", "{}")
 
         # invalid customer
@@ -78,7 +78,7 @@ module Tangany
         cleanup("update")
 
         # updated
-        file = Dir.glob("#{responses_root_folder}/retrieve/*.json").min
+        file = fetch_customer_file_name
         FileUtils.cp(file, "#{responses_root_folder}/update/updated.json")
 
         # invalid customer
@@ -98,6 +98,15 @@ module Tangany
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
           message: "Customer with ID \"deleted\" has been deleted"
         }
+      end
+
+      def fetch_customer_file_name
+        Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
+          id = File.basename(file, ".json")
+          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+          file
+        end.compact.min
       end
 
       def not_found_response
