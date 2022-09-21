@@ -50,13 +50,13 @@ Tangany.subscription = '...'
 customers_client = Tangany::Customers::Client.new
 
 # list customers
-customers_client.customers.list(limit: 21, sort: :asc, start: 42)
+collection = customers_client.customers.list(limit: 21, sort: :asc, start: 42)
 
 # retrieve single customer
-customers_client.customers.retrieve('cus_123456789')
+customer = customers_client.customers.retrieve('cus_123456789')
 
 # create customer
-customers_client.customers.create(
+customer = customers_client.customers.create(
   id: 'cus_123456789',
   person: {
     firstName: 'John',
@@ -67,7 +67,7 @@ customers_client.customers.create(
 )
 
 # update customer
-customers_client.customers.update(
+customer = customers_client.customers.update(
   'cus_123456789',
   person: {
     firstName: 'John',
@@ -78,10 +78,10 @@ customers_client.customers.update(
 )
 
 # delete customer
-customers_client.customers.delete('cus_123456789')
+response = customers_client.customers.delete('cus_123456789')
 
 # list wallet links
-customers_client.wallet_links.list(limit: 21, sort: :asc, start: 42)
+collection = customers_client.wallet_links.list(limit: 21, sort: :asc, start: 42)
 ```
 
 ### Custody API
@@ -97,13 +97,13 @@ Tangany.vault_url = '...'
 custody_client = Tangany::Custody::Client.new
 
 # list wallets
-custody_client.wallets.list(limit: 21, order: 'wallet', sort: 'asc', start: 42, tags: { tag0: 'tag 0', tag1: 'tag 1' }, xtags: { tag2: 'tag 2', tag3: 'tag 3' })
+collection = custody_client.wallets.list(limit: 21, order: 'wallet', sort: 'asc', start: 42, tags: { tag0: 'tag 0', tag1: 'tag 1' }, xtags: { tag2: 'tag 2', tag3: 'tag 3' })
 
 # retrieve single wallet
-custody_client.wallets.retrieve('wal_123456789')
+wallet = custody_client.wallets.retrieve('wal_123456789')
 
 # create wallet
-custody_client.wallets.create(
+wallet = custody_client.wallets.create(
   wallet: 'wal_123456789',
   useHsm: false,
   tags: [{
@@ -118,7 +118,7 @@ custody_client.wallets.create(
 )
 
 # update wallet
-custody_client.wallets.update(
+wallet = custody_client.wallets.update(
   'wal_123456789',
   tags: [{
     tag0: 'tag 0'
@@ -132,7 +132,7 @@ custody_client.wallets.update(
 )
 
 # delete customer
-custody_client.customers.delete('wal_123456789')
+wallet_recovery = custody_client.customers.delete('wal_123456789')
 ```
 
 ---
