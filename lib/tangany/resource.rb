@@ -65,9 +65,12 @@ module Tangany
     end
 
     def sanitize_params!(params)
-      action_name = caller_locations(1..1).first.label
-      resource_name = self.class.name.gsub("Resource", "")
-      contract = "#{resource_name}::#{action_name.camelcase}Contract".constantize
+      root_name = self.class.name.split("::")[0...-1].join("::")
+      resource_name = self.class.name.split("::").last.gsub("Resource", "")
+      action_name = caller_locations(1..1).first.label.camelcase
+
+      contract = "#{root_name}::Contracts::#{resource_name}::#{action_name.camelcase}".constantize
+
       contract.new.to_safe_params!(params)
     end
   end

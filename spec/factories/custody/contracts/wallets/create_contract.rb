@@ -1,7 +1,7 @@
 require "factory_bot"
 
 FactoryBot.define do
-  factory :custody_contracts_wallets_create, class: "Tangany::Custody::Wallets::CreateContract" do
+  factory :custody_contracts_wallets_create, class: "Tangany::Custody::Contracts::Wallets::Create" do
     initialize_with { new.to_safe_params!(attributes) }
 
     wallet { Faker::Internet.uuid }

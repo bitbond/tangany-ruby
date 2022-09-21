@@ -6,7 +6,7 @@ FactoryBot.define do
 
     firstName { Faker::Name.first_name }
     lastName { Faker::Name.last_name }
-    gender { Tangany::Customers::Customers::CreateContract::ALLOWED_PERSON_GENDERS.sample }
+    gender { Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_GENDERS.sample }
     birthDate { Faker::Date.birthday(min_age: 18, max_age: 65).to_s }
     birthName { Faker::Name.first_name }
     birthPlace { Faker::Address.city }

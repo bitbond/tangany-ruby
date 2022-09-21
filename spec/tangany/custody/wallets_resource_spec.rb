@@ -151,7 +151,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
             File.read("spec/fixtures/generated/responses/custody/wallets/retrieve/#{wallet_id}.json"),
             symbolize_names: true
           )).to_h
-          safe_params = Tangany::Custody::Wallets::UpdateContract.new.to_safe_params!(params)
+          safe_params = Tangany::Custody::Contracts::Wallets::Update.new.to_safe_params!(params)
           merged_hash = wallet_hash.deep_merge(safe_params)
           Tangany::JsonPatch.new(wallet_hash, merged_hash).generate.to_json
         end

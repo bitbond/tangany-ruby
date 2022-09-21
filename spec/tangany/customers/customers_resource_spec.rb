@@ -188,7 +188,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
             File.read("spec/fixtures/generated/responses/customers/customers/retrieve/#{customer_id}.json"),
             symbolize_names: true
           )).to_h
-          safe_params = Tangany::Customers::Customers::UpdateContract.new.to_safe_params!(params)
+          safe_params = Tangany::Customers::Contracts::Customers::Update.new.to_safe_params!(params)
           merged_hash = customer_hash.deep_merge(safe_params)
           Tangany::JsonPatch.new(customer_hash, merged_hash).generate.to_json
         end

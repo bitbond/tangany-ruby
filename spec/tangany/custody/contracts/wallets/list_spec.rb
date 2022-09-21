@@ -1,4 +1,4 @@
-RSpec.describe Tangany::Custody::Wallets::ListContract do
+RSpec.describe(Tangany::Custody::Contracts::Wallets::List) do
   subject(:to_safe_params) { described_class.new.to_safe_params!(params) }
 
   describe "#to_safe_params!" do

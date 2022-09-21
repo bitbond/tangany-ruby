@@ -1,7 +1,7 @@
 require "factory_bot"
 
 FactoryBot.define do
-  factory :customers_contracts_customers_create, class: "Tangany::Customers::Customers::CreateContract" do
+  factory :customers_contracts_customers_create, class: "Tangany::Customers::Contracts::Customers::Create" do
     initialize_with { new.to_safe_params!(attributes) }
 
     id { Faker::Internet.uuid }
@@ -12,7 +12,7 @@ FactoryBot.define do
       {
         firstName: Faker::Name.first_name,
         lastName: Faker::Name.last_name,
-        gender: Tangany::Customers::Customers::CreateContract::ALLOWED_PERSON_GENDERS.sample,
+        gender: Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_GENDERS.sample,
         birthDate: Faker::Date.birthday(min_age: 18, max_age: 65).to_s,
         birthName: Faker::Name.first_name,
         birthPlace: Faker::Address.city,
@@ -29,7 +29,7 @@ FactoryBot.define do
         kyc: {
           id: Faker::Internet.uuid,
           date: Faker::Date.backward(days: 365).to_s,
-          method: Tangany::Customers::Customers::CreateContract::ALLOWED_PERSON_KYC_METHODS.sample,
+          method: Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_KYC_METHODS.sample,
           document: {
             country: Faker::Address.country_code,
             nationality: Faker::Address.country_code,
@@ -37,7 +37,7 @@ FactoryBot.define do
             issuedBy: Faker::Company.name,
             issueDate: issue_date,
             validUntil: Date.parse(issue_date).next_year(10).to_s,
-            type: Tangany::Customers::Customers::CreateContract::ALLOWED_PERSON_KYC_DOCUMENT_TYPES.sample
+            type: Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_KYC_DOCUMENT_TYPES.sample
           }
         },
         pep: {
