@@ -1,7 +1,7 @@
 module Tangany
   module Custody
     module Wallets
-      class UpdateContract < Contract
+      class UpdateContract < ApplicationContract
         TagSchema = Dry::Schema.Params do
           10.times do |i|
             optional("tag#{i}".to_sym).maybe(:string, max_size?: 256)

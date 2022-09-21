@@ -1,7 +1,7 @@
 module Tangany
   module Customers
     module WalletLinks
-      class CreateContract < Contract
+      class CreateContract < ApplicationContract
         ALLOWED_TYPES = ["mpc", "waas"].freeze
         ALLOWED_ASSETS = %w[
           AAVE

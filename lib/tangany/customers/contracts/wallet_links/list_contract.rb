@@ -1,7 +1,7 @@
 module Tangany
   module Customers
     module WalletLinks
-      class ListContract < Contract
+      class ListContract < ApplicationContract
         schema do
           config.validate_keys = true
 

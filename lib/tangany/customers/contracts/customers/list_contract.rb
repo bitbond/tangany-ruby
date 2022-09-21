@@ -1,7 +1,7 @@
 module Tangany
   module Customers
     module Customers
-      class ListContract < Contract
+      class ListContract < ApplicationContract
         ALLOWED_ENVIRONMENTS = %w[production testing].freeze
 
         schema do

@@ -2,7 +2,7 @@ require "active_support/core_ext/object/to_param"
 require "dry-validation"
 
 module Tangany
-  class Contract < Dry::Validation::Contract
+  class ApplicationContract < Dry::Validation::Contract
     ALLOWED_SORTS = ["asc", "desc"].freeze
     COUNTRY_REGEXP = %r{[A-Z]{2}}
     DATE_REGEXP = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}}

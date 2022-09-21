@@ -1,7 +1,7 @@
 module Tangany
   module Custody
     module Wallets
-      class ListContract < Contract
+      class ListContract < ApplicationContract
         ALLOWED_ORDERS = ["created", "security", "updated", "wallet"].freeze
 
         schema do

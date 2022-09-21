@@ -1,7 +1,7 @@
 module Tangany
   module Customers
     module Customers
-      class UpdateContract < Contract
+      class UpdateContract < ApplicationContract
         AddressSchema = Dry::Schema.Params do
           optional(:country).filled(:string, format?: COUNTRY_REGEXP)
           optional(:city).filled(:string, max_size?: 50)
