@@ -4,7 +4,7 @@ module Tangany
       attribute :firstName, Types::String
       attribute :lastName, Types::String
       attribute :gender, Types::String
-      attribute :birthDate, Types::String
+      attribute :birthDate, Types::Date
       attribute :birthName, Types::String
       attribute :birthPlace, Types::String
       attribute :birthCountry, Types::String
@@ -13,6 +13,8 @@ module Tangany
       attribute :email, Types::String
       attribute :kyc, Kyc
       attribute :pep, Pep
+
+      to_date :birthDate
     end
   end
 end
