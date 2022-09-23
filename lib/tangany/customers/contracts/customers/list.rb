@@ -3,8 +3,6 @@ module Tangany
     module Contracts
       module Customers
         class List < ApplicationContract
-          ALLOWED_ENVIRONMENTS = %w[production testing].freeze
-
           schema do
             config.validate_keys = true
 

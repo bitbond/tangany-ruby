@@ -1,3 +1,4 @@
+require_relative "customers/application_contract"
 require_relative "customers/client"
 require_relative "customers/collection"
 require_relative "customers/resource"
