@@ -1,43 +1,29 @@
+require_relative "update_schemas/contract"
+require_relative "update_schemas/person"
+
 module Tangany
   module Customers
     module Contracts
       module Customers
         class Update < ApplicationContract
-          AddressSchema = Dry::Schema.Params do
-            optional(:country).filled(:string, format?: COUNTRY_REGEXP)
-            optional(:city).filled(:string, max_size?: 50)
-            optional(:postcode).filled(:string, max_size?: 50)
-            optional(:streetName).filled(:string, max_size?: 50)
-            optional(:streetNumber).filled(:string, max_size?: 50)
-          end
-
-          ContractSchema = Dry::Schema.Params do
-            optional(:isSigned).filled(:bool)
-            optional(:signedDate).filled(:string, format?: DATETIME_OPTIONAL_REGEXP) # can also be nil
-            optional(:isCancelled).filled(:bool)
-            optional(:cancelledDate).filled(:string, format?: DATETIME_OPTIONAL_REGEXP) # can also be nil
-          end
-
-          PepSchema = Dry::Schema.Params do
-            optional(:isExposed).filled(:bool)
-            optional(:checkDate).filled(:string, format?: DATE_REGEXP)
-            optional(:source).maybe(:string, max_size?: 255)
-            optional(:reason).maybe(:string)
-            optional(:isSanctioned).filled(:bool)
-          end
-
-          PersonSchema = Dry::Schema.Params do
-            optional(:lastName).filled(:string, max_size?: 50)
-            optional(:address).hash(AddressSchema)
-            optional(:email).filled(:string, max_size?: 255)
-            optional(:pep).hash(PepSchema)
-          end
-
           schema do
             config.validate_keys = true
 
-            optional(:person).hash(PersonSchema)
-            optional(:contract).hash(ContractSchema)
+            optional(:contract).hash(UpdateSchemas::Contract.schema)
+            optional(:person).hash(UpdateSchemas::Person.schema)
+            # TODO: Add support for company
+          end
+
+          rule(person: {pep: :source}) do
+            if values.dig(:person, :pep, :source).present? && !values.dig(:person, :pep, :isExposed)
+              key.failure("should be specified only if `person.pep.isExposed` is true")
+            end
+          end
+
+          rule(person: {pep: :reason}) do
+            if values.dig(:person, :pep, :reason).present? && !values.dig(:person, :pep, :isExposed)
+              key.failure("should be specified only if `person.pep.isExposed` is true")
+            end
           end
         end
       end
