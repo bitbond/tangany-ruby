@@ -74,7 +74,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       it "raises an error" do
         expect { wallet_link }.to(
           raise_error(Tangany::RequestError)
-          .with_message(/WalletLink with ID "[^"]+" already exists/)
+          .with_message("A wallet link with the provided wallet ID and vault url already exists")
         )
       end
     end
@@ -108,5 +108,43 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     it "has a previous path" do
       expect(wallet_links.previous_path).to(eq("/wallet-links?start=0&limit=1&sort=asc"))
     end
+  end
+
+  describe "#retrieve" do
+    subject(:wallet_link) { client.wallet_links.retrieve(wallet_link_id) }
+
+    let(:fixture) { "wallet_links/retrieve/#{wallet_link_id}" }
+    let(:path) { "wallet-links/#{wallet_link_id}" }
+
+    context "with a valid wallet link ID" do
+      let(:wallet_link_id) { fetch_wallet_link_id }
+
+      it "returns a WalletLink" do
+        expect(wallet_link).to(be_a(Tangany::Customers::WalletLink))
+      end
+    end
+
+    context "with an invalid wallet link ID" do
+      let(:wallet_link_id) { "not_found" }
+      let(:status) { 404 }
+
+      it "raises an error" do
+        expect { wallet_link }.to(
+          raise_error(Tangany::RequestError)
+          .with_message("Wallet with ID \"#{wallet_link_id}\" was not found")
+        )
+      end
+    end
+  end
+
+  private
+
+  def fetch_wallet_link_id
+    Dir.glob("spec/fixtures/generated/responses/customers/wallet_links/retrieve/*.json").map do |file|
+      id = File.basename(file, ".json")
+      next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+
+      id
+    end.compact.min
   end
 end

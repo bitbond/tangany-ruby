@@ -83,6 +83,9 @@ response = customers_client.customers.delete('cus_123456789')
 # list wallet links
 collection = customers_client.wallet_links.list(limit: 21, sort: 'asc', start: 42)
 
+# retrieve single wallet link
+wallet_link = customers_client.wallet_links.retrieve('wl_123456789')
+
 # create wallet link
 wallet_link = customers_client.wallet_links.create(
   id: 'wl_123456789',

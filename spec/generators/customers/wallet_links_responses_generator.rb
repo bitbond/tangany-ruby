@@ -23,7 +23,7 @@ module Tangany
         File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
           statusCode: 409,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "WalletLink with ID \"#{customer_id}\" already exists."
+          message: "A wallet link with the provided wallet ID and vault url already exists"
         }))
 
         # not existing customer
@@ -111,7 +111,7 @@ module Tangany
         {
           statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "WalletLink with ID \"not_found\" was not found"
+          message: "Wallet with ID \"not_found\" was not found"
         }
       end
     end
