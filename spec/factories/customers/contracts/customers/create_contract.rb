@@ -43,7 +43,7 @@ FactoryBot.define do
         pep: {
           isExposed: is_exposed,
           checkDate: Faker::Date.backward(days: 365 * 5).to_s,
-          source: Faker::Company.name,
+          source: is_exposed ? Faker::Company.name : nil,
           reason: is_exposed ? Faker::Lorem.sentence : nil,
           isSanctioned: is_exposed ? Faker::Boolean.boolean : false
         }
