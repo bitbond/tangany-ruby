@@ -83,6 +83,12 @@ module Tangany
               key.failure("should be specified only if `person.pep.isExposed` is true")
             end
           end
+
+          rule(person: {pep: :reason}) do
+            if values[:person][:pep][:reason].present? && !values[:person][:pep][:isExposed]
+              key.failure("should be specified only if `person.pep.isExposed` is true")
+            end
+          end
         end
       end
     end
