@@ -68,7 +68,14 @@ module Tangany
             required(:id).filled(:string)
             required(:environment).filled(:string, included_in?: ALLOWED_ENVIRONMENTS)
             required(:person).hash(PersonSchema)
+            # TODO: Add support for company
             required(:contract).hash(ContractSchema)
+          end
+
+          rule(contract: :cancelledDate) do
+            if values[:contract][:cancelledDate].present? && !values[:contract][:isCancelled]
+              key.failure("should be specified only if `contract.isCancelled` is true")
+            end
           end
         end
       end
