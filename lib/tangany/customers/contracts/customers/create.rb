@@ -77,6 +77,12 @@ module Tangany
               key.failure("should be specified only if `contract.isCancelled` is true")
             end
           end
+
+          rule(person: {pep: :source}) do
+            if values[:person][:pep][:source].present? && !values[:person][:pep][:isExposed]
+              key.failure("should be specified only if `person.pep.isExposed` is true")
+            end
+          end
         end
       end
     end
