@@ -12,7 +12,7 @@ module Tangany
             required(:type).filled(:string, included_in?: ALLOWED_TYPES)
             required(:vaultUrl).filled(:string, format?: URI::DEFAULT_PARSER.make_regexp)
             required(:vaultWalletId).filled(:string)
-            required(:assignment).hash do
+            optional(:assignment).hash do
               required(:customerId).filled(:string)
             end
           end
