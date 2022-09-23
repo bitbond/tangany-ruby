@@ -45,7 +45,7 @@ FactoryBot.define do
           checkDate: Faker::Date.backward(days: 365 * 5).to_s,
           source: is_exposed ? Faker::Company.name : nil,
           reason: is_exposed ? Faker::Lorem.sentence : nil,
-          isSanctioned: is_exposed ? Faker::Boolean.boolean : false
+          isSanctioned: Faker::Boolean.boolean
         }
       }
     end
