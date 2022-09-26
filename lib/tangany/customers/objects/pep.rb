@@ -3,10 +3,9 @@ module Tangany
     class Pep < Object
       attribute :isExposed, Types::Bool
       attribute :checkDate, Types::Date
-      attribute :source, Types::String
-      attribute :reason?, Types::String.optional
       attribute :isSanctioned?, Types::Bool
 
+      censored :source, :reason
       to_date :checkDate
     end
   end
