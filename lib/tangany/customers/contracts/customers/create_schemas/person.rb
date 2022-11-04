@@ -15,7 +15,7 @@ module Tangany
                   required(:lastName).filled(:string, max_size?: 50)
                   required(:gender).filled(:string, included_in?: Create::ALLOWED_PERSON_GENDERS)
                   required(:birthDate).filled(:string, format?: Create::DATE_REGEXP)
-                  required(:birthName).filled(:string, max_size?: 50)
+                  optional(:birthName).filled(:string, max_size?: 50)
                   required(:birthPlace).filled(:string, max_size?: 50)
                   required(:birthCountry).filled(:string, format?: Create::COUNTRY_REGEXP)
                   required(:nationality).filled(:string, format?: Create::COUNTRY_REGEXP)

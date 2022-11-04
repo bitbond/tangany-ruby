@@ -8,8 +8,8 @@ module Tangany
               def schema
                 Dry::Schema.Params do
                   required(:isSigned).filled(:bool)
-                  required(:signedDate).maybe(:string, format?: Create::DATETIME_OPTIONAL_REGEXP)
-                  optional(:isCancelled).filled(:bool)
+                  optional(:signedDate).maybe(:string, format?: Create::DATETIME_OPTIONAL_REGEXP)
+                  required(:isCancelled).filled(:bool)
                   optional(:cancelledDate).maybe(:string, format?: Create::DATETIME_OPTIONAL_REGEXP)
                 end
               end

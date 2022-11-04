@@ -29,18 +29,6 @@ RSpec.describe(Tangany::Customers::Contracts::Customers::Create) do
           }.to_json)
         end
       end
-
-      context "without the contract.isCancelled param" do
-        before do
-          params[:contract].delete(:isCancelled)
-        end
-
-        it "raises an ArgumentError" do
-          expect { to_safe_params }.to raise_error(Tangany::InputError, {
-            contract: {cancelledDate: ["should be specified only if `contract.isCancelled` is true"]}
-          }.to_json)
-        end
-      end
     end
 
     context "with the person.pep.source and the person.pep.reason param" do
