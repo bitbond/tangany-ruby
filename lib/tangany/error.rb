@@ -8,6 +8,8 @@ module Tangany
   end
 
   class RequestError < Error
+    attr_reader :activity_id, :status_code
+
     def initialize(message, activity_id: nil, status_code: nil, validation_errors: [])
       @activity_id = activity_id
       @message = message
