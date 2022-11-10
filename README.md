@@ -89,10 +89,12 @@ wallet_link = customers_client.wallet_links.retrieve('wl_123456789')
 # create wallet link
 wallet_link = customers_client.wallet_links.create(
   id: 'wl_123456789',
-  customerId: 'cus_123456789',
   type: 'waas',
   vaultUrl: 'https://vault.example.com',
-  vaultWalletId: 'wal_123456789'
+  vaultWalletId: 'wal_123456789',
+  assignment: {
+    customerId: 'cus_123456789',
+  }
 )
 ```
 
