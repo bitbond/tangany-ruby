@@ -81,12 +81,11 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
   end
 
   describe "#list" do
-    subject(:wallet_links) { client.wallet_links.list(limit: limit, sort: sort, start: start) }
+    subject(:wallet_links) { client.wallet_links.list(limit: limit, sort: sort) }
 
     let(:fixture) { "wallet_links/list/paginated" }
     let(:limit) { 1 }
-    let(:path) { "wallet-links?limit=#{limit}&sort=#{sort}&start=#{start}" }
-    let(:start) { 1 }
+    let(:path) { "wallet-links?limit=#{limit}&sort=#{sort}" }
     let(:sort) { "asc" }
 
     it "returns a collection" do
@@ -101,12 +100,8 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       expect(wallet_links.total).to(eq(3))
     end
 
-    it "has a next path" do
-      expect(wallet_links.next_path).to(eq("/wallet-links?start=2&limit=1&sort=asc"))
-    end
-
-    it "has a previous path" do
-      expect(wallet_links.previous_path).to(eq("/wallet-links?start=0&limit=1&sort=asc"))
+    it "has a next page token" do
+      expect(wallet_links.next_page_token).to(eq("foo"))
     end
   end
 

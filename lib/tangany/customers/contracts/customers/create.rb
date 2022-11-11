@@ -10,7 +10,6 @@ module Tangany
             config.validate_keys = true
 
             required(:id).filled(:string)
-            required(:environment).filled(:string, included_in?: ALLOWED_ENVIRONMENTS)
             required(:naturalPerson).hash(CreateSchemas::NaturalPerson.schema)
             # TODO: Add support for company
             required(:contract).hash(CreateSchemas::Contract.schema)

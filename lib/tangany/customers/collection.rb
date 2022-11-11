@@ -5,10 +5,9 @@ module Tangany
         def from_response(response, type:)
           body = response.body
           Tangany::Collection.new(
-            data: body[:results].map { |attributes| type.new(attributes) },
-            total: body[:total],
-            next_path: body.dig(:_links, :next),
-            previous_path: body.dig(:_links, :previous)
+            data: body[:items].map { |attributes| type.new(attributes) },
+            total: body.dig(:pageInfo, :totalResults),
+            next_page_token: body[:nextPageToken]
           )
         end
       end

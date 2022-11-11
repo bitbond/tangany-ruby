@@ -44,16 +44,15 @@ module Tangany
         cleanup("list")
 
         # empty
-        File.write("#{responses_root_folder}/list/empty.json", JSON.pretty_generate(list_response_from_customer_ids([])))
+        File.write("#{responses_root_folder}/list/empty.json", JSON.pretty_generate(list_response_from_customers([])))
 
         # paginated
-        customer_ids = Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
-          id = File.basename(file, ".json")
-          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+        customers = Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
+          next unless File.basename(file, ".json").match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
 
-          id
-        end.compact.sort
-        File.write("#{responses_root_folder}/list/paginated.json", JSON.pretty_generate(list_response_from_customer_ids(customer_ids)))
+          JSON.parse(File.read(file))
+        end.compact.sort_by { |a| a["id"] }
+        File.write("#{responses_root_folder}/list/paginated.json", JSON.pretty_generate(list_response_from_customers(customers)))
       end
 
       def retrieve
@@ -117,22 +116,14 @@ module Tangany
         }
       end
 
-      def list_response_from_customer_ids(customer_ids)
+      def list_response_from_customers(customers)
         {
-          total: customer_ids.size,
-          results: (customer_ids[1..1] || []).map do |id|
-            {
-              id: id,
-              environment: "testing",
-              _links: {
-                self: "/customers/#{id}"
-              }
-            }
-          end,
-          _links: {
-            next: customer_ids.present? ? "/customers?start=2&limit=1&sort=asc" : nil,
-            previous: customer_ids.present? ? "/customers?start=0&limit=1&sort=asc" : nil
-          }
+          nextPageToken: customers.size > 1 ? "foo" : nil,
+          pageInfo: {
+            totalResults: customers.size,
+            resultsPerPage: 100
+          },
+          items: (customers[1..1] || []).map.to_a
         }
       end
     end

@@ -5,7 +5,6 @@ FactoryBot.define do
     initialize_with { new.to_safe_params!(attributes) }
 
     id { Faker::Internet.uuid }
-    environment { "testing" }
     naturalPerson do
       is_exposed = Faker::Boolean.boolean
       is_sanctioned = Faker::Boolean.boolean

@@ -1,12 +1,13 @@
 module Tangany
   class Collection
-    attr_reader :data, :total, :next_path, :previous_path
+    attr_reader :data, :next_page_token, :next_path, :previous_path, :total
 
-    def initialize(data:, total:, next_path:, previous_path:)
+    def initialize(data:, total:, next_page_token: nil, next_path: nil, previous_path: nil)
       @data = data
-      @total = total
+      @next_page_token = next_page_token
       @next_path = next_path
       @previous_path = previous_path
+      @total = total
     end
   end
 end

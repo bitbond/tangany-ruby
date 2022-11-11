@@ -47,12 +47,8 @@ RSpec.describe(Tangany::Collection) do
         expect(collection.total).to(eq(3))
       end
 
-      it "has a next path" do
-        expect(collection.next_path).to(eq("/customers?start=2&limit=1&sort=asc"))
-      end
-
-      it "has a previous path" do
-        expect(collection.previous_path).to(eq("/customers?start=0&limit=1&sort=asc"))
+      it "has a next page token" do
+        expect(collection.next_page_token).to(eq("foo"))
       end
 
       it "fills the collection with the correct type" do

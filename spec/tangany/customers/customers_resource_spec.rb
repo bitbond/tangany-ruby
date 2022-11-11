@@ -88,12 +88,11 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#list" do
-    subject(:customers) { client.customers.list(limit: limit, sort: sort, start: start) }
+    subject(:customers) { client.customers.list(limit: limit, sort: sort) }
 
     let(:fixture) { "customers/list/paginated" }
     let(:limit) { 1 }
-    let(:path) { "customers?limit=#{limit}&sort=#{sort}&start=#{start}" }
-    let(:start) { 1 }
+    let(:path) { "customers?limit=#{limit}&sort=#{sort}" }
     let(:sort) { "asc" }
 
     it "returns a collection" do
@@ -108,12 +107,8 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       expect(customers.total).to(eq(3))
     end
 
-    it "has a next path" do
-      expect(customers.next_path).to(eq("/customers?start=2&limit=1&sort=#{sort}"))
-    end
-
-    it "has a previous path" do
-      expect(customers.previous_path).to(eq("/customers?start=0&limit=1&sort=#{sort}"))
+    it "has a next page token" do
+      expect(customers.next_page_token).to(eq("foo"))
     end
   end
 
