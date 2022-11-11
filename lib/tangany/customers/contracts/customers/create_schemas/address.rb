@@ -7,7 +7,7 @@ module Tangany
             class << self
               def schema
                 Dry::Schema.Params do
-                  required(:country).filled(:string, format?: Create::COUNTRY_REGEXP)
+                  required(:country).filled(:string, format?: ApplicationContract::COUNTRY_REGEXP)
                   required(:city).filled(:string, max_size?: 50)
                   required(:postcode).filled(:string, max_size?: 50)
                   required(:streetName).filled(:string, max_size?: 50)

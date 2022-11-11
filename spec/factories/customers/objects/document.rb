@@ -10,6 +10,6 @@ FactoryBot.define do
     issuedBy { Faker::Company.name }
     issueDate { Faker::Date.backward(days: 365 * 5).to_s }
     validUntil { |obj| Date.parse(obj.issueDate).next_year(10).to_s }
-    type { Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_KYC_DOCUMENT_TYPES.sample }
+    type { Tangany::Customers::Kyc::ALLOWED_DOCUMENT_TYPES.sample }
   end
 end

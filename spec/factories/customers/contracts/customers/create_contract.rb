@@ -6,17 +6,20 @@ FactoryBot.define do
 
     id { Faker::Internet.uuid }
     environment { "testing" }
-    person do
+    naturalPerson do
       is_exposed = Faker::Boolean.boolean
+      is_sanctioned = Faker::Boolean.boolean
       issue_date = Faker::Date.backward(days: 365 * 5).to_s
       {
+        id: Faker::Internet.uuid,
+        title: Faker::Name.prefix,
         firstName: Faker::Name.first_name,
         lastName: Faker::Name.last_name,
-        gender: Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_GENDERS.sample,
+        gender: Tangany::Customers::NaturalPerson::ALLOWED_GENDERS.sample,
         birthDate: Faker::Date.birthday(min_age: 18, max_age: 65).to_s,
-        birthName: Faker::Name.first_name,
         birthPlace: Faker::Address.city,
         birthCountry: Faker::Address.country_code,
+        birthName: Faker::Name.first_name,
         nationality: Faker::Address.country_code,
         address: {
           country: Faker::Address.country_code,
@@ -29,7 +32,7 @@ FactoryBot.define do
         kyc: {
           id: Faker::Internet.uuid,
           date: Faker::Date.backward(days: 365).to_s,
-          method: Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_KYC_METHODS.sample,
+          method: Tangany::Customers::Kyc::ALLOWED_METHODS.sample,
           document: {
             country: Faker::Address.country_code,
             nationality: Faker::Address.country_code,
@@ -37,7 +40,7 @@ FactoryBot.define do
             issuedBy: Faker::Company.name,
             issueDate: issue_date,
             validUntil: Date.parse(issue_date).next_year(10).to_s,
-            type: Tangany::Customers::Contracts::Customers::Create::ALLOWED_PERSON_KYC_DOCUMENT_TYPES.sample
+            type: Tangany::Customers::Kyc::ALLOWED_DOCUMENT_TYPES.sample
           }
         },
         pep: {
@@ -45,7 +48,13 @@ FactoryBot.define do
           checkDate: Faker::Date.backward(days: 365 * 5).to_s,
           source: is_exposed ? Faker::Company.name : nil,
           reason: is_exposed ? Faker::Lorem.sentence : nil,
-          isSanctioned: Faker::Boolean.boolean
+          isSanctioned: is_sanctioned
+        },
+        sanctions: {
+          checkDate: Faker::Time.backward(days: 365).utc.iso8601,
+          isSanctioned: is_sanctioned,
+          source: is_sanctioned ? Faker::Company.name : nil,
+          reason: is_sanctioned ? Faker::Lorem.sentence : nil
         }
       }
     end

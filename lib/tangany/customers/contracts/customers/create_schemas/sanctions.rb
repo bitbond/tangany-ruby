@@ -2,16 +2,15 @@ module Tangany
   module Customers
     module Contracts
       module Customers
-        module UpdateSchemas
-          module Pep
+        module CreateSchemas
+          module Sanctions
             class << self
               def schema
                 Dry::Schema.Params do
-                  optional(:isExposed).filled(:bool)
-                  optional(:checkDate).filled(:string, format?: Update::DATE_REGEXP)
+                  required(:checkDate).filled(:string, format?: ApplicationContract::DATE_REGEXP)
+                  required(:isSanctioned).filled(:bool)
                   optional(:source).maybe(:string, max_size?: 255)
-                  optional(:reason).maybe(:string)
-                  optional(:isSanctioned).filled(:bool)
+                  optional(:reason).maybe(:string, max_size?: 255)
                 end
               end
             end

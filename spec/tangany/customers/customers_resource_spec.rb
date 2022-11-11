@@ -162,7 +162,12 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     let(:fixture) { "customers/update/#{customer_id}" }
     let(:if_match_header) { "etag" }
     let(:method) { :patch }
-    let(:params) { {} }
+    let(:params) do
+      JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
+        symbolize_names: true
+      )
+    end
     let(:path) { "customers/#{customer_id}" }
 
     before do
@@ -191,12 +196,6 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
           safe_params = Tangany::Customers::Contracts::Customers::Update.new.to_safe_params!(params)
           merged_hash = customer_hash.deep_merge(safe_params)
           Tangany::JsonPatch.new(customer_hash, merged_hash).generate.to_json
-        end
-        let(:params) do
-          JSON.parse(
-            File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
-            symbolize_names: true
-          )
         end
 
         it "updates the customer" do

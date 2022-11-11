@@ -5,7 +5,7 @@ FactoryBot.define do
     initialize_with { new(attributes) }
 
     id { Faker::Internet.uuid }
-    association :person, factory: :customers_objects_person
+    association :naturalPerson, factory: :customers_objects_natural_person
     association :contract, factory: :customers_objects_contract
     add_attribute(:_links) { |obj| {documents: "/customers/#{obj.id}/documents"} }
   end

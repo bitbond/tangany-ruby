@@ -1,5 +1,5 @@
 require_relative "update_schemas/contract"
-require_relative "update_schemas/person"
+require_relative "update_schemas/natural_person"
 
 module Tangany
   module Customers
@@ -9,20 +9,40 @@ module Tangany
           schema do
             config.validate_keys = true
 
-            optional(:contract).hash(UpdateSchemas::Contract.schema)
-            optional(:person).hash(UpdateSchemas::Person.schema)
+            required(:id).filled(:string)
+            required(:environment).filled(:string, included_in?: ALLOWED_ENVIRONMENTS)
+            required(:naturalPerson).hash(UpdateSchemas::NaturalPerson.schema)
             # TODO: Add support for company
+            required(:contract).hash(UpdateSchemas::Contract.schema)
           end
 
-          rule(person: {pep: :source}) do
-            if values.dig(:person, :pep, :source).present? && !values.dig(:person, :pep, :isExposed)
-              key.failure("should be specified only if `person.pep.isExposed` is true")
+          rule(contract: :cancelledDate) do
+            if values[:contract][:cancelledDate].present? && !values[:contract][:isCancelled]
+              key.failure("should be specified only if `contract.isCancelled` is true")
             end
           end
 
-          rule(person: {pep: :reason}) do
-            if values.dig(:person, :pep, :reason).present? && !values.dig(:person, :pep, :isExposed)
-              key.failure("should be specified only if `person.pep.isExposed` is true")
+          rule(naturalPerson: {pep: :source}) do
+            if values.dig(:naturalPerson, :pep, :source).present? && !values.dig(:naturalPerson, :pep, :isExposed)
+              key.failure("should be specified only if `naturalPerson.pep.isExposed` is true")
+            end
+          end
+
+          rule(naturalPerson: {pep: :reason}) do
+            if values.dig(:naturalPerson, :pep, :reason).present? && !values.dig(:naturalPerson, :pep, :isExposed)
+              key.failure("should be specified only if `naturalPerson.pep.isExposed` is true")
+            end
+          end
+
+          rule(naturalPerson: {sanctions: :source}) do
+            if values.dig(:naturalPerson, :sanctions, :source).present? && !values.dig(:naturalPerson, :sanctions, :isSanctioned)
+              key.failure("should be specified only if `naturalPerson.sanctions.isSanctioned` is true")
+            end
+          end
+
+          rule(naturalPerson: {sanctions: :reason}) do
+            if values.dig(:naturalPerson, :sanctions, :reason).present? && !values.dig(:naturalPerson, :sanctions, :isSanctioned)
+              key.failure("should be specified only if `naturalPerson.sanctions.isSanctioned` is true")
             end
           end
         end

@@ -58,7 +58,7 @@ customer = customers_client.customers.retrieve('cus_123456789')
 # create customer
 customer = customers_client.customers.create(
   id: 'cus_123456789',
-  person: {
+  naturalPerson: {
     firstName: 'John',
     lastName: 'Doe',
     ...
@@ -69,7 +69,7 @@ customer = customers_client.customers.create(
 # update customer
 customer = customers_client.customers.update(
   'cus_123456789',
-  person: {
+  naturalPerson: {
     firstName: 'John',
     lastName: 'Doe',
     ...
