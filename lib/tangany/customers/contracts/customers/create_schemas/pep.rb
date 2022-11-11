@@ -11,7 +11,6 @@ module Tangany
                   required(:checkDate).filled(:string, format?: ApplicationContract::DATE_REGEXP)
                   required(:source).maybe(:string, max_size?: 255)
                   optional(:reason).maybe(:string)
-                  required(:isSanctioned).filled(:bool)
                 end
               end
             end
