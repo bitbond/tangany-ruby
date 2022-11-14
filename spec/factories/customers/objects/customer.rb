@@ -1,12 +1,11 @@
-require "factory_bot"
-
 FactoryBot.define do
   factory :customers_objects_customer, class: "Tangany::Customers::Customer" do
     initialize_with { new(attributes) }
 
     id { Faker::Internet.uuid }
-    association :naturalPerson, factory: :customers_objects_natural_person
-    association :contract, factory: :customers_objects_contract
-    add_attribute(:_links) { |obj| {documents: "/customers/#{obj.id}/documents"} }
+    owner { {entityId: Faker::Internet.uuid} }
+    authorized { {entityId: Faker::Internet.uuid} }
+    contracts { [association(:customers_objects_contract)] }
+    additionalAttributes { {"foo" => "bar"} }
   end
 end

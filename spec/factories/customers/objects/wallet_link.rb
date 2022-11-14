@@ -1,5 +1,3 @@
-require "factory_bot"
-
 FactoryBot.define do
   factory :customers_objects_wallet_link, class: "Tangany::Customers::WalletLink" do
     initialize_with { new(attributes) }

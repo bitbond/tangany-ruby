@@ -1,5 +1,3 @@
-require "factory_bot"
-
 FactoryBot.define do
   factory :customers_contracts_customers_create, class: "Tangany::Customers::Contracts::Customers::Create" do
     initialize_with { new.to_safe_params!(attributes) }

@@ -1,5 +1,3 @@
-require "factory_bot"
-
 FactoryBot.define do
   factory :customers_objects_sanctions, class: "Tangany::Customers::Sanctions" do
     initialize_with { new(attributes) }

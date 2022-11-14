@@ -1,5 +1,3 @@
-require "factory_bot"
-
 FactoryBot.define do
   factory :custody_objects_wallet, class: "Tangany::Custody::Wallet" do
     initialize_with { new(attributes) }

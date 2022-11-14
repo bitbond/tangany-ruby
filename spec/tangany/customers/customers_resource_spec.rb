@@ -6,9 +6,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   let(:stubbed_response) { stub_customers_response(fixture: fixture, status: status) }
   let(:stubs) { Faraday::Adapter::Test::Stubs.new }
 
-  before do
-    stub_customers_request(stubs, path, method: method, body: body, response: stubbed_response)
-  end
+  before { stub_customers_request(stubs, path, method: method, body: body, response: stubbed_response) }
 
   describe "#create" do
     subject(:customer) { client.customers.create(**input) }
@@ -26,18 +24,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       end
       let(:fixture) { "customers/create/created" }
 
-      it "creates a customer" do
-        expect(customer).to(be_a(Tangany::Customers::Customer))
-      end
+      it { expect(customer).to(be_a(Tangany::Customers::Customer)) }
     end
 
     context "with an invalid payload" do
       let(:input) { {foo: :bar} }
       let(:fixture) { "customers/create/created" }
 
-      it "raises a Dry::Struct::Error" do
-        expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
-      end
+      it { expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/)) }
     end
 
     context "with a conflicting payload" do
@@ -69,21 +63,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a valid customer ID" do
       let(:customer_id) { fetch_customer_id }
 
-      it "returns an empty response" do
-        expect { customer }.not_to(raise_error)
-      end
+      it { expect { customer }.not_to(raise_error) }
     end
 
     context "with an invalid customer ID" do
       let(:customer_id) { "not_found" }
       let(:status) { 404 }
 
-      it "raises an error" do
-        expect { customer }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("Customer with ID \"#{customer_id}\" was not found")
-        )
-      end
+      it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
     end
   end
 
@@ -95,21 +82,10 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     let(:path) { "customers?limit=#{limit}&sort=#{sort}" }
     let(:sort) { "asc" }
 
-    it "returns a collection" do
-      expect(customers).to(be_a(Tangany::Collection))
-    end
-
-    it "returns a collection of customers" do
-      expect(customers.data.first.class).to(eq(Tangany::Customers::Customer))
-    end
-
-    it "has a total of 3" do
-      expect(customers.total).to(eq(3))
-    end
-
-    it "has a next page token" do
-      expect(customers.next_page_token).to(eq("foo"))
-    end
+    it { expect(customers).to(be_a(Tangany::Collection)) }
+    it { expect(customers.data.first.class).to(eq(Tangany::Customers::Customer)) }
+    it { expect(customers.total).to(eq(3)) }
+    it { expect(customers.next_page_token).to(eq("foo")) }
   end
 
   describe "#retrieve" do
@@ -121,33 +97,14 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a valid customer ID" do
       let(:customer_id) { fetch_customer_id }
 
-      it "returns a Customer" do
-        expect(customer).to(be_a(Tangany::Customers::Customer))
-      end
+      it { expect(customer).to(be_a(Tangany::Customers::Customer)) }
     end
 
     context "with an invalid customer ID" do
       let(:customer_id) { "not_found" }
       let(:status) { 404 }
 
-      it "raises an error" do
-        expect { customer }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("Customer with ID \"#{customer_id}\" was not found")
-        )
-      end
-    end
-
-    context "with a deleted customer ID" do
-      let(:customer_id) { "deleted" }
-      let(:status) { 404 }
-
-      it "raises an error" do
-        expect { customer }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("Customer with ID \"#{customer_id}\" has been deleted")
-        )
-      end
+      it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
     end
   end
 
@@ -193,28 +150,19 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
           Tangany::JsonPatch.new(customer_hash, merged_hash).generate.to_json
         end
 
-        it "updates the customer" do
-          expect(customer).to(be_a(Tangany::Customers::Customer))
-        end
+        it { expect(customer).to(be_a(Tangany::Customers::Customer)) }
       end
 
       context "with an invalid payload" do
         let(:params) { {foo: :bar} }
 
-        it "raises a Dry::Struct::Error" do
-          expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
-        end
+        it { expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/)) }
       end
 
       context "with a conflicting If-Match precondition" do
         let(:status) { 412 }
 
-        it "raises an error" do
-          expect { customer }.to(
-            raise_error(Tangany::RequestError)
-            .with_message("Mid-air edit collision detected")
-          )
-        end
+        it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("Mid-air edit collision detected")) }
       end
     end
 
@@ -222,12 +170,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       let(:customer_id) { "not_found" }
       let(:status) { 404 }
 
-      it "raises an error" do
-        expect { customer }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("Customer with ID \"#{customer_id}\" was not found")
-        )
-      end
+      it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
     end
   end
 

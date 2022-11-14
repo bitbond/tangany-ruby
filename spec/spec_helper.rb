@@ -1,4 +1,5 @@
 require "byebug"
+require "factory_bot"
 require "rake"
 require "simplecov"
 require "simplecov_json_formatter"
@@ -16,7 +17,11 @@ require "tangany"
 require_relative "support/request_helpers"
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+
   config.before(:suite) do
+    # FactoryBot.find_definitions
+
     load("Rakefile")
     Rake::Task["regenerate_fixtures"].invoke
     Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")

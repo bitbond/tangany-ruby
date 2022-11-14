@@ -1,5 +1,3 @@
-require "factory_bot"
-
 FactoryBot.define do
   factory :customers_objects_natural_person, class: "Tangany::Customers::NaturalPerson" do
     initialize_with { new(attributes) }

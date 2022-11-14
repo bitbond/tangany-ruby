@@ -67,9 +67,6 @@ module Tangany
 
         # invalid customer
         File.write("#{responses_root_folder}/retrieve/not_found.json", JSON.pretty_generate(not_found_response))
-
-        # deleted customer
-        File.write("#{responses_root_folder}/retrieve/deleted.json", JSON.pretty_generate(deleted_response))
       end
 
       def update
@@ -112,7 +109,7 @@ module Tangany
         {
           statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"not_found\" was not found"
+          message: "Resource not found"
         }
       end
 
