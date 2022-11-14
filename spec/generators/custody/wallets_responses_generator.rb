@@ -33,7 +33,7 @@ module Tangany
         wallet_id = File.basename(fetch_wallet_file_name, ".json")
         File.write("#{responses_root_folder}/delete/#{wallet_id}.json", JSON.pretty_generate({
           recoveryId: wallet_id,
-          scheduledPurgeDate: (Time.now + 90 * 24 * 60 * 60).utc.iso8601
+          scheduledPurgeDate: (Time.now + 90 * 24 * 60 * 60).utc.iso8601(3)
         }))
 
         # invalid wallet

@@ -1,0 +1,3 @@
+require_relative "natural_persons/create_contract"
+require_relative "natural_persons/list_contract"
+require_relative "natural_persons/update_contract"

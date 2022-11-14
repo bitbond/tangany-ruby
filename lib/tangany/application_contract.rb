@@ -4,9 +4,9 @@ require "dry-validation"
 module Tangany
   class ApplicationContract < Dry::Validation::Contract
     ALLOWED_SORTS = ["asc", "desc"].freeze
-    COUNTRY_REGEXP = %r{[A-Z]{2}}
-    DATE_REGEXP = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}}
-    DATETIME_OPTIONAL_REGEXP = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z)?}
+    COUNTRY_CODE_REGEX = %r{[A-Z]{2}}
+    DATE_REGEX = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}}
+    DATETIME_REGEX = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z}
 
     def to_safe_params!(params)
       response = call(params)

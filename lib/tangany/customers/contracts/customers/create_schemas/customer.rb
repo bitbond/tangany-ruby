@@ -9,7 +9,7 @@ module Tangany
             module ClassMethods
               def schema
                 Dry::Schema.Params do
-                  required(:id).filled(:string)
+                  required(:id).filled(:string, max_size?: 40)
                   required(:owner).hash do
                     required(:entityId).filled(:string)
                   end

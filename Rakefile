@@ -25,7 +25,35 @@ task :regenerate_fixtures do
   puts
   puts "== Regenerating customers fixtures ".ljust(80, "=")
 
-  # Customers
+  # Customers API
+
+  ## Natural persons
+
+  puts " -> Regenerating responses/customers/natural_persons/retrieve"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating inputs/customers/natural_persons/list"
+  Tangany::Customers::NaturalPersonsInputsGenerator.new.list
+
+  puts " -> Regenerating responses/customers/natural_persons/list"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.list
+
+  puts " -> Regenerating inputs/customers/natural_persons/create"
+  Tangany::Customers::NaturalPersonsInputsGenerator.new.create
+
+  puts " -> Regenerating responses/customers/natural_persons/create"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.create
+
+  puts " -> Regenerating inputs/customers/natural_persons/update"
+  Tangany::Customers::NaturalPersonsInputsGenerator.new.update
+
+  puts " -> Regenerating responses/customers/natural_persons/update"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.update
+
+  puts " -> Regenerating responses/customers/natural_persons/delete"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.delete
+
+  ## Customers
 
   puts " -> Regenerating responses/customers/customers/retrieve"
   Tangany::Customers::CustomersResponsesGenerator.new.retrieve
@@ -51,7 +79,7 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/customers/delete"
   Tangany::Customers::CustomersResponsesGenerator.new.delete
 
-  # Wallet links
+  ## Wallet links
 
   puts " -> Regenerating responses/customers/wallet_links/retrieve"
   Tangany::Customers::WalletLinksResponsesGenerator.new.retrieve
@@ -65,7 +93,9 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/wallet_links/create"
   Tangany::Customers::WalletLinksResponsesGenerator.new.create
 
-  # Custody
+  # Custody API
+
+  ## Wallets
 
   puts " -> Regenerating responses/custody/wallets/retrieve"
   Tangany::Custody::WalletsResponsesGenerator.new.retrieve
