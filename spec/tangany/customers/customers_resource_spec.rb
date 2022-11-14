@@ -27,13 +27,6 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       it { expect(customer).to(be_a(Tangany::Customers::Customer)) }
     end
 
-    context "with an invalid payload" do
-      let(:input) { {foo: :bar} }
-      let(:fixture) { "customers/create/created" }
-
-      it { expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/)) }
-    end
-
     context "with a conflicting payload" do
       let(:input) do
         JSON.parse(
@@ -54,7 +47,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#delete" do
-    subject(:customer) { client.customers.delete(customer_id) }
+    subject(:response) { client.customers.delete(customer_id) }
 
     let(:fixture) { "customers/delete/#{customer_id}" }
     let(:method) { :delete }
@@ -63,14 +56,15 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     context "with a valid customer ID" do
       let(:customer_id) { fetch_customer_id }
 
-      it { expect { customer }.not_to(raise_error) }
+      it { expect(response.body).to(eq({})) }
+      it { expect { response }.not_to(raise_error) }
     end
 
     context "with an invalid customer ID" do
       let(:customer_id) { "not_found" }
       let(:status) { 404 }
 
-      it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
+      it { expect { response }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
     end
   end
 

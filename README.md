@@ -60,23 +60,31 @@ customer = customers_client.customers.retrieve("cus_123456789")
 # create customer
 customer = customers_client.customers.create(
   id: "cus_123456789",
-  naturalPerson: {
-    firstName: "John",
-    lastName: "Doe",
-    ...
+  owner: {
+    entityId: "ent_123456789",
   },
-  ...
+  authorized: {
+    entityId: "ent_123456789",
+  },
+  contracts: [{
+    type: "standard",
+    signedDate: "2020-09-04",
+  }]
 )
 
 # update customer
 customer = customers_client.customers.update(
   "cus_123456789",
-  naturalPerson: {
-    firstName: "John",
-    lastName: "Doe",
-    ...
+  owner: {
+    entityId: "ent_123456789",
   },
-  ...
+  authorized: {
+    entityId: "ent_123456789",
+  },
+  contracts: [{
+    type: "standard",
+    signedDate: "2020-09-04",
+  }]
 )
 
 # delete customer
