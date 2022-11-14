@@ -35,6 +35,14 @@ module Tangany
       end)
     end
 
+    def put_request(url, body:, headers: {})
+      handle_response(client.connection.put do |request|
+        request.url(url)
+        request.body = body
+        request.headers = default_headers.merge({"Content-Type" => "application/json-patch+json"}.merge(headers))
+      end)
+    end
+
     private
 
     attr_reader :client

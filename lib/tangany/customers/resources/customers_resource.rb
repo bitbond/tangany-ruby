@@ -18,16 +18,7 @@ module Tangany
       end
 
       def update(customer_id, **params)
-        safe_params = sanitize_params!(params)
-
-        retrieve_response = get_request("customers/#{customer_id}")
-        customer = Customer.new(retrieve_response.body)
-
-        Customer.new(patch_request(
-          "customers/#{customer_id}",
-          body: build_update_body_json(customer.to_h, safe_params),
-          headers: {"If-Match" => retrieve_response.headers["If-Match"]}
-        ).body)
+        Customer.new(put_request("customers/#{customer_id}", body: sanitize_params!(params).to_json).body)
       end
     end
   end

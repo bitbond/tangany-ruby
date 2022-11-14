@@ -12,9 +12,9 @@ RSpec.describe(Tangany::Customers::Contracts::Customers::Update) do
     it { expect(to_safe_params!).to(eq(params)) }
 
     context "with invalid params" do
-      let(:params) { {foo: :bar} }
+      let(:params) { super().merge(contracts: []) }
 
-      it { expect { to_safe_params! }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/)) }
+      it { expect { to_safe_params! }.to(raise_error(Tangany::InputError).with_message(/"contracts":\["must contain at least one contract"\]/)) }
     end
   end
 end

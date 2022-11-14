@@ -12,28 +12,22 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
     subject(:customer) { client.customers.create(**input) }
 
     let(:body) { input.to_json }
+    let(:input) do
+      JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
+        symbolize_names: true
+      )
+    end
     let(:method) { :post }
     let(:path) { "customers" }
 
     context "with a valid payload" do
-      let(:input) do
-        JSON.parse(
-          File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
-          symbolize_names: true
-        )
-      end
       let(:fixture) { "customers/create/created" }
 
       it { expect(customer).to(be_a(Tangany::Customers::Customer)) }
     end
 
     context "with a conflicting payload" do
-      let(:input) do
-        JSON.parse(
-          File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
-          symbolize_names: true
-        )
-      end
       let(:fixture) { "customers/create/conflicting" }
       let(:status) { 409 }
 
@@ -103,65 +97,28 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
   end
 
   describe "#update" do
-    subject(:customer) { client.customers.update(customer_id, **params) }
+    subject(:customer) { client.customers.update(customer_id, **input) }
 
-    let(:fixture) { "customers/update/#{customer_id}" }
-    let(:if_match_header) { "etag" }
-    let(:method) { :patch }
-    let(:params) do
+    let(:body) { input.to_json }
+    let(:input) do
       JSON.parse(
         File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
         symbolize_names: true
       )
     end
+    let(:method) { :put }
     let(:path) { "customers/#{customer_id}" }
-
-    before do
-      stub_customers_request(
-        stubs,
-        path,
-        method: :get,
-        response: stub_customers_response(
-          fixture: "customers/retrieve/#{customer_id}",
-          headers: {"If-Match" => if_match_header},
-          status: status
-        )
-      )
-    end
 
     context "with a valid customer ID" do
       let(:customer_id) { fetch_customer_id }
       let(:fixture) { "customers/update/updated" }
 
-      context "with a valid payload" do
-        let(:body) do
-          customer_hash = Tangany::Customers::Customer.new(JSON.parse(
-            File.read("spec/fixtures/generated/responses/customers/customers/retrieve/#{customer_id}.json"),
-            symbolize_names: true
-          )).to_h
-          safe_params = Tangany::Customers::Contracts::Customers::Update.new.to_safe_params!(params)
-          merged_hash = customer_hash.deep_merge(safe_params)
-          Tangany::JsonPatch.new(customer_hash, merged_hash).generate.to_json
-        end
-
-        it { expect(customer).to(be_a(Tangany::Customers::Customer)) }
-      end
-
-      context "with an invalid payload" do
-        let(:params) { {foo: :bar} }
-
-        it { expect { customer }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/)) }
-      end
-
-      context "with a conflicting If-Match precondition" do
-        let(:status) { 412 }
-
-        it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("Mid-air edit collision detected")) }
-      end
+      it { expect(customer).to(be_a(Tangany::Customers::Customer)) }
     end
 
     context "with an invalid customer ID" do
       let(:customer_id) { "not_found" }
+      let(:fixture) { "customers/update/not_found" }
       let(:status) { 404 }
 
       it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
