@@ -47,7 +47,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       it "raises an error" do
         expect { customer }.to(
           raise_error(Tangany::RequestError)
-          .with_message(/Customer with ID "[^"]+" already exists/)
+          .with_message("Customer with given ID already exists.")
         )
       end
     end

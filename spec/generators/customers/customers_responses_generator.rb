@@ -19,11 +19,10 @@ module Tangany
         FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
 
         # conflicting
-        customer_id = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))["id"]
         File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
-          statusCode: 409,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"#{customer_id}\" already exists."
+          message: "Customer with given ID already exists.",
+          statusCode: 409
         }))
       end
 
@@ -88,14 +87,6 @@ module Tangany
         Dir.glob("#{responses_root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
       end
 
-      def deleted_response
-        {
-          statusCode: 404,
-          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"deleted\" has been deleted"
-        }
-      end
-
       def fetch_customer_file_name
         Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
           id = File.basename(file, ".json")
@@ -107,9 +98,9 @@ module Tangany
 
       def not_found_response
         {
-          statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Resource not found"
+          message: "Resource not found",
+          statusCode: 404
         }
       end
 

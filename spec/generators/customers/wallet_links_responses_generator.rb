@@ -21,23 +21,23 @@ module Tangany
 
         # conflicting
         File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
-          statusCode: 409,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "A wallet link with the provided wallet ID and vault url already exists"
+          message: "A wallet link with the provided wallet ID and vault url already exists",
+          statusCode: 409
         }))
 
         # not existing customer
         File.write("#{responses_root_folder}/create/not_existing_customer.json", JSON.pretty_generate({
-          statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID #{customer_id} was not found"
+          message: "Customer with ID #{customer_id} was not found",
+          statusCode: 404
         }))
 
         # not existing wallet
         File.write("#{responses_root_folder}/create/not_existing_wallet.json", JSON.pretty_generate({
-          statusCode: 400,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Wallet #{input["vaultWalletId"]} was not found in vault #{input["vaultUrl"]}"
+          message: "Wallet #{input["vaultWalletId"]} was not found in vault #{input["vaultUrl"]}",
+          statusCode: 400
         }))
       end
 
@@ -100,9 +100,9 @@ module Tangany
 
       def not_found_response
         {
-          statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Wallet with ID \"not_found\" was not found"
+          message: "Wallet with ID \"not_found\" was not found",
+          statusCode: 404
         }
       end
     end
