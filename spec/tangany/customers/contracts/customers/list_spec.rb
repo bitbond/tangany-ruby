@@ -1,10 +1,10 @@
-RSpec.describe(Tangany::Customers::Contracts::Customers::Create) do
+RSpec.describe(Tangany::Customers::Contracts::Customers::List) do
   subject(:to_safe_params!) { described_class.new.to_safe_params!(params) }
 
   describe "#to_safe_params!" do
     let(:params) do
       JSON.parse(
-        File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
+        File.read("spec/fixtures/generated/inputs/customers/customers/list/valid_input.json"),
         symbolize_names: true
       )
     end

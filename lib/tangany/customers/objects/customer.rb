@@ -9,7 +9,6 @@ module Tangany
         attribute :entityId, Types::String
       end
       attribute :contracts, Types::Array.of(Contract)
-      attribute? :additionalAttributes, Types::Hash
     end
   end
 end

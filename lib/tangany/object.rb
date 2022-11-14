@@ -23,14 +23,14 @@ module Tangany
 
       def translate_dates(args)
         (to_date_attributes || []).each do |attribute|
-          next if args[:attribute].is_a?(Date)
+          next if args[attribute].is_a?(Date)
           args[attribute] = Date.parse(args[attribute]) if args[attribute].present?
         end
       end
 
       def translate_datetimes(args)
         (to_datetime_attributes || []).each do |attribute|
-          next if args[:attribute].is_a?(DateTime)
+          next if args[attribute].is_a?(DateTime)
           args[attribute] = DateTime.parse(args[attribute]) if args[attribute].present?
         end
       end

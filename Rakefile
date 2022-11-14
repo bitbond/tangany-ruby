@@ -1,5 +1,6 @@
 require "byebug"
 require "bundler/gem_tasks"
+require "factory_bot"
 require "rspec/core/rake_task"
 
 require_relative "spec/generators"
@@ -28,6 +29,9 @@ task :regenerate_fixtures do
 
   puts " -> Regenerating responses/customers/customers/retrieve"
   Tangany::Customers::CustomersResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating inputs/customers/customers/list"
+  Tangany::Customers::CustomersInputsGenerator.new.list
 
   puts " -> Regenerating responses/customers/customers/list"
   Tangany::Customers::CustomersResponsesGenerator.new.list

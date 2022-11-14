@@ -4,21 +4,14 @@ module Tangany
       module Customers
         module CreateSchemas
           module Contract
-            module ClassMethods
+            class << self
               def schema
                 Dry::Schema.Params do
-                  required(:isSigned).filled(:bool)
-                  optional(:signedDate).maybe(:string, format?: ApplicationContract::DATETIME_OPTIONAL_REGEXP)
-                  required(:isCancelled).filled(:bool)
-                  optional(:cancelledDate).maybe(:string, format?: ApplicationContract::DATETIME_OPTIONAL_REGEXP)
+                  required(:type).filled(:string, included_in?: Tangany::Customers::Contract::ALLOWED_TYPES)
+                  required(:signedDate).filled(:string, format?: ApplicationContract::DATE_REGEXP)
+                  optional(:cancelledDate).filled(:string, format?: ApplicationContract::DATE_REGEXP)
                 end
               end
-            end
-
-            extend ClassMethods
-
-            def self.included(base)
-              base.extend(ClassMethods)
             end
           end
         end

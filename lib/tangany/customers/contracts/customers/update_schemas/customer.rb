@@ -1,12 +1,12 @@
-require_relative "../create_schemas/natural_person"
+require_relative "../create_schemas/customer"
 
 module Tangany
   module Customers
     module Contracts
       module Customers
         module UpdateSchemas
-          module NaturalPerson
-            include CreateSchemas::NaturalPerson
+          module Customer
+            include CreateSchemas::Customer
           end
         end
       end
