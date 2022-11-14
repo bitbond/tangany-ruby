@@ -3,7 +3,7 @@ module Tangany
     module Contracts
       module WalletLinks
         class Create < ApplicationContract
-          ALLOWED_TYPES = ["waas"].freeze # TODO: add "mpc" support
+          ALLOWED_TYPES = ["waas"].freeze
 
           schema do
             config.validate_keys = true

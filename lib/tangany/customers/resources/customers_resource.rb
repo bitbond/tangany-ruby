@@ -13,8 +13,6 @@ module Tangany
         Collection.from_response(get_request("customers", params: sanitize_params!(params)), type: Customer)
       end
 
-      # TODO: list_documents
-
       def retrieve(customer_id)
         Customer.new(get_request("customers/#{customer_id}").body)
       end
@@ -31,8 +29,6 @@ module Tangany
           headers: {"If-Match" => retrieve_response.headers["If-Match"]}
         ).body)
       end
-
-      # TODO: upload_document
     end
   end
 end

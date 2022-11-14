@@ -11,7 +11,6 @@ module Tangany
 
             required(:id).filled(:string)
             required(:naturalPerson).hash(UpdateSchemas::NaturalPerson.schema)
-            # TODO: Add support for company
             required(:contract).hash(UpdateSchemas::Contract.schema)
           end
 
