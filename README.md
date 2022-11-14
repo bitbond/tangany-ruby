@@ -40,24 +40,32 @@ gem "tangany"
 
 The library needs to be configured with your account's secrets.
 
-### Customers API
-
 ```ruby
 require "tangany"
+Tangany.client_id = "..."
+Tangany.client_secret = "..."
 Tangany.subscription = "..."
+Tangany.vault_url = "..."
 
 customers_client = Tangany::Customers::Client.new
+custody_client = Tangany::Custody::Client.new
 ```
+
+---
+
+## Customers API
+
+### Customers
 
 #### List customers
 
 ```ruby
 collection = customers_client.customers.list(limit: 21, sort: "asc", pageToken: "foo")
+```
 
-# retrieve single customer
-customer = customers_client.customers.retrieve("cus_123456789")
+#### Create customer
 
-# create customer
+```ruby
 customer = customers_client.customers.create(
   id: "cus_123456789",
   owner: {
@@ -71,8 +79,17 @@ customer = customers_client.customers.create(
     signedDate: "2020-09-04",
   }]
 )
+```
 
-# update customer
+#### Get customer
+
+```ruby
+customer = customers_client.customers.retrieve("cus_123456789")
+```
+
+#### Update customer
+
+```ruby
 customer = customers_client.customers.update(
   "cus_123456789",
   owner: {
@@ -86,10 +103,17 @@ customer = customers_client.customers.update(
     signedDate: "2020-09-04",
   }]
 )
+```
 
-# delete customer
+#### Delete customer
+
+```ruby
 response = customers_client.customers.delete("cus_123456789")
+```
 
+### Wallet links
+
+```ruby
 # list wallet links
 collection = customers_client.wallet_links.list(limit: 21, sort: "asc", pageToken: "foo")
 
@@ -107,6 +131,8 @@ wallet_link = customers_client.wallet_links.create(
   }
 )
 ```
+
+---
 
 ### Custody API
 
