@@ -1,0 +1,98 @@
+#!/usr/bin/env ruby
+
+puts "This suite will run tests against the \e[1mlive Tangany's API\e[0m."
+puts "\e[36mBe sure to set environment variables with \e[1mtesting values\e[0m\e[36m before running this suite.\e[0m"
+print "Do you want to continue? [y/N] "
+answer = gets.chomp
+
+exit 1 unless answer == "y"
+
+require "bundler/setup"
+require "byebug"
+require "factory_bot"
+
+require "tangany"
+
+Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")
+Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
+Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
+Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
+
+begin
+  customers_client = Tangany::Customers::Client.new
+
+  puts "Customers"
+
+  puts "\tNatural persons"
+
+  puts "\t\tCreating natural person..."
+  input = JSON.parse(
+    File.read("spec/fixtures/generated/inputs/customers/natural_persons/create/valid_input.json"),
+    symbolize_names: true
+  )
+  natural_person_id = input[:id]
+  puts "\t\t\tNatural person ID: #{natural_person_id}"
+  natural_person = customers_client.natural_persons.create(input)
+  raise "Natural person creation failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
+
+  puts "\t\tListing natural persons..."
+  natural_persons = customers_client.natural_persons.list
+  raise "Natural person not present in list" unless natural_persons.data.map(&:id).include?(natural_person_id)
+
+  puts "\t\tRetrieving natural person..."
+  natural_person = customers_client.natural_persons.retrieve(natural_person_id)
+  raise "Natural person retrieval failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
+
+  puts "\t\tUpdating natural person..."
+  input = JSON.parse(
+    File.read("spec/fixtures/generated/inputs/customers/natural_persons/update/valid_input.json"),
+    symbolize_names: true
+  )
+  input[:id] = natural_person_id
+  natural_person = customers_client.natural_persons.update(input[:id], input)
+  raise "Natural person update failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
+
+  puts "\tCustomers"
+
+  puts "\t\tCreating customer..."
+  input = JSON.parse(
+    File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
+    symbolize_names: true
+  )
+  customer_id = input[:id]
+  puts "\t\t\tCustomer ID: #{customer_id}"
+  input[:owner][:entityId] = natural_person_id
+  input[:authorized][0][:entityId] = natural_person_id
+  customer = customers_client.customers.create(input)
+  raise "Customer creation failed" unless customer.is_a?(Tangany::Customers::Customer)
+
+  puts "\t\tListing customers..."
+  customers = customers_client.customers.list
+  raise "Customer not present in list" unless customers.data.map(&:id).include?(customer_id)
+
+  puts "\t\tRetrieving customer..."
+  customer = customers_client.customers.retrieve(customer_id)
+  raise "Customer retrieval failed" unless customer.is_a?(Tangany::Customers::Customer)
+
+  puts "\t\tUpdating customer..."
+  input = JSON.parse(
+    File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
+    symbolize_names: true
+  )
+  input[:id] = customer_id
+  input[:owner][:entityId] = natural_person_id
+  input[:authorized][0][:entityId] = natural_person_id
+  customer = customers_client.customers.update(input[:id], input)
+  raise "Natural person update failed" unless customer.is_a?(Tangany::Customers::Customer)
+rescue => e
+  puts e.message
+  exit 1
+ensure
+  puts "Cleaning up..."
+
+  puts "\tDeleting customer..."
+  customers_client.customers.delete(customer_id)
+
+  puts "\tDeleting natural person..."
+  customers_client.natural_persons.delete(natural_person_id)
+end
