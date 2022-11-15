@@ -25,6 +25,10 @@ module Tangany
         CustomersResource.new(self)
       end
 
+      def natural_persons
+        NaturalPersonsResource.new(self)
+      end
+
       def wallet_links
         WalletLinksResource.new(self)
       end

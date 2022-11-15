@@ -23,6 +23,8 @@ module Tangany
       attribute? :kyc, Kyc
       attribute? :pep, Pep
       attribute? :sanctions, Sanctions
+
+      to_date :birthDate
     end
   end
 end
