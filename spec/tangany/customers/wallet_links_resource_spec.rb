@@ -49,7 +49,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       it "raises a Dry::Struct::Error" do
         expect { wallet_link }.to(
           raise_error(Tangany::RequestError)
-          .with_message("Wallet #{input[:vaultWalletId]} was not found in vault #{input[:vaultUrl]}")
+          .with_message("[400] Wallet #{input[:vaultWalletId]} was not found in vault #{input[:vaultUrl]}")
         )
       end
     end
@@ -62,7 +62,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       it "raises a Dry::Struct::Error" do
         expect { wallet_link }.to(
           raise_error(Tangany::RequestError)
-          .with_message(/Customer with ID .+ was not found/)
+          .with_message(/\[404\] Customer with ID .+ was not found/)
         )
       end
     end
@@ -74,7 +74,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       it "raises an error" do
         expect { wallet_link }.to(
           raise_error(Tangany::RequestError)
-          .with_message("A wallet link with the provided wallet ID and vault url already exists")
+          .with_message("[409] A wallet link with the provided wallet ID and vault url already exists")
         )
       end
     end
@@ -126,7 +126,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       it "raises an error" do
         expect { wallet_link }.to(
           raise_error(Tangany::RequestError)
-          .with_message("Wallet with ID \"#{wallet_link_id}\" was not found")
+          .with_message("[404] Wallet with ID \"#{wallet_link_id}\" was not found")
         )
       end
     end

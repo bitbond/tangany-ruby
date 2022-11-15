@@ -8,7 +8,7 @@ RSpec.describe Tangany::RequestError do
       let(:validation_errors) { nil }
 
       it "builds the correct error message" do
-        expect(error.message).to eq(message)
+        expect(error.message).to eq("[] foo")
       end
     end
 
@@ -21,7 +21,7 @@ RSpec.describe Tangany::RequestError do
       }
 
       it "builds the correct error message" do
-        expect(error.message).to eq("foo Validation errors: baz: bar")
+        expect(error.message).to eq("[] foo Validation errors: baz: bar")
       end
     end
   end

@@ -34,7 +34,7 @@ RSpec.describe(Tangany::Customers::NaturalPersonsResource) do
       it "raises an error" do
         expect { natural_person }.to(
           raise_error(Tangany::RequestError)
-          .with_message("Entity with given ID already exists.")
+          .with_message("[409] Entity with given ID already exists.")
         )
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe(Tangany::Customers::NaturalPersonsResource) do
       let(:entity_id) { "not_found" }
       let(:status) { 404 }
 
-      it { expect { response }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
+      it { expect { response }.to(raise_error(Tangany::RequestError).with_message("[404] Resource not found")) }
     end
   end
 
@@ -92,7 +92,7 @@ RSpec.describe(Tangany::Customers::NaturalPersonsResource) do
       let(:entity_id) { "not_found" }
       let(:status) { 404 }
 
-      it { expect { natural_person }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
+      it { expect { natural_person }.to(raise_error(Tangany::RequestError).with_message("[404] Resource not found")) }
     end
   end
 
@@ -121,7 +121,7 @@ RSpec.describe(Tangany::Customers::NaturalPersonsResource) do
       let(:fixture) { "natural_persons/update/not_found" }
       let(:status) { 404 }
 
-      it { expect { natural_person }.to(raise_error(Tangany::RequestError).with_message("Resource not found")) }
+      it { expect { natural_person }.to(raise_error(Tangany::RequestError).with_message("[404] Resource not found")) }
     end
   end
 

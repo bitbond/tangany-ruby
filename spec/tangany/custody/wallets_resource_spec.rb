@@ -81,7 +81,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
       it "raises an error" do
         expect { wallet_recovery }.to(
           raise_error(Tangany::RequestError)
-          .with_message("No wallet found for given name: #{wallet_id}")
+          .with_message("[404] No wallet found for given name: #{wallet_id}")
         )
       end
     end
@@ -141,7 +141,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
       it "raises an error" do
         expect { wallet }.to(
           raise_error(Tangany::RequestError)
-          .with_message("No wallet found for given name: #{wallet_id}")
+          .with_message("[404] No wallet found for given name: #{wallet_id}")
         )
       end
     end
@@ -202,17 +202,6 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
           expect { wallet }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
         end
       end
-
-      context "with a conflicting If-Match precondition" do
-        let(:status) { 412 }
-
-        it "raises an error" do
-          expect { wallet }.to(
-            raise_error(Tangany::RequestError)
-            .with_message("Mid-air edit collision detected")
-          )
-        end
-      end
     end
 
     context "with an invalid wallet" do
@@ -222,7 +211,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
       it "raises an error" do
         expect { wallet }.to(
           raise_error(Tangany::RequestError)
-          .with_message("No wallet found for given name: #{wallet_id}")
+          .with_message("[404] No wallet found for given name: #{wallet_id}")
         )
       end
     end

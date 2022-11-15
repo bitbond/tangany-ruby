@@ -53,23 +53,18 @@ module Tangany
     end
 
     def handle_response(response)
-      case response.status
-      when 400, 401, 404, 409
+      if response.status >= 400
         raise RequestError.new(
           response.body[:message],
           activity_id: response.headers["tangany-activity-id"],
+          details: response.body[:details],
+          error_code: response.body[:errorCode],
           status_code: response.body[:statusCode],
           validation_errors: response.body[:validationErrors]
         )
-      when 412
-        raise RequestError.new(
-          "Mid-air edit collision detected",
-          activity_id: response.headers["tangany-activity-id"],
-          status_code: 412
-        )
-      else
-        response
       end
+
+      response
     end
 
     def sanitize_params!(params)
