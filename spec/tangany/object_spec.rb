@@ -6,13 +6,8 @@ RSpec.describe(Tangany::Object) do
     let(:id) { "cus_123" }
 
     describe "#to_json" do
-      it "returns a JSON string" do
-        expect(object.to_json).to(be_a(String))
-      end
-
-      it "returns a JSON string with the correct attributes" do
-        expect(object.to_json).to(eq(attributes.to_json))
-      end
+      it { expect(object.to_json).to(be_a(String)) }
+      it { expect(object.to_json).to(eq(attributes.to_json)) }
     end
   end
 end

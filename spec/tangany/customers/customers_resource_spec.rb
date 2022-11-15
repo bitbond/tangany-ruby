@@ -31,12 +31,7 @@ RSpec.describe(Tangany::Customers::CustomersResource) do
       let(:fixture) { "customers/create/conflicting" }
       let(:status) { 409 }
 
-      it "raises an error" do
-        expect { customer }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("[409] Customer with given ID already exists.")
-        )
-      end
+      it { expect { customer }.to(raise_error(Tangany::RequestError).with_message("[409] Customer with given ID already exists.")) }
     end
   end
 
