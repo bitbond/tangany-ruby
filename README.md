@@ -55,6 +55,128 @@ custody_client = Tangany::Custody::Client.new
 
 ## Customers API
 
+### NaturalP persons
+
+#### List natural_persons
+
+```ruby
+collection = customers_client.natural_persons.list(limit: 21, sort: "asc", pageToken: "foo")
+```
+
+#### Create natural person
+
+```ruby
+natural_person = customers_client.natural_persons.create(
+  id: "ent_123456789",
+  title: "Mr",
+  firstName: "John",
+  lastName: "Doe",
+  gender: "M",
+  birthDate: "1980-01-01",
+  birthPlace: "Milano",
+  birthCountry: "IT",
+  birthName: "John",
+  nationality: "IT",
+  address: {
+    country: "IT",
+    city: "Milano",
+    postcode: "20100",
+    streetName: "Via Roma",
+    streetNumber: "1",
+  },
+  email: "john.doe@example.com",
+  kyc: {
+    id: "kyc_123456789",
+    date: "2021-01-01T00:00:00.000Z",
+    method: "video_ident",
+    document: {
+      country: "IT",
+      nationality: "IT",
+      number: "123456789",
+      issuedBy: "Milano",
+      issueDate: "2015-01-01",
+      validUntil: "2025-01-01",
+      type: "id_card"
+    }
+  },
+  pep: {
+    checkDate: "2021-01-01T00:00:00.000Z",
+    isExposed: true,
+    source: "PEP source",
+    reason: "PEP reason"
+  },
+  sanctions: {
+    checkDate: "2021-01-01T00:00:00.000Z",
+    isExposed: true,
+    source: "Sanctions source",
+    reason: "Sanctions reason"
+  }
+)
+```
+
+#### Retrieve natural person
+
+```ruby
+customer = customers_client.natural_persons.retrieve("ent_123456789")
+```
+
+#### Update natural person
+
+```ruby
+natural_person = customers_client.natural_persons.update(
+  "ent_123456789",
+  title: "Mr",
+  firstName: "John",
+  lastName: "Doe",
+  gender: "M",
+  birthDate: "1980-01-01",
+  birthPlace: "Milano",
+  birthCountry: "IT",
+  birthName: "John",
+  nationality: "IT",
+  address: {
+    country: "IT",
+    city: "Milano",
+    postcode: "20100",
+    streetName: "Via Roma",
+    streetNumber: "1",
+  },
+  email: "john.doe@example.com",
+  kyc: {
+    id: "kyc_123456789",
+    date: "2021-01-01T00:00:00.000Z",
+    method: "video_ident",
+    document: {
+      country: "IT",
+      nationality: "IT",
+      number: "123456789",
+      issuedBy: "Milano",
+      issueDate: "2015-01-01",
+      validUntil: "2025-01-01",
+      type: "id_card"
+    }
+  },
+  pep: {
+    checkDate: "2021-01-01T00:00:00.000Z",
+    isExposed: true,
+    source: "PEP source",
+    reason: "PEP reason"
+  },
+  sanctions: {
+    checkDate: "2021-01-01T00:00:00.000Z",
+    isExposed: true,
+    source: "Sanctions source",
+    reason: "Sanctions reason"
+  }
+)
+```
+
+#### Delete natural person
+
+```ruby
+response = customers_client.natural_persons.delete("ent_123456789")
+```
+
 ### Customers
 
 #### List customers
@@ -81,7 +203,7 @@ customer = customers_client.customers.create(
 )
 ```
 
-#### Get customer
+#### Retrieve customer
 
 ```ruby
 customer = customers_client.customers.retrieve("cus_123456789")
