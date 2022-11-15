@@ -84,7 +84,7 @@ module Tangany
 
       def list_response_from_wallet_links(wallet_links)
         {
-          nextPageToken: wallet_links.size > 1 ? "foo" : nil,
+          nextPageToken: (wallet_links.size > 1) ? "foo" : nil,
           pageInfo: {
             totalResults: wallet_links.size,
             resultsPerPage: 100

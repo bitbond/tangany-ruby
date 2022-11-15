@@ -106,7 +106,7 @@ module Tangany
 
       def list_response_from_customers(customers)
         {
-          nextPageToken: customers.size > 1 ? "foo" : nil,
+          nextPageToken: (customers.size > 1) ? "foo" : nil,
           pageInfo: {
             totalResults: customers.size,
             resultsPerPage: 100

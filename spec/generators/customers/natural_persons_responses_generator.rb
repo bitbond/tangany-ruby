@@ -106,7 +106,7 @@ module Tangany
 
       def list_response_from_natural_persons(natural_persons)
         {
-          nextPageToken: natural_persons.size > 1 ? "foo" : nil,
+          nextPageToken: (natural_persons.size > 1) ? "foo" : nil,
           pageInfo: {
             totalResults: natural_persons.size,
             resultsPerPage: 100
