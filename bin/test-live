@@ -59,10 +59,10 @@ begin
     File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
     symbolize_names: true
   )
-  customer_id = input[:id]
-  puts "\t\t\tCustomer ID: #{customer_id}"
   input[:owner][:entityId] = natural_person_id
   input[:authorized][0][:entityId] = natural_person_id
+  customer_id = input[:id]
+  puts "\t\t\tCustomer ID: #{customer_id}"
   customer = customers_client.customers.create(input)
   raise "Customer creation failed" unless customer.is_a?(Tangany::Customers::Customer)
 
@@ -83,12 +83,36 @@ begin
   input[:owner][:entityId] = natural_person_id
   input[:authorized][0][:entityId] = natural_person_id
   customer = customers_client.customers.update(input[:id], input)
-  raise "Natural person update failed" unless customer.is_a?(Tangany::Customers::Customer)
+  raise "Customer update failed" unless customer.is_a?(Tangany::Customers::Customer)
+
+  puts "\Wallet links"
+
+  puts "\t\tCreating wallet link..."
+  input = JSON.parse(
+    File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
+    symbolize_names: true
+  )
+  input[:assignment][:customerId] = customer_id
+  wallet_link_id = input[:id]
+  puts "\t\t\Wallet link ID: #{wallet_link_id}"
+  wallet_link = customers_client.wallet_links.create(input)
+  raise "Wallet link creation failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
+
+  puts "\t\tListing wallet links..."
+  wallet_links = customers_client.wallet_links.list
+  raise "Wallet link not present in list" unless wallet_links.data.map(&:id).include?(wallet_link_id)
+
+  puts "\t\tRetrieving wallet link..."
+  wallet_link = customers_client.wallet_links.retrieve(wallet_link_id)
+  raise "Wallet link retrieval failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
 rescue => e
   puts e.message
   exit 1
 ensure
   puts "Cleaning up..."
+
+  puts "\tDeleting wallet link..."
+  customers_client.wallet_links.delete(wallet_link_id)
 
   puts "\tDeleting customer..."
   customers_client.customers.delete(customer_id)
