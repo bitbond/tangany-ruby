@@ -17,7 +17,7 @@ module Tangany
                   required(:firstName).filled(:string, max_size?: 255)
                   required(:lastName).filled(:string, max_size?: 255)
                   optional(:gender).maybe(:string, included_in?: Tangany::Customers::NaturalPerson::ALLOWED_GENDERS)
-                  required(:birthDate).filled(:date)
+                  required(:birthDate).filled(:string, format?: Tangany::ApplicationContract::DATE_REGEX)
                   required(:birthPlace).filled(:string, max_size?: 255)
                   required(:birthCountry).filled(:string, format?: Tangany::ApplicationContract::COUNTRY_CODE_REGEX)
                   optional(:birthName).maybe(:string, max_size?: 255)

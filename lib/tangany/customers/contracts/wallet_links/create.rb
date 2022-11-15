@@ -10,7 +10,7 @@ module Tangany
 
             required(:id).filled(:string, max_size?: 40)
             required(:address).filled(:string, format?: ApplicationContract::ETHEREUM_ADDRESS_REGEX)
-            required(:assetId).filled(:string, inclusion?: Tangany::Customers::WalletLink::ALLOWED_ASSET_IDS)
+            required(:assetId).filled(:string, included_in?: Tangany::Customers::WalletLink::ALLOWED_ASSET_IDS)
             optional(:assignment).hash do
               required(:customerId).filled(:string)
             end

@@ -84,6 +84,9 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/wallet_links/retrieve"
   Tangany::Customers::WalletLinksResponsesGenerator.new.retrieve
 
+  puts " -> Regenerating inputs/customers/wallet-links/list"
+  Tangany::Customers::WalletLinksInputsGenerator.new.list
+
   puts " -> Regenerating responses/customers/wallet_links/list"
   Tangany::Customers::WalletLinksResponsesGenerator.new.list
 
