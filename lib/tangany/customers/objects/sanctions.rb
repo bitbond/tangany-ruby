@@ -3,8 +3,8 @@ module Tangany
     class Sanctions < Object
       attribute :checkDate, Types::DateTime
       attribute :isSanctioned, Types::Bool
-      attribute? :source, Types::String
-      attribute? :reason, Types::String
+      attribute? :source, Types::String.optional
+      attribute? :reason, Types::String.optional
 
       to_datetime :checkDate
     end

@@ -3,8 +3,8 @@ module Tangany
     class Pep < Object
       attribute :checkDate, Types::DateTime
       attribute :isExposed, Types::Bool
-      attribute? :source, Types::String
-      attribute? :reason, Types::String
+      attribute? :source, Types::String.optional
+      attribute? :reason, Types::String.optional
 
       to_datetime :checkDate
     end
