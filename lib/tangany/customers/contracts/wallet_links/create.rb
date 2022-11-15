@@ -8,10 +8,9 @@ module Tangany
           schema do
             config.validate_keys = true
 
-            required(:id).filled(:string)
-            required(:type).filled(:string, included_in?: ALLOWED_TYPES)
-            required(:vaultUrl).filled(:string, format?: URI::DEFAULT_PARSER.make_regexp)
-            required(:vaultWalletId).filled(:string)
+            required(:id).filled(:string, max_size?: 40)
+            required(:address).filled(:string, format?: ApplicationContract::ETHEREUM_ADDRESS_REGEX)
+            required(:assetId).filled(:string, inclusion?: Tangany::Customers::WalletLink::ALLOWED_ASSET_IDS)
             optional(:assignment).hash do
               required(:customerId).filled(:string)
             end

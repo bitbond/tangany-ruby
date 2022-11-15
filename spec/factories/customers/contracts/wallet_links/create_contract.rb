@@ -3,9 +3,8 @@ FactoryBot.define do
     initialize_with { new.to_safe_params!(attributes) }
 
     id { Faker::Internet.uuid }
-    type { Tangany::Customers::Contracts::WalletLinks::Create::ALLOWED_TYPES.sample }
-    vaultUrl { Faker::Internet.url }
-    vaultWalletId { Faker::Internet.uuid }
+    address { Faker::Blockchain::Ethereum.address }
+    assetId { Tangany::Customers::WalletLink::ALLOWED_ASSET_IDS.sample }
     assignment do
       {
         customerId: Faker::Internet.uuid

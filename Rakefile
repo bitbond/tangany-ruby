@@ -93,6 +93,9 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/wallet_links/create"
   Tangany::Customers::WalletLinksResponsesGenerator.new.create
 
+  puts " -> Regenerating responses/customers/wallet_links/delete"
+  Tangany::Customers::WalletLinksResponsesGenerator.new.delete
+
   # Custody API
 
   ## Wallets

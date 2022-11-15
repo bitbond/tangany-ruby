@@ -31,12 +31,7 @@ RSpec.describe(Tangany::Customers::NaturalPersonsResource) do
       let(:fixture) { "natural_persons/create/conflicting" }
       let(:status) { 409 }
 
-      it "raises an error" do
-        expect { natural_person }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("[409] Entity with given ID already exists.")
-        )
-      end
+      it { expect { natural_person }.to(raise_error(Tangany::RequestError).with_message("[409] Entity with given ID already exists.")) }
     end
   end
 

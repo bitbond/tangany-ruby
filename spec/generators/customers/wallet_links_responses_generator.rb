@@ -12,9 +12,6 @@ module Tangany
         # cleanup
         cleanup("create")
 
-        input = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))
-        customer_id = input["id"]
-
         # created
         file = fetch_wallet_link_file_name
         FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
@@ -22,23 +19,21 @@ module Tangany
         # conflicting
         File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "A wallet link with the provided wallet ID and vault url already exists",
+          message: "A wallet link for address and given asset already exists",
           statusCode: 409
         }))
+      end
 
-        # not existing customer
-        File.write("#{responses_root_folder}/create/not_existing_customer.json", JSON.pretty_generate({
-          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID #{customer_id} was not found",
-          statusCode: 404
-        }))
+      def delete
+        # cleanup
+        cleanup("delete")
 
-        # not existing wallet
-        File.write("#{responses_root_folder}/create/not_existing_wallet.json", JSON.pretty_generate({
-          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Wallet #{input["vaultWalletId"]} was not found in vault #{input["vaultUrl"]}",
-          statusCode: 400
-        }))
+        # deleted
+        wallet_link_id = File.basename(fetch_wallet_link_file_name, ".json")
+        File.write("#{responses_root_folder}/delete/#{wallet_link_id}.json", "{}")
+
+        # invalid customer
+        File.write("#{responses_root_folder}/delete/not_found.json", JSON.pretty_generate(not_found_response))
       end
 
       def list
@@ -101,7 +96,7 @@ module Tangany
       def not_found_response
         {
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Wallet with ID \"not_found\" was not found",
+          message: "Resource not found",
           statusCode: 404
         }
       end

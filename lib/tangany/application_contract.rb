@@ -7,6 +7,7 @@ module Tangany
     COUNTRY_CODE_REGEX = %r{[A-Z]{2}}
     DATE_REGEX = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}}
     DATETIME_REGEX = %r{[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z}
+    ETHEREUM_ADDRESS_REGEX = %r{^0x[a-fA-F0-9]{40}$}
 
     def to_safe_params!(params)
       response = call(params)
