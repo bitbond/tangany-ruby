@@ -55,7 +55,7 @@ custody_client = Tangany::Custody::Client.new
 
 ## Customers API
 
-### NaturalP persons
+### Natural persons
 
 #### List natural_persons
 
