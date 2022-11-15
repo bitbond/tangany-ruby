@@ -5,7 +5,7 @@ module Tangany
 
       attribute :type, Types::String
       attribute :signedDate, Types::Date
-      attribute? :cancelledDate, Types::Date
+      attribute? :cancelledDate, Types::Date.optional
 
       to_date :signedDate, :cancelledDate
     end
