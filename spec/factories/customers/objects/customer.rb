@@ -4,7 +4,7 @@ FactoryBot.define do
 
     id { Faker::Internet.uuid }
     owner { {entityId: Faker::Internet.uuid} }
-    authorized { {entityId: Faker::Internet.uuid} }
+    authorized { [{entityId: Faker::Internet.uuid}] }
     contracts { [association(:customers_objects_contract)] }
   end
 end

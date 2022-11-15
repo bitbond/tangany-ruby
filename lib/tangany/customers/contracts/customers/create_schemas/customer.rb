@@ -13,7 +13,7 @@ module Tangany
                   required(:owner).hash do
                     required(:entityId).filled(:string)
                   end
-                  required(:authorized).hash do
+                  required(:authorized).array(:hash) do
                     required(:entityId).filled(:string)
                   end
                   required(:contracts).array(CreateSchemas::Contract.schema)

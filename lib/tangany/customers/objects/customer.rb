@@ -5,7 +5,7 @@ module Tangany
       attribute :owner do
         attribute :entityId, Types::String
       end
-      attribute :authorized do
+      attribute :authorized, Types::Array do
         attribute :entityId, Types::String
       end
       attribute :contracts, Types::Array.of(Contract)
