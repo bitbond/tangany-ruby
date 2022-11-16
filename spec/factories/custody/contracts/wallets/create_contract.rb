@@ -6,7 +6,7 @@ FactoryBot.define do
     useHsm { Faker::Boolean.boolean }
     tags do
       [{
-        tag1: Faker::Lorem.characters(number: 256)
+        tag1: Faker::Lorem.word
       }]
     end
   end
