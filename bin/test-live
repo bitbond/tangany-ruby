@@ -25,6 +25,7 @@ rescue Tangany::RequestError => e
 end
 
 begin
+  custody_client = Tangany::Custody::Client.new
   customers_client = Tangany::Customers::Client.new
 
   puts "Preparing data..."
@@ -49,6 +50,12 @@ begin
         symbolize_names: true
       )
     },
+    wallet: {
+      create: JSON.parse(
+        File.read("spec/fixtures/generated/inputs/custody/wallets/create/valid_input.json"),
+        symbolize_names: true
+      )
+    },
     wallet_link: {
       create: JSON.parse(
         File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
@@ -59,6 +66,7 @@ begin
   ids = {
     customer: inputs[:customer][:create][:id],
     natural_person: inputs[:natural_person][:create][:id],
+    wallet: inputs[:wallet][:create][:wallet],
     wallet_link: inputs[:wallet_link][:create][:id]
   }
   inputs[:customer][:create][:owner][:entityId] = ids[:natural_person]
@@ -72,6 +80,7 @@ begin
   puts "\tUsing these IDs:"
   puts "\t\t\e[36mCustomer: \e[1m#{ids[:customer]}\e[0m"
   puts "\t\t\e[36mNatural person: \e[1m#{ids[:natural_person]}\e[0m"
+  puts "\t\t\e[36mWallet: \e[1m#{ids[:wallet]}\e[0m"
   puts "\t\t\e[36mWallet link: \e[1m#{ids[:wallet_link]}\e[0m"
 
   puts "Running tests..."
@@ -108,6 +117,10 @@ begin
   customer = customers_client.customers.update(ids[:customer], inputs[:customer][:update])
   raise "Customer update failed" unless customer.is_a?(Tangany::Customers::Customer)
 
+  puts "\tCreating wallet..."
+  wallet = custody_client.wallets.create(inputs[:wallet][:create])
+  raise "Wallet creation failed" unless wallet.is_a?(Tangany::Custody::Wallet)
+
   puts "\tCreating wallet link..."
   wallet_link = customers_client.wallet_links.create(inputs[:wallet_link][:create])
   raise "Wallet link creation failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
@@ -127,6 +140,9 @@ ensure
 
   puts "\tDeleting wallet link..."
   safe_not_found { customers_client.wallet_links.delete(ids[:wallet_link]) }
+
+  puts "\tDeleting wallet..."
+  safe_not_found { custody_client.wallets.delete(ids[:wallet]) }
 
   puts "\tDeleting customer..."
   safe_not_found { customers_client.customers.delete(ids[:customer]) }
