@@ -50,7 +50,7 @@ module Tangany
         # paginated
         wallets = Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
           id = File.basename(file, ".json")
-          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+          next unless id.match?(/^wallet-/)
 
           id
         end.compact.sort
@@ -101,7 +101,7 @@ module Tangany
       def fetch_wallet_file_name
         Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
           id = File.basename(file, ".json")
-          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+          next unless id.match?(/^wallet-/)
 
           file
         end.compact.min

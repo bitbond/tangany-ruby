@@ -176,7 +176,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
   def fetch_wallet_id
     Dir.glob("spec/fixtures/generated/responses/custody/wallets/retrieve/*.json").map do |file|
       id = File.basename(file, ".json")
-      next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+      next unless id.match?(/^wallet-/)
 
       id
     end.compact.min
