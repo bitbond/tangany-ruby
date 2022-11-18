@@ -10,8 +10,12 @@ exit 1 unless answer == "y"
 require "bundler/setup"
 require "byebug"
 require "factory_bot"
+require "json"
 
 require "tangany"
+
+load("Rakefile")
+Rake::Task["regenerate_fixtures"].invoke
 
 Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")
 Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
@@ -29,7 +33,8 @@ begin
   custody_client = Tangany::Custody::Client.new
   customers_client = Tangany::Customers::Client.new
 
-  puts "Preparing data..."
+  puts
+  puts "== Preparing data ".ljust(80, "=")
   inputs = {
     customer: {
       create: JSON.parse(
@@ -78,78 +83,89 @@ begin
   inputs[:natural_person][:update][:id] = ids[:natural_person]
   inputs[:wallet_link][:create][:assignment][:customerId] = ids[:customer]
   inputs[:wallet_link][:create][:assetId] = "ETH"
-  puts "\tUsing these IDs:"
-  puts "\t\t\e[36mCustomer: \e[1m#{ids[:customer]}\e[0m"
-  puts "\t\t\e[36mNatural person: \e[1m#{ids[:natural_person]}\e[0m"
-  puts "\t\t\e[36mWallet: \e[1m#{ids[:wallet]}\e[0m"
-  puts "\t\t\e[36mWallet link: \e[1m#{ids[:wallet_link]}\e[0m"
+  puts " -> \e[36mCustomer: \e[1m#{ids[:customer]}\e[0m"
+  puts " -> \e[36mNatural person: \e[1m#{ids[:natural_person]}\e[0m"
+  puts " -> \e[36mWallet: \e[1m#{ids[:wallet]}\e[0m"
+  puts " -> \e[36mWallet link: \e[1m#{ids[:wallet_link]}\e[0m"
+  puts "== Data prepared ".ljust(80, "=")
 
-  puts "Running tests..."
+  puts
+  puts "== Running tests... ".ljust(80, "=")
 
-  puts "\tCreating natural person..."
+  puts " -> Creating natural person..."
   natural_person = customers_client.natural_persons.create(inputs[:natural_person][:create])
   raise "Natural person creation failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
 
-  puts "\tListing natural persons..."
+  puts " -> Listing natural persons..."
   natural_persons = customers_client.natural_persons.list
   raise "Natural person not present in list" unless natural_persons.data.map(&:id).include?(ids[:natural_person])
 
-  puts "\tRetrieving natural person..."
+  puts " -> Retrieving natural person..."
   natural_person = customers_client.natural_persons.retrieve(ids[:natural_person])
   raise "Natural person retrieval failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
 
-  puts "\tUpdating natural person..."
+  puts " -> Updating natural person..."
   natural_person = customers_client.natural_persons.update(ids[:natural_person], inputs[:natural_person][:update])
   raise "Natural person update failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
 
-  puts "\tCreating customer..."
+  puts " -> Creating customer..."
   customer = customers_client.customers.create(inputs[:customer][:create])
   raise "Customer creation failed" unless customer.is_a?(Tangany::Customers::Customer)
 
-  puts "\tListing customers..."
+  puts " -> Listing customers..."
   customers = customers_client.customers.list
   raise "Customer not present in list" unless customers.data.map(&:id).include?(ids[:customer])
 
-  puts "\tRetrieving customer..."
+  puts " -> Retrieving customer..."
   customer = customers_client.customers.retrieve(ids[:customer])
   raise "Customer retrieval failed" unless customer.is_a?(Tangany::Customers::Customer)
 
-  puts "\tUpdating customer..."
+  puts " -> Updating customer..."
   customer = customers_client.customers.update(ids[:customer], inputs[:customer][:update])
   raise "Customer update failed" unless customer.is_a?(Tangany::Customers::Customer)
 
-  puts "\tCreating wallet..."
+  puts " -> Creating wallet..."
   wallet = custody_client.wallets.create(inputs[:wallet][:create])
   raise "Wallet creation failed" unless wallet.is_a?(Tangany::Custody::Wallet)
 
-  puts "\tCreating wallet link..."
-  # TODO: create wallet link through a wallet name
-  # TODO: create wallet link through an address
+  puts " -> Creating wallet link with address value..."
   wallet_link = customers_client.wallet_links.create(inputs[:wallet_link][:create])
   raise "Wallet link creation failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
 
-  puts "\tListing wallet links..."
+  puts " -> Creating wallet link with wallet value..."
+  customers_client.wallet_links.delete(ids[:wallet_link])
+  inputs[:wallet_link][:create].delete(:address)
+  inputs[:wallet_link][:create][:wallet] = ids[:wallet]
+  wallet_link = customers_client.wallet_links.create(inputs[:wallet_link][:create])
+  raise "Wallet link creation failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
+
+  puts " -> Listing wallet links..."
   wallet_links = customers_client.wallet_links.list
   raise "Wallet link not present in list" unless wallet_links.data.map(&:id).include?(ids[:wallet_link])
 
-  puts "\tRetrieving wallet link..."
+  puts " -> Retrieving wallet link..."
   wallet_link = customers_client.wallet_links.retrieve(ids[:wallet_link])
   raise "Wallet link retrieval failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
+
+  puts "== Tests run... ".ljust(80, "=")
 rescue => e
   puts e.message
   exit 1
 ensure
-  puts "Cleaning up..."
+  puts
+  puts "== Cleaning up... ".ljust(80, "=")
 
-  puts "\tDeleting wallet link..."
+  puts " -> Deleting wallet link..."
   safe_not_found { customers_client.wallet_links.delete(ids[:wallet_link]) }
 
-  puts "\tDeleting wallet..."
+  puts " -> Deleting wallet..."
   safe_not_found { custody_client.wallets.delete(ids[:wallet]) }
 
-  puts "\tDeleting customer..."
+  puts " -> Deleting customer..."
   safe_not_found { customers_client.customers.delete(ids[:customer]) }
 
-  puts "\tDeleting natural person..."
+  puts " -> Deleting natural person..."
   safe_not_found { customers_client.natural_persons.delete(ids[:natural_person]) }
+
+  puts "== Cleaned ".ljust(80, "=")
 end

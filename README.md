@@ -373,7 +373,7 @@ rspec
 
 Fixtures will be regenerated automatically each time you run the tests.
 
-It is also possible to run a test suite against the live API. To do so, you need to run at least once the `rspec` command before.
+It is also possible to run a test suite against the live API.
 
 > :warning: Be sure to set environment variables **not to production values** before running the following command!
 

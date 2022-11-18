@@ -23,7 +23,7 @@ end
 desc "Regenerates the fixtures"
 task :regenerate_fixtures do
   puts
-  puts "== Regenerating customers fixtures ".ljust(80, "=")
+  puts "== Regenerating fixtures ".ljust(80, "=")
 
   # Customers API
 
@@ -128,4 +128,6 @@ task :regenerate_fixtures do
 
   puts " -> Regenerating responses/custody/wallets/delete"
   Tangany::Custody::WalletsResponsesGenerator.new.delete
+
+  puts "== Fixtures regenerated ".ljust(80, "=")
 end
