@@ -1,30 +1,20 @@
 RSpec.describe(Tangany::Customers::Contracts::Customers::Update) do
-  subject(:to_safe_params) { described_class.new.to_safe_params!(params) }
+  subject(:to_safe_params!) { described_class.new.to_safe_params!(params) }
 
   describe "#to_safe_params!" do
-    let(:params) { {} }
+    let(:params) do
+      JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
+        symbolize_names: true
+      )
+    end
 
-    context "with the person.pep.source and the person.pep.reason param" do
-      let(:params) { super().deep_merge(person: {pep: {source: Faker::Lorem.sentence, reason: Faker::Lorem.sentence}}) }
+    it { expect(to_safe_params!).to(eq(params)) }
 
-      context "with the person.pep.isExposed param set to `true`" do
-        let(:params) { super().deep_merge(person: {pep: {isExposed: true}}) }
+    context "with invalid params" do
+      let(:params) { super().merge(contracts: []) }
 
-        it "returns the params" do
-          expect(to_safe_params).to eq(params)
-        end
-      end
-
-      context "with the isExposed param set to `false`" do
-        let(:params) { super().deep_merge(person: {pep: {isExposed: false}}) }
-
-        it "raises an ArgumentError" do
-          expect { to_safe_params }.to raise_error(Tangany::InputError, {person: {pep: {
-            source: ["should be specified only if `person.pep.isExposed` is true"],
-            reason: ["should be specified only if `person.pep.isExposed` is true"]
-          }}}.to_json)
-        end
-      end
+      it { expect { to_safe_params! }.to(raise_error(Tangany::InputError).with_message(/"contracts":\["must contain at least one contract"\]/)) }
     end
   end
 end

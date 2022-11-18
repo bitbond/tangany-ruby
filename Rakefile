@@ -1,5 +1,6 @@
 require "byebug"
 require "bundler/gem_tasks"
+require "factory_bot"
 require "rspec/core/rake_task"
 
 require_relative "spec/generators"
@@ -22,12 +23,43 @@ end
 desc "Regenerates the fixtures"
 task :regenerate_fixtures do
   puts
-  puts "== Regenerating customers fixtures ".ljust(80, "=")
+  puts "== Regenerating fixtures ".ljust(80, "=")
 
-  # Customers
+  # Customers API
+
+  ## Natural persons
+
+  puts " -> Regenerating responses/customers/natural_persons/retrieve"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating inputs/customers/natural_persons/list"
+  Tangany::Customers::NaturalPersonsInputsGenerator.new.list
+
+  puts " -> Regenerating responses/customers/natural_persons/list"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.list
+
+  puts " -> Regenerating inputs/customers/natural_persons/create"
+  Tangany::Customers::NaturalPersonsInputsGenerator.new.create
+
+  puts " -> Regenerating responses/customers/natural_persons/create"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.create
+
+  puts " -> Regenerating inputs/customers/natural_persons/update"
+  Tangany::Customers::NaturalPersonsInputsGenerator.new.update
+
+  puts " -> Regenerating responses/customers/natural_persons/update"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.update
+
+  puts " -> Regenerating responses/customers/natural_persons/delete"
+  Tangany::Customers::NaturalPersonsResponsesGenerator.new.delete
+
+  ## Customers
 
   puts " -> Regenerating responses/customers/customers/retrieve"
   Tangany::Customers::CustomersResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating inputs/customers/customers/list"
+  Tangany::Customers::CustomersInputsGenerator.new.list
 
   puts " -> Regenerating responses/customers/customers/list"
   Tangany::Customers::CustomersResponsesGenerator.new.list
@@ -47,10 +79,13 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/customers/delete"
   Tangany::Customers::CustomersResponsesGenerator.new.delete
 
-  # Wallet links
+  ## Wallet links
 
   puts " -> Regenerating responses/customers/wallet_links/retrieve"
   Tangany::Customers::WalletLinksResponsesGenerator.new.retrieve
+
+  puts " -> Regenerating inputs/customers/wallet-links/list"
+  Tangany::Customers::WalletLinksInputsGenerator.new.list
 
   puts " -> Regenerating responses/customers/wallet_links/list"
   Tangany::Customers::WalletLinksResponsesGenerator.new.list
@@ -61,7 +96,17 @@ task :regenerate_fixtures do
   puts " -> Regenerating responses/customers/wallet_links/create"
   Tangany::Customers::WalletLinksResponsesGenerator.new.create
 
-  # Custody
+  puts " -> Regenerating responses/customers/wallet_links/delete"
+  Tangany::Customers::WalletLinksResponsesGenerator.new.delete
+
+  # Custody API
+
+  ## Wallet statuses
+
+  puts " -> Regenerating responses/custody/wallet_statuses/retrieve"
+  Tangany::Custody::WalletStatusesResponsesGenerator.new.retrieve
+
+  ## Wallets
 
   puts " -> Regenerating responses/custody/wallets/retrieve"
   Tangany::Custody::WalletsResponsesGenerator.new.retrieve
@@ -83,4 +128,6 @@ task :regenerate_fixtures do
 
   puts " -> Regenerating responses/custody/wallets/delete"
   Tangany::Custody::WalletsResponsesGenerator.new.delete
+
+  puts "== Fixtures regenerated ".ljust(80, "=")
 end

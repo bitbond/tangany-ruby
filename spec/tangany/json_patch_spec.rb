@@ -15,25 +15,19 @@ RSpec.describe Tangany::JsonPatch do
     context "with an invalid old_hash" do
       let(:old_hash) { "foo" }
 
-      it "raises an ArgumentError" do
-        expect { json_patch }.to raise_error(ArgumentError, "Old hash must be a Hash")
-      end
+      it { expect { json_patch }.to raise_error(ArgumentError, "Old hash must be a Hash") }
     end
 
     context "with an invalid new_hash" do
       let(:new_hash) { "foo" }
 
-      it "raises an ArgumentError" do
-        expect { json_patch }.to raise_error(ArgumentError, "New hash must be a Hash")
-      end
+      it { expect { json_patch }.to raise_error(ArgumentError, "New hash must be a Hash") }
     end
 
     context "with an invalid prefix" do
       let(:prefix) { 42 }
 
-      it "raises an ArgumentError" do
-        expect { json_patch }.to raise_error(ArgumentError, "Prefix must be a String")
-      end
+      it { expect { json_patch }.to raise_error(ArgumentError, "Prefix must be a String") }
     end
   end
 
@@ -42,9 +36,7 @@ RSpec.describe Tangany::JsonPatch do
       json_patch.generate
     end
 
-    it "returns an array of operations" do
-      expect(json_patch.operations.sort_by { |op| op[:path] }).to eq(operations.sort_by { |op| op[:path] })
-    end
+    it { expect(json_patch.operations.sort_by { |op| op[:path] }).to eq(operations.sort_by { |op| op[:path] }) }
   end
 
   describe "to_json" do
@@ -52,8 +44,6 @@ RSpec.describe Tangany::JsonPatch do
       json_patch.generate
     end
 
-    it "returns a JSON string" do
-      expect(json_patch.to_json).to eq(json_patch.operations.to_json)
-    end
+    it { expect(json_patch.to_json).to eq(json_patch.operations.to_json) }
   end
 end

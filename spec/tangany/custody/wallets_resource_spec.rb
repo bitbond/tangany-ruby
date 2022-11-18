@@ -26,18 +26,14 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
       end
       let(:fixture) { "wallets/create/created" }
 
-      it "creates a wallet" do
-        expect(wallet).to(be_a(Tangany::Custody::Wallet))
-      end
+      it { expect(wallet).to(be_a(Tangany::Custody::Wallet)) }
     end
 
     context "with an invalid payload" do
       let(:input) { {foo: :bar} }
       let(:fixture) { "wallets/create/created" }
 
-      it "raises a Dry::Struct::Error" do
-        expect { wallet }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
-      end
+      it { expect { wallet }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/)) }
     end
 
     context "with a conflicting payload" do
@@ -50,12 +46,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
       let(:fixture) { "wallets/create/conflicting" }
       let(:status) { 409 }
 
-      it "raises an error" do
-        expect { wallet }.to(
-          raise_error(Tangany::RequestError)
-          .with_message(/Won't overwrite existing wallet with name [^"]+/)
-        )
-      end
+      it { expect { wallet }.to(raise_error(Tangany::RequestError).with_message(/Won't overwrite existing wallet with name [^"]+/)) }
     end
   end
 
@@ -69,21 +60,14 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
     context "with a valid wallet" do
       let(:wallet_id) { fetch_wallet_id }
 
-      it "returns a wallet recovery object" do
-        expect(wallet_recovery).to(be_a(Tangany::Custody::WalletRecovery))
-      end
+      it { expect(wallet_recovery).to(be_a(Tangany::Custody::WalletRecovery)) }
     end
 
     context "with an invalid wallet" do
       let(:wallet_id) { "not_found" }
       let(:status) { 404 }
 
-      it "raises an error" do
-        expect { wallet_recovery }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("No wallet found for given name: #{wallet_id}")
-        )
-      end
+      it { expect { wallet_recovery }.to(raise_error(Tangany::RequestError).with_message("[404] No wallet found for given name: #{wallet_id}")) }
     end
   end
 
@@ -99,25 +83,11 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
     let(:tags) { [:tag] }
     let(:xtags) { [:xtag] }
 
-    it "returns a collection" do
-      expect(wallets).to(be_a(Tangany::Collection))
-    end
-
-    it "returns a collection of wallets" do
-      expect(wallets.data.first.class).to(eq(Tangany::Custody::Wallet))
-    end
-
-    it "has a total of 3" do
-      expect(wallets.total).to(eq(3))
-    end
-
-    it "has a next path" do
-      expect(wallets.next_path).to(eq("/wallets?index=2&limit=1&sort=#{sort}"))
-    end
-
-    it "has a previous path" do
-      expect(wallets.previous_path).to(eq("/wallets?index=0&limit=1&sort=#{sort}"))
-    end
+    it { expect(wallets).to(be_a(Tangany::Collection)) }
+    it { expect(wallets.data.first.class).to(eq(Tangany::Custody::Wallet)) }
+    it { expect(wallets.total).to(eq(3)) }
+    it { expect(wallets.next_path).to(eq("/wallets?index=2&limit=1&sort=#{sort}")) }
+    it { expect(wallets.previous_path).to(eq("/wallets?index=0&limit=1&sort=#{sort}")) }
   end
 
   describe "#retrieve" do
@@ -129,21 +99,14 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
     context "with a valid wallet" do
       let(:wallet_id) { fetch_wallet_id }
 
-      it "returns a Wallet" do
-        expect(wallet).to(be_a(Tangany::Custody::Wallet))
-      end
+      it { expect(wallet).to(be_a(Tangany::Custody::Wallet)) }
     end
 
     context "with an invalid wallet" do
       let(:wallet_id) { "not_found" }
       let(:status) { 404 }
 
-      it "raises an error" do
-        expect { wallet }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("No wallet found for given name: #{wallet_id}")
-        )
-      end
+      it { expect { wallet }.to(raise_error(Tangany::RequestError).with_message("[404] No wallet found for given name: #{wallet_id}")) }
     end
   end
 
@@ -190,28 +153,13 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
           )
         end
 
-        it "updates the wallet" do
-          expect(wallet).to(be_a(Tangany::Custody::Wallet))
-        end
+        it { expect(wallet).to(be_a(Tangany::Custody::Wallet)) }
       end
 
       context "with an invalid payload" do
         let(:params) { {wallet: wallet_id, foo: :bar} }
 
-        it "raises a Dry::Struct::Error" do
-          expect { wallet }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
-        end
-      end
-
-      context "with a conflicting If-Match precondition" do
-        let(:status) { 412 }
-
-        it "raises an error" do
-          expect { wallet }.to(
-            raise_error(Tangany::RequestError)
-            .with_message("Mid-air edit collision detected")
-          )
-        end
+        it { expect { wallet }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/)) }
       end
     end
 
@@ -219,12 +167,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
       let(:wallet_id) { "not_found" }
       let(:status) { 404 }
 
-      it "raises an error" do
-        expect { wallet }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("No wallet found for given name: #{wallet_id}")
-        )
-      end
+      it { expect { wallet }.to(raise_error(Tangany::RequestError).with_message("[404] No wallet found for given name: #{wallet_id}")) }
     end
   end
 
@@ -233,7 +176,7 @@ RSpec.describe(Tangany::Custody::WalletsResource) do
   def fetch_wallet_id
     Dir.glob("spec/fixtures/generated/responses/custody/wallets/retrieve/*.json").map do |file|
       id = File.basename(file, ".json")
-      next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+      next unless id.match?(/^wallet-/)
 
       id
     end.compact.min

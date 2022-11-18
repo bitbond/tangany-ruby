@@ -33,7 +33,7 @@ module Tangany
         wallet_id = File.basename(fetch_wallet_file_name, ".json")
         File.write("#{responses_root_folder}/delete/#{wallet_id}.json", JSON.pretty_generate({
           recoveryId: wallet_id,
-          scheduledPurgeDate: (Time.now + 90 * 24 * 60 * 60).utc.iso8601
+          scheduledPurgeDate: (Time.now + 90 * 24 * 60 * 60).utc.iso8601(3)
         }))
 
         # invalid wallet
@@ -50,7 +50,7 @@ module Tangany
         # paginated
         wallets = Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
           id = File.basename(file, ".json")
-          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+          next unless id.match?(/^wallet-/)
 
           id
         end.compact.sort
@@ -101,7 +101,7 @@ module Tangany
       def fetch_wallet_file_name
         Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
           id = File.basename(file, ".json")
-          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+          next unless id.match?(/^wallet-/)
 
           file
         end.compact.min

@@ -19,11 +19,10 @@ module Tangany
         FileUtils.cp(file, "#{responses_root_folder}/create/created.json")
 
         # conflicting
-        customer_id = JSON.parse(File.read("#{inputs_root_folder}/create/valid_input.json"))["id"]
         File.write("#{responses_root_folder}/create/conflicting.json", JSON.pretty_generate({
-          statusCode: 409,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"#{customer_id}\" already exists."
+          message: "Customer with given ID already exists.",
+          statusCode: 409
         }))
       end
 
@@ -44,16 +43,15 @@ module Tangany
         cleanup("list")
 
         # empty
-        File.write("#{responses_root_folder}/list/empty.json", JSON.pretty_generate(list_response_from_customer_ids([])))
+        File.write("#{responses_root_folder}/list/empty.json", JSON.pretty_generate(list_response_from_customers([])))
 
         # paginated
-        customer_ids = Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
-          id = File.basename(file, ".json")
-          next unless id.match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
+        customers = Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
+          next unless File.basename(file, ".json").match?(/[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}/i)
 
-          id
-        end.compact.sort
-        File.write("#{responses_root_folder}/list/paginated.json", JSON.pretty_generate(list_response_from_customer_ids(customer_ids)))
+          JSON.parse(File.read(file))
+        end.compact.sort_by { |a| a["id"] }
+        File.write("#{responses_root_folder}/list/paginated.json", JSON.pretty_generate(list_response_from_customers(customers)))
       end
 
       def retrieve
@@ -68,9 +66,6 @@ module Tangany
 
         # invalid customer
         File.write("#{responses_root_folder}/retrieve/not_found.json", JSON.pretty_generate(not_found_response))
-
-        # deleted customer
-        File.write("#{responses_root_folder}/retrieve/deleted.json", JSON.pretty_generate(deleted_response))
       end
 
       def update
@@ -92,14 +87,6 @@ module Tangany
         Dir.glob("#{responses_root_folder}/#{folder}/*.json").each { |file| File.delete(file) }
       end
 
-      def deleted_response
-        {
-          statusCode: 404,
-          activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"deleted\" has been deleted"
-        }
-      end
-
       def fetch_customer_file_name
         Dir.glob("#{responses_root_folder}/retrieve/*.json").map do |file|
           id = File.basename(file, ".json")
@@ -111,28 +98,20 @@ module Tangany
 
       def not_found_response
         {
-          statusCode: 404,
           activityId: "5911c614-219c-41df-a350-50c4a50e4a6d",
-          message: "Customer with ID \"not_found\" was not found"
+          message: "Resource not found",
+          statusCode: 404
         }
       end
 
-      def list_response_from_customer_ids(customer_ids)
+      def list_response_from_customers(customers)
         {
-          total: customer_ids.size,
-          results: (customer_ids[1..1] || []).map do |id|
-            {
-              id: id,
-              environment: "testing",
-              _links: {
-                self: "/customers/#{id}"
-              }
-            }
-          end,
-          _links: {
-            next: customer_ids.present? ? "/customers?start=2&limit=1&sort=asc" : nil,
-            previous: customer_ids.present? ? "/customers?start=0&limit=1&sort=asc" : nil
-          }
+          nextPageToken: (customers.size > 1) ? "foo" : nil,
+          pageInfo: {
+            totalResults: customers.size,
+            resultsPerPage: 100
+          },
+          items: (customers[1..1] || []).map.to_a
         }
       end
     end

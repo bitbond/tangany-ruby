@@ -1,12 +1,12 @@
 module Tangany
   module Customers
     class Pep < Object
+      attribute :checkDate, Types::DateTime
       attribute :isExposed, Types::Bool
-      attribute :checkDate, Types::Date
-      attribute :isSanctioned?, Types::Bool
+      attribute? :source, Types::String.optional
+      attribute? :reason, Types::String.optional
 
-      censored :source, :reason
-      to_date :checkDate
+      to_datetime :checkDate
     end
   end
 end

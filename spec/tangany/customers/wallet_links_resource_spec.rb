@@ -6,9 +6,7 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
   let(:stubbed_response) { stub_customers_response(fixture: fixture, status: status) }
   let(:stubs) { Faraday::Adapter::Test::Stubs.new }
 
-  before do
-    stub_customers_request(stubs, path, method: method, body: body, response: stubbed_response)
-  end
+  before { stub_customers_request(stubs, path, method: method, body: body, response: stubbed_response) }
 
   describe "#create" do
     subject(:wallet_link) { client.wallet_links.create(**input) }
@@ -26,44 +24,27 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     context "with a valid payload" do
       let(:fixture) { "wallet_links/create/created" }
 
-      it "creates a wallet link" do
-        expect(wallet_link).to(be_a(Tangany::Customers::WalletLink))
-      end
-    end
+      it { expect(wallet_link).to(be_a(Tangany::Customers::WalletLink)) }
 
-    context "with an invalid payload" do
-      let(:input) { {foo: :bar} }
-      let(:fixture) { "wallet_links/create/created" }
-      let(:status) { 400 }
+      # TODO: derive wallet address from secp256k1 public key instead of using the Custody API
+      context "with a wallet value" do
+        let(:custody_client) { Tangany::Custody::Client.new(adapter: :test, stubs: custody_stubs) }
+        let(:custody_fixture) { "wallet_statuses/retrieve/#{input[:wallet]}" }
+        let(:custody_stubs) { Faraday::Adapter::Test::Stubs.new }
+        let(:custody_stubbed_response) { stub_custody_response(fixture: custody_fixture, status: 200) }
 
-      it "raises a Dry::Struct::Error" do
-        expect { wallet_link }.to(raise_error(Tangany::InputError).with_message(/"foo":\["is not allowed"\]/))
-      end
-    end
+        before do
+          input[:wallet] = "wal_123456789"
+          original_address = input.delete(:address)
+          allow(Tangany::Custody::Client).to(receive(:new).and_return(custody_client))
+          stub_custody_request(custody_stubs, "eth/wallet/#{input[:wallet]}", method: "get", response: custody_stubbed_response)
+          hash = input.dup
+          hash.delete(:wallet)
+          hash[:address] = original_address
+          stub_customers_request(stubs, path, method: method, body: hash.to_json, response: stubbed_response)
+        end
 
-    context "with a not existing wallet" do
-      let(:fixture) { "wallet_links/create/not_existing_wallet" }
-      let(:status) { 400 }
-      let(:wallet_id) { "not-existing-wallet-id" }
-
-      it "raises a Dry::Struct::Error" do
-        expect { wallet_link }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("Wallet #{input[:vaultWalletId]} was not found in vault #{input[:vaultUrl]}")
-        )
-      end
-    end
-
-    context "with a not existing customer" do
-      let(:fixture) { "wallet_links/create/not_existing_customer" }
-      let(:status) { 404 }
-      let(:wallet_id) { "not-existing-wallet-id" }
-
-      it "raises a Dry::Struct::Error" do
-        expect { wallet_link }.to(
-          raise_error(Tangany::RequestError)
-          .with_message(/Customer with ID .+ was not found/)
-        )
+        it { expect(wallet_link).to(be_a(Tangany::Customers::WalletLink)) }
       end
     end
 
@@ -71,43 +52,44 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       let(:fixture) { "wallet_links/create/conflicting" }
       let(:status) { 409 }
 
-      it "raises an error" do
-        expect { wallet_link }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("A wallet link with the provided wallet ID and vault url already exists")
-        )
-      end
+      it { expect { wallet_link }.to(raise_error(Tangany::RequestError).with_message("[409] A wallet link for address and given asset already exists")) }
+    end
+  end
+
+  describe "#delete" do
+    subject(:response) { client.wallet_links.delete(wallet_link_id) }
+
+    let(:fixture) { "wallet_links/delete/#{wallet_link_id}" }
+    let(:method) { :delete }
+    let(:path) { "wallet-links/#{wallet_link_id}" }
+
+    context "with a valid wallet link ID" do
+      let(:wallet_link_id) { fetch_wallet_link_id }
+
+      it { expect(response.body).to(eq({})) }
+      it { expect { response }.not_to(raise_error) }
+    end
+
+    context "with an invalid wallet link ID" do
+      let(:wallet_link_id) { "not_found" }
+      let(:status) { 404 }
+
+      it { expect { response }.to(raise_error(Tangany::RequestError).with_message("[404] Resource not found")) }
     end
   end
 
   describe "#list" do
-    subject(:wallet_links) { client.wallet_links.list(limit: limit, sort: sort, start: start) }
+    subject(:wallet_links) { client.wallet_links.list(limit: limit, sort: sort) }
 
     let(:fixture) { "wallet_links/list/paginated" }
     let(:limit) { 1 }
-    let(:path) { "wallet-links?limit=#{limit}&sort=#{sort}&start=#{start}" }
-    let(:start) { 1 }
+    let(:path) { "wallet-links?limit=#{limit}&sort=#{sort}" }
     let(:sort) { "asc" }
 
-    it "returns a collection" do
-      expect(wallet_links).to(be_a(Tangany::Collection))
-    end
-
-    it "returns a collection of wallet_links" do
-      expect(wallet_links.data.first.class).to(eq(Tangany::Customers::WalletLink))
-    end
-
-    it "has a total of 3" do
-      expect(wallet_links.total).to(eq(3))
-    end
-
-    it "has a next path" do
-      expect(wallet_links.next_path).to(eq("/wallet-links?start=2&limit=1&sort=asc"))
-    end
-
-    it "has a previous path" do
-      expect(wallet_links.previous_path).to(eq("/wallet-links?start=0&limit=1&sort=asc"))
-    end
+    it { expect(wallet_links).to(be_a(Tangany::Collection)) }
+    it { expect(wallet_links.data.first.class).to(eq(Tangany::Customers::WalletLink)) }
+    it { expect(wallet_links.total).to(eq(3)) }
+    it { expect(wallet_links.next_page_token).to(eq("foo")) }
   end
 
   describe "#retrieve" do
@@ -119,21 +101,14 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
     context "with a valid wallet link ID" do
       let(:wallet_link_id) { fetch_wallet_link_id }
 
-      it "returns a WalletLink" do
-        expect(wallet_link).to(be_a(Tangany::Customers::WalletLink))
-      end
+      it { expect(wallet_link).to(be_a(Tangany::Customers::WalletLink)) }
     end
 
     context "with an invalid wallet link ID" do
       let(:wallet_link_id) { "not_found" }
       let(:status) { 404 }
 
-      it "raises an error" do
-        expect { wallet_link }.to(
-          raise_error(Tangany::RequestError)
-          .with_message("Wallet with ID \"#{wallet_link_id}\" was not found")
-        )
-      end
+      it { expect { wallet_link }.to(raise_error(Tangany::RequestError).with_message("[404] Resource not found")) }
     end
   end
 

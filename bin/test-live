@@ -1,0 +1,170 @@
+#!/usr/bin/env ruby
+
+puts "This suite will run tests against the \e[1mlive Tangany's API\e[0m."
+puts "\e[36mBe sure to set environment variables with \e[1mtesting values\e[0m\e[36m before running this suite.\e[0m"
+print "Do you want to continue? [y/N] "
+answer = gets.chomp
+
+exit 1 unless answer == "y"
+
+require "bundler/setup"
+require "byebug"
+require "factory_bot"
+
+require "tangany"
+
+load("Rakefile")
+Rake::Task["regenerate_fixtures"].invoke
+
+Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")
+Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
+Tangany.environment = "testnet"
+Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
+Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
+
+def safe_not_found(&block)
+  yield
+rescue Tangany::RequestError => e
+  raise e unless e.status_code == 404
+end
+
+begin
+  custody_client = Tangany::Custody::Client.new
+  customers_client = Tangany::Customers::Client.new
+
+  puts
+  puts "== Preparing data ".ljust(80, "=")
+  inputs = {
+    customer: {
+      create: JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/customers/create/valid_input.json"),
+        symbolize_names: true
+      ),
+      update: JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/customers/update/valid_input.json"),
+        symbolize_names: true
+      )
+    },
+    natural_person: {
+      create: JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/natural_persons/create/valid_input.json"),
+        symbolize_names: true
+      ),
+      update: JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/natural_persons/update/valid_input.json"),
+        symbolize_names: true
+      )
+    },
+    wallet: {
+      create: JSON.parse(
+        File.read("spec/fixtures/generated/inputs/custody/wallets/create/valid_input.json"),
+        symbolize_names: true
+      )
+    },
+    wallet_link: {
+      create: JSON.parse(
+        File.read("spec/fixtures/generated/inputs/customers/wallet_links/create/valid_input.json"),
+        symbolize_names: true
+      )
+    }
+  }
+  ids = {
+    customer: inputs[:customer][:create][:id],
+    natural_person: inputs[:natural_person][:create][:id],
+    wallet: inputs[:wallet][:create][:wallet],
+    wallet_link: inputs[:wallet_link][:create][:id]
+  }
+  inputs[:customer][:create][:owner][:entityId] = ids[:natural_person]
+  inputs[:customer][:create][:authorized][0][:entityId] = ids[:natural_person]
+  inputs[:customer][:update][:id] = ids[:customer]
+  inputs[:customer][:update][:owner][:entityId] = ids[:natural_person]
+  inputs[:customer][:update][:authorized][0][:entityId] = ids[:natural_person]
+  inputs[:natural_person][:update][:id] = ids[:natural_person]
+  inputs[:wallet_link][:create][:assignment][:customerId] = ids[:customer]
+  inputs[:wallet_link][:create][:assetId] = "ETH"
+  puts " -> \e[36mCustomer: \e[1m#{ids[:customer]}\e[0m"
+  puts " -> \e[36mNatural person: \e[1m#{ids[:natural_person]}\e[0m"
+  puts " -> \e[36mWallet: \e[1m#{ids[:wallet]}\e[0m"
+  puts " -> \e[36mWallet link: \e[1m#{ids[:wallet_link]}\e[0m"
+  puts "== Data prepared ".ljust(80, "=")
+
+  puts
+  puts "== Running tests... ".ljust(80, "=")
+
+  puts " -> Creating natural person..."
+  natural_person = customers_client.natural_persons.create(inputs[:natural_person][:create])
+  raise "Natural person creation failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
+
+  puts " -> Listing natural persons..."
+  natural_persons = customers_client.natural_persons.list
+  raise "Natural person not present in list" unless natural_persons.data.map(&:id).include?(ids[:natural_person])
+
+  puts " -> Retrieving natural person..."
+  natural_person = customers_client.natural_persons.retrieve(ids[:natural_person])
+  raise "Natural person retrieval failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
+
+  puts " -> Updating natural person..."
+  natural_person = customers_client.natural_persons.update(ids[:natural_person], inputs[:natural_person][:update])
+  raise "Natural person update failed" unless natural_person.is_a?(Tangany::Customers::NaturalPerson)
+
+  puts " -> Creating customer..."
+  customer = customers_client.customers.create(inputs[:customer][:create])
+  raise "Customer creation failed" unless customer.is_a?(Tangany::Customers::Customer)
+
+  puts " -> Listing customers..."
+  customers = customers_client.customers.list
+  raise "Customer not present in list" unless customers.data.map(&:id).include?(ids[:customer])
+
+  puts " -> Retrieving customer..."
+  customer = customers_client.customers.retrieve(ids[:customer])
+  raise "Customer retrieval failed" unless customer.is_a?(Tangany::Customers::Customer)
+
+  puts " -> Updating customer..."
+  customer = customers_client.customers.update(ids[:customer], inputs[:customer][:update])
+  raise "Customer update failed" unless customer.is_a?(Tangany::Customers::Customer)
+
+  puts " -> Creating wallet..."
+  wallet = custody_client.wallets.create(inputs[:wallet][:create])
+  raise "Wallet creation failed" unless wallet.is_a?(Tangany::Custody::Wallet)
+
+  puts " -> Creating wallet link with address value..."
+  wallet_link = customers_client.wallet_links.create(inputs[:wallet_link][:create])
+  raise "Wallet link creation failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
+
+  puts " -> Creating wallet link with wallet value..."
+  customers_client.wallet_links.delete(ids[:wallet_link])
+  inputs[:wallet_link][:create].delete(:address)
+  inputs[:wallet_link][:create][:wallet] = ids[:wallet]
+  wallet_link = customers_client.wallet_links.create(inputs[:wallet_link][:create])
+  raise "Wallet link creation failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
+
+  puts " -> Listing wallet links..."
+  wallet_links = customers_client.wallet_links.list
+  raise "Wallet link not present in list" unless wallet_links.data.map(&:id).include?(ids[:wallet_link])
+
+  puts " -> Retrieving wallet link..."
+  wallet_link = customers_client.wallet_links.retrieve(ids[:wallet_link])
+  raise "Wallet link retrieval failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
+
+  puts "== Tests run... ".ljust(80, "=")
+rescue => e
+  puts e.message
+  exit 1
+ensure
+  puts
+  puts "== Cleaning up... ".ljust(80, "=")
+
+  puts " -> Deleting wallet link..."
+  safe_not_found { customers_client.wallet_links.delete(ids[:wallet_link]) }
+
+  puts " -> Deleting wallet..."
+  safe_not_found { custody_client.wallets.delete(ids[:wallet]) }
+
+  puts " -> Deleting customer..."
+  safe_not_found { customers_client.customers.delete(ids[:customer]) }
+
+  puts " -> Deleting natural person..."
+  safe_not_found { customers_client.natural_persons.delete(ids[:natural_person]) }
+
+  puts "== Cleaned ".ljust(80, "=")
+end

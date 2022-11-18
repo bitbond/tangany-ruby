@@ -7,10 +7,9 @@ module Tangany
             class << self
               def schema
                 Dry::Schema.Params do
-                  required(:isSigned).filled(:bool)
-                  optional(:signedDate).maybe(:string, format?: Create::DATETIME_OPTIONAL_REGEXP)
-                  required(:isCancelled).filled(:bool)
-                  optional(:cancelledDate).maybe(:string, format?: Create::DATETIME_OPTIONAL_REGEXP)
+                  required(:type).filled(:string, included_in?: Tangany::Customers::Contract::ALLOWED_TYPES)
+                  required(:signedDate).filled(:string, format?: ApplicationContract::DATE_REGEX)
+                  optional(:cancelledDate).maybe(:string, format?: ApplicationContract::DATE_REGEX)
                 end
               end
             end

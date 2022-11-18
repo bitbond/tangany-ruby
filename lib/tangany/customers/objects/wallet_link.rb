@@ -1,11 +1,14 @@
 module Tangany
   module Customers
     class WalletLink < Object
+      ALLOWED_ASSET_IDS = Tangany.networks.keys.freeze
+
       attribute :id, Types::String
-      attribute? :type, Types::String
-      attribute? :vaultUrl, Types::String
-      attribute? :vaultWalletId, Types::String
-      attribute? :assignment, Types::Hash
+      attribute :address, Types::String
+      attribute :assetId, Types::String
+      attribute? :assignment do
+        attribute :customerId, Types::String
+      end
     end
   end
 end

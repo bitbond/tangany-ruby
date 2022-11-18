@@ -24,7 +24,7 @@ module Tangany
             safe_params = super(params)
             order = safe_params.delete(:order)
 
-            safe_params[:sort] = order + (safe_params[:sort] == "desc" ? "desc" : "") if order
+            safe_params[:sort] = order + ((safe_params[:sort] == "desc") ? "desc" : "") if order
             safe_params[:index] = safe_params.delete(:start) if safe_params[:start]
             safe_params[:tags] = safe_params[:tags].join(",") if safe_params[:tags]
             safe_params[:xtags] = safe_params[:xtags].join(",") if safe_params[:xtags]

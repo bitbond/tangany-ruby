@@ -1,12 +1,13 @@
 module Tangany
   module Customers
     class Contract < Object
-      attribute :isSigned, Types::Bool
-      attribute :signedDate, Types::DateTime.optional
-      attribute :isCancelled?, Types::Bool
-      attribute :cancelledDate?, Types::DateTime.optional
+      ALLOWED_TYPES = %w[standard].freeze
 
-      to_datetime :signedDate, :cancelledDate
+      attribute :type, Types::String
+      attribute :signedDate, Types::Date
+      attribute? :cancelledDate, Types::Date.optional
+
+      to_date :signedDate, :cancelledDate
     end
   end
 end

@@ -1,4 +1,6 @@
 require_relative "customers/customers_inputs_generator"
 require_relative "customers/customers_responses_generator"
+require_relative "customers/natural_persons_inputs_generator"
+require_relative "customers/natural_persons_responses_generator"
 require_relative "customers/wallet_links_inputs_generator"
 require_relative "customers/wallet_links_responses_generator"

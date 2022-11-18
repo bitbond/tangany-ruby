@@ -1,1 +1,2 @@
+require_relative "resources/wallet_statuses_resource"
 require_relative "resources/wallets_resource"
