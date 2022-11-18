@@ -14,6 +14,7 @@ require "tangany"
 
 Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")
 Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
+Tangany.ecosystem = "testnet"
 Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
 Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
 

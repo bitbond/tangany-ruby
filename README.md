@@ -44,6 +44,7 @@ The library needs to be configured with your account's secrets.
 require "tangany"
 Tangany.client_id = "..."
 Tangany.client_secret = "..."
+Tangany.ecosystem = "..." # mainnet or testnet
 Tangany.subscription = "..."
 Tangany.vault_url = "..."
 
@@ -235,46 +236,63 @@ response = customers_client.customers.delete("cus_123456789")
 
 ### Wallet links
 
+#### List wallet links
+
 ```ruby
-# list wallet links
 collection = customers_client.wallet_links.list(limit: 21, sort: "asc", pageToken: "foo")
+```
 
-# retrieve single wallet link
-wallet_link = customers_client.wallet_links.retrieve("wl_123456789")
+#### Create wallet link
 
-# create wallet link
+**With an address**
+
+```ruby
 wallet_link = customers_client.wallet_links.create(
   id: "wl_123456789",
-  type: "waas",
-  vaultUrl: "https://vault.example.com",
-  vaultWalletId: "wal_123456789",
+  address: "0x1234567890abcdef1234567890abcdef12345678",
+  assetId: "ETH",
   assignment: {
     customerId: "cus_123456789",
   }
 )
 ```
 
----
-
-### Custody API
+**With a wallet**
 
 ```ruby
-require "tangany"
-Tangany.client_id = "..."
-Tangany.client_secret = "..."
-Tangany.subscription = "..."
-Tangany.vault_url = "..."
+wallet_link = customers_client.wallet_links.create(
+  id: "wl_123456789",
+  wallet: "wal_123456789",
+  assetId: "ETH",
+  assignment: {
+    customerId: "cus_123456789",
+  }
+)
+```
 
-# initialize the client
-custody_client = Tangany::Custody::Client.new
+#### Retrieve wallet link
 
-# list wallets
+```ruby
+wallet_link = customers_client.wallet_links.retrieve("wl_123456789")
+```
+
+---
+
+## Custody API
+
+See [config/networks.json](config/networks.json) for the list of available networks.
+
+### Wallets
+
+#### List wallets
+
+```ruby
 collection = custody_client.wallets.list(limit: 21, order: "wallet", sort: "asc", start: 42, tags: { tag0: "tag 0", tag1: "tag 1" }, xtags: { tag2: "tag 2", tag3: "tag 3" })
+```
 
-# retrieve single wallet
-wallet = custody_client.wallets.retrieve("wal_123456789")
+#### Create wallet
 
-# create wallet
+```ruby
 wallet = custody_client.wallets.create(
   wallet: "wal_123456789",
   useHsm: false,
@@ -288,8 +306,17 @@ wallet = custody_client.wallets.create(
     tag9: "tag 9"
   }]
 )
+```
 
-# update wallet
+#### Retrieve wallet
+
+```ruby
+wallet = custody_client.wallets.retrieve("wal_123456789")
+```
+
+#### Update wallet
+
+```ruby
 wallet = custody_client.wallets.update(
   "wal_123456789",
   tags: [{
@@ -302,9 +329,20 @@ wallet = custody_client.wallets.update(
     tag9: "tag 9"
   }]
 )
+```
 
-# delete customer
+#### Delete wallet
+
+```ruby
 wallet_recovery = custody_client.customers.delete("wal_123456789")
+```
+
+### Wallet statuses
+
+#### Retrieve wallet status
+
+```ruby
+wallet_status = custody_client.wallet_statuses(assetId: "ETH").retrieve("wal_123456789")
 ```
 
 ---

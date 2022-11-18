@@ -1,34 +1,7 @@
 module Tangany
   module Customers
     class WalletLink < Object
-      ALLOWED_ASSET_IDS = %w[
-        AAVE
-        ADA
-        ALGO
-        BCH
-        BNB
-        BTC
-        CHZ
-        CRV
-        DOGE
-        DOT
-        ENJ
-        EOS
-        ETC
-        ETH
-        KSM
-        LINK
-        LTC
-        LUNA
-        MANA
-        MATIC
-        SOL
-        UNI
-        XLM
-        XRP
-        XTZ
-        YFI
-      ].freeze
+      ALLOWED_ASSET_IDS = Tangany.networks.keys.freeze
 
       attribute :id, Types::String
       attribute :address, Types::String

@@ -15,6 +15,7 @@ require "tangany"
 
 Tangany.client_id = ENV.fetch("TEST_TANGANY_CLIENT_ID", "test")
 Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
+Tangany.ecosystem = "testnet"
 Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
 Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
 
@@ -122,6 +123,8 @@ begin
   raise "Wallet creation failed" unless wallet.is_a?(Tangany::Custody::Wallet)
 
   puts "\tCreating wallet link..."
+  # TODO: create wallet link through a wallet name
+  # TODO: create wallet link through an address
   wallet_link = customers_client.wallet_links.create(inputs[:wallet_link][:create])
   raise "Wallet link creation failed" unless wallet_link.is_a?(Tangany::Customers::WalletLink)
 

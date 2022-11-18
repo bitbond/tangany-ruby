@@ -9,11 +9,19 @@ module Tangany
             config.validate_keys = true
 
             required(:id).filled(:string, max_size?: 40)
-            required(:address).filled(:string, format?: ApplicationContract::ETHEREUM_ADDRESS_REGEX)
+            # TODO: create wallet link through a wallet name
+            # TODO: create wallet link through an address
+            optional(:address).filled(:string, format?: ApplicationContract::ETHEREUM_ADDRESS_REGEX)
+            optional(:wallet).filled(:string)
             required(:assetId).filled(:string, included_in?: Tangany::Customers::WalletLink::ALLOWED_ASSET_IDS)
             optional(:assignment).hash do
               required(:customerId).filled(:string)
             end
+          end
+
+          rule do
+            key.failure("one ne of address or wallet must be present") if !values[:address] && !values[:wallet]
+            key.failure("only one of address or wallet must be present") if values[:address] && values[:wallet]
           end
         end
       end

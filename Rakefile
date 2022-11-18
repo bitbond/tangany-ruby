@@ -101,6 +101,11 @@ task :regenerate_fixtures do
 
   # Custody API
 
+  ## Wallet statuses
+
+  puts " -> Regenerating responses/custody/wallet_statuses/retrieve"
+  Tangany::Custody::WalletStatusesResponsesGenerator.new.retrieve
+
   ## Wallets
 
   puts " -> Regenerating responses/custody/wallets/retrieve"

@@ -1,0 +1,18 @@
+{
+  "ETH": {
+    "base_path": "eth",
+    "header": {
+      "name": "tangany-ethereum-network",
+      "mainnet": "infura",
+      "testnet": "goerli"
+    }
+  },
+  "MATIC": {
+    "base_path": "eth",
+    "header": {
+      "name": "tangany-ethereum-network",
+      "mainnet": "https://rpc-mainnet.maticvigil.com",
+      "testnet": "https://rpc-mumbai.maticvigil.com"
+    }
+  }
+}

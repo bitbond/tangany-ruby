@@ -25,6 +25,27 @@ RSpec.describe(Tangany::Customers::WalletLinksResource) do
       let(:fixture) { "wallet_links/create/created" }
 
       it { expect(wallet_link).to(be_a(Tangany::Customers::WalletLink)) }
+
+      # TODO: derive wallet address from secp256k1 public key instead of using the Custody API
+      context "with a wallet value" do
+        let(:custody_client) { Tangany::Custody::Client.new(adapter: :test, stubs: custody_stubs) }
+        let(:custody_fixture) { "wallet_statuses/retrieve/#{input[:wallet]}" }
+        let(:custody_stubs) { Faraday::Adapter::Test::Stubs.new }
+        let(:custody_stubbed_response) { stub_custody_response(fixture: custody_fixture, status: 200) }
+
+        before do
+          input[:wallet] = "wal_123456789"
+          original_address = input.delete(:address)
+          allow(Tangany::Custody::Client).to(receive(:new).and_return(custody_client))
+          stub_custody_request(custody_stubs, "eth/wallet/#{input[:wallet]}", method: "get", response: custody_stubbed_response)
+          hash = input.dup
+          hash.delete(:wallet)
+          hash[:address] = original_address
+          stub_customers_request(stubs, path, method: method, body: hash.to_json, response: stubbed_response)
+        end
+
+        it { expect(wallet_link).to(be_a(Tangany::Customers::WalletLink)) }
+      end
     end
 
     context "with a conflicting payload" do
