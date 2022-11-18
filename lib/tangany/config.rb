@@ -1,3 +1,5 @@
+require "json"
+
 module Tangany
   class Config
     attr_accessor :client_id, :client_secret, :ecosystem, :network, :subscription, :vault_url

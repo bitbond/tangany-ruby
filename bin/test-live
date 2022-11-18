@@ -10,7 +10,6 @@ exit 1 unless answer == "y"
 require "bundler/setup"
 require "byebug"
 require "factory_bot"
-require "json"
 
 require "tangany"
 
