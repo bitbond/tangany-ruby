@@ -3,13 +3,13 @@ require "faraday"
 module Tangany
   module Custody
     class Client
-      attr_reader :adapter, :client_id, :client_secret, :ecosystem, :subscription, :vault_url
+      attr_reader :adapter, :client_id, :client_secret, :environment, :subscription, :vault_url
 
       def initialize(adapter: Faraday.default_adapter, stubs: nil)
         @adapter = adapter
         @client_id = Tangany.client_id
         @client_secret = Tangany.client_secret
-        @ecosystem = Tangany.ecosystem
+        @environment = Tangany.environment
         @subscription = Tangany.subscription
         @vault_url = Tangany.vault_url
 

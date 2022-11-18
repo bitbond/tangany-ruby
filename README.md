@@ -44,7 +44,7 @@ The library needs to be configured with your account's secrets.
 require "tangany"
 Tangany.client_id = "..."
 Tangany.client_secret = "..."
-Tangany.ecosystem = "..." # mainnet or testnet
+Tangany.environment = "..." # mainnet or testnet
 Tangany.subscription = "..."
 Tangany.vault_url = "..."
 

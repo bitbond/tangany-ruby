@@ -3,7 +3,7 @@
     "base_path": "eth",
     "header": {
       "name": "tangany-ethereum-network",
-      "mainnet": "infura",
+      "mainnet": "mainnet",
       "testnet": "goerli"
     }
   },
@@ -11,7 +11,7 @@
     "base_path": "eth",
     "header": {
       "name": "tangany-ethereum-network",
-      "mainnet": "https://rpc-mainnet.maticvigil.com",
+      "mainnet": "polygon",
       "testnet": "https://rpc-mumbai.maticvigil.com"
     }
   }

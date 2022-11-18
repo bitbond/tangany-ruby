@@ -22,7 +22,7 @@ module Tangany
 
       def merge_network_header(headers)
         header = @network["header"]
-        headers.merge(header["name"] => header[Tangany.ecosystem])
+        headers.merge(header["name"] => header[Tangany.environment])
       end
     end
   end

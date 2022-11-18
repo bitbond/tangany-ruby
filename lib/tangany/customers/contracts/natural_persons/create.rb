@@ -9,17 +9,11 @@ module Tangany
 
           rule(pep: :source) do
             key.failure("must be present if pep.isExposed is true") if values.dig(:pep, :isExposed) && !value
-          end
-
-          rule(pep: :source) do
             key.failure("must not be present if pep.isExposed is false") if !values.dig(:pep, :isExposed) && value
           end
 
           rule(sanctions: :source) do
             key.failure("must be present if sanctions.isSanctioned is true") if values.dig(:sanctions, :isSanctioned) && !value
-          end
-
-          rule(sanctions: :source) do
             key.failure("must not be present if sanctions.isSanctioned is false") if !values.dig(:sanctions, :isSanctioned) && value
           end
         end
