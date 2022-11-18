@@ -244,7 +244,7 @@ collection = customers_client.wallet_links.list(limit: 21, sort: "asc", pageToke
 
 #### Create wallet link
 
-**With an address**
+With an address:
 
 ```ruby
 wallet_link = customers_client.wallet_links.create(
@@ -257,7 +257,7 @@ wallet_link = customers_client.wallet_links.create(
 )
 ```
 
-**With a wallet**
+With a wallet:
 
 ```ruby
 wallet_link = customers_client.wallet_links.create(
