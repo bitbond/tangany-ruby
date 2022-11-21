@@ -2,7 +2,7 @@ module Tangany
   module Custody
     class Resource < Tangany::Resource
       def initialize(client, options = {})
-        @network = Tangany.networks.fetch(options[:asset_id]) if options[:asset_id]
+        @protocol = Tangany.protocols.find { |protocol| protocol["asset_id"] == options[:asset_id] } if options[:asset_id]
 
         super(client)
       end
@@ -16,12 +16,12 @@ module Tangany
           "tangany-subscription" => client.subscription,
           "tangany-vault-url" => client.vault_url
         }
-        merge_network_header(headers) if @network
+        merge_protocol_header(headers) if @protocol
         headers
       end
 
-      def merge_network_header(headers)
-        header = @network["header"]
+      def merge_protocol_header(headers)
+        header = @protocol["header"]
         headers.merge(header["name"] => header[Tangany.environment])
       end
     end

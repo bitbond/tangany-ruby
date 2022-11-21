@@ -1,7 +1,7 @@
 module Tangany
   module Customers
     class WalletLink < Object
-      ALLOWED_ASSET_IDS = Tangany.networks.keys.freeze
+      ALLOWED_ASSET_IDS = Tangany.protocols.map { |protocol| protocol["asset_id"] }.freeze
 
       attribute :id, Types::String
       attribute :address, Types::String

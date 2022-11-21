@@ -1,18 +1,22 @@
-{
-  "ETH": {
+[
+  {
+    "asset_id": "ETH",
     "base_path": "eth",
     "header": {
       "name": "tangany-ethereum-network",
       "mainnet": "mainnet",
       "testnet": "goerli"
-    }
+    },
+    "name": "Ethereum"
   },
-  "MATIC": {
+  {
+    "asset_id": "MATIC",
     "base_path": "eth",
     "header": {
       "name": "tangany-ethereum-network",
       "mainnet": "polygon",
       "testnet": "https://rpc-mumbai.maticvigil.com"
-    }
+    },
+    "name": "Polygon"
   }
-}
+]

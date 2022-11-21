@@ -2,9 +2,9 @@ require "json"
 
 module Tangany
   class Config
-    attr_accessor :client_id, :client_secret, :environment, :network, :subscription, :vault_url
+    attr_accessor :client_id, :client_secret, :environment, :protocol, :subscription, :vault_url
 
-    attr_reader :custody_base_url, :customers_base_url, :customers_version, :networks
+    attr_reader :custody_base_url, :customers_base_url, :customers_version, :protocols
 
     def initialize
       @custody_base_url = "https://api.tangany.com/v1"
@@ -12,13 +12,13 @@ module Tangany
       @customers_base_url = "https://api.tangany.com/customers"
       @customers_version = "1"
 
-      @networks = load_networks
+      @protocols = load_protocols
     end
 
     private
 
-    def load_networks
-      JSON.parse(File.read(File.join(__dir__, "../config/networks.json")))
+    def load_protocols
+      JSON.parse(File.read(File.join(__dir__, "../config/protocols.json")))
     end
   end
 end
