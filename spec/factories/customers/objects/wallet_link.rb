@@ -4,7 +4,7 @@ FactoryBot.define do
 
     id { Faker::Internet.uuid }
     address { Faker::Blockchain::Ethereum.address }
-    assetId { Tangany::Customers::WalletLink::ALLOWED_ASSET_IDS.sample }
+    assetId { Tangany::Customers::WalletLink::ALLOWED_CHAIN_IDS.sample }
     assignment do
       {
         customerId: Faker::Internet.uuid

@@ -11,6 +11,9 @@ module Tangany
     attr_reader :config
 
     def_delegators :config,
+      :chain,
+      :chain=,
+      :chains,
       :client_id,
       :client_id=,
       :client_secret,
@@ -20,9 +23,6 @@ module Tangany
       :customers_version,
       :environment,
       :environment=,
-      :protocol,
-      :protocol=,
-      :protocols,
       :subscription,
       :subscription=,
       :vault_url,

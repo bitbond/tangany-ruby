@@ -280,7 +280,7 @@ wallet_link = customers_client.wallet_links.retrieve("wl_123456789")
 
 ## Custody API
 
-See [lib/config/protocols.json](lib/config/protocols.json) for the list of available protocols.
+See [lib/config/chains.json](lib/config/chains.json) for the list of available chains.
 
 ### Wallets
 
