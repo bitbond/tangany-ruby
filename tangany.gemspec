@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.description = "Tangany is a German provider for custody of digital assets and crypto." \
     "See https://tangany.com/ for details."
   spec.author = "Bitbond"
-  spec.email = "support@bitbond.com"
-  spec.homepage = "https://docs.tangany.com/"
+  spec.email = "service@bitbond.com"
+  spec.homepage = "https://github.com/bitbond/tangany-ruby"
   spec.license = "MIT"
 
   spec.metadata = {

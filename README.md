@@ -1,10 +1,15 @@
 # Tangany Ruby Library
 
+[![Gem Version](https://badge.fury.io/rb/tangany.svg)](https://badge.fury.io/rb/tangany)
 [![CI](https://github.com/bitbond/tangany-ruby/actions/workflows/ci.yml/badge.svg)](https://github.com/bitbond/tangany-ruby/actions/workflows/ci.yml)
 
 The Tangany Ruby library provides convenient access to the Tangany APIs from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that initialize themselves dynamically from API responses.
 
 ---
+
+## Documentation
+
+See the [API docs](https://docs.tangany.com) for more details.
 
 ## Installation
 
