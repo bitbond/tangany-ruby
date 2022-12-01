@@ -48,9 +48,4 @@ RUN mkdir -p /history \
   && chown -R sasori:sasori /usr/local/bundle \
   && chown -R sasori:sasori /home/sasori
 
-# Docker compose command script
-COPY .sasori/command.sh /home/sasori/command.sh
-RUN chown sasori:sasori /home/sasori/command.sh \
-  && chmod +x /home/sasori/command.sh
-
 USER sasori

@@ -17,7 +17,7 @@ module Tangany
           end
 
           rule(:sort) do
-            key.failure("should not be specified without `order`") if values[:sort].present? && values[:order].nil?
+            key.failure("should not be specified without `order`") if values[:sort] && values[:order].nil?
           end
 
           def to_safe_params!(params)

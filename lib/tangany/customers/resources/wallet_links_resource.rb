@@ -24,7 +24,7 @@ module Tangany
 
       def prepare_create_hash(hash)
         # TODO: derive wallet address from secp256k1 public key instead of using the Custody API
-        if hash[:wallet].present?
+        if hash[:wallet]
           custody_client = Tangany::Custody::Client.new
           wallet_status = custody_client.wallet_statuses(asset_id: hash[:assetId]).retrieve(hash[:wallet])
           hash[:address] = wallet_status.address

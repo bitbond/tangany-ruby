@@ -136,8 +136,8 @@ module Tangany
             }
           end,
           links: {
-            next: wallets.present? ? "/wallets?index=2&limit=1&sort=asc" : nil,
-            previous: wallets.present? ? "/wallets?index=0&limit=1&sort=asc" : nil
+            next: wallets ? "/wallets?index=2&limit=1&sort=asc" : nil,
+            previous: wallets ? "/wallets?index=0&limit=1&sort=asc" : nil
           }
         }
       end

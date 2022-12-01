@@ -32,8 +32,8 @@ Gem::Specification.new do |spec|
   spec.executables = `git ls-files -z -- bin/*`.split("\x0").map { |f| ::File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency("activesupport", ">= 3.0.0")
-  spec.add_dependency("dry-struct", "~> 1.4")
-  spec.add_dependency("dry-validation", "~> 1.8")
-  spec.add_dependency("faraday", "~> 2.5")
+  spec.add_dependency("activesupport", ">=6.0", "< 8.0.0")
+  spec.add_dependency("dry-struct", ">= 1.6", "< 2.0.0")
+  spec.add_dependency("dry-validation", ">= 1.10", "< 2.0.0")
+  spec.add_dependency("faraday", ">= 2.7", "< 2.8.0")
 end
