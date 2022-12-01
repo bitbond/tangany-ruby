@@ -1,4 +1,6 @@
 /.bundle/
+/.byebug_history
+/.rspec_status
 /.yardoc
 /_yardoc/
 /coverage/
@@ -6,9 +8,7 @@
 /pkg/
 /spec/fixtures/generated/
 /spec/reports/
+/tangany-*.gem
 /tmp/
-
-.byebug_history
-.rspec_status
 
 !/spec/fixtures/generated/.keep
