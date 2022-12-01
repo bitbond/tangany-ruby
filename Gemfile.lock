@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     tangany (0.0.1)
-      activesupport (>= 5.0.0, < 8.0.0)
-      dry-struct (~> 1.4)
-      dry-validation (~> 1.8)
-      faraday (~> 2.5)
+      activesupport (>= 6.0, < 8.0.0)
+      dry-struct (>= 1.6, < 2.0.0)
+      dry-validation (>= 1.10, < 2.0.0)
+      faraday (>= 2.7, < 2.8.0)
 
 GEM
   remote: https://rubygems.org/
