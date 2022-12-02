@@ -5,11 +5,16 @@ require "simplecov"
 require "simplecov_json_formatter"
 require "webmock/rspec"
 
+require_relative "../lib/simplecov/formatter/badge_formatter"
+
 SimpleCov.start do
   if ENV["CI"]
     formatter SimpleCov::Formatter::JSONFormatter
   else
-    formatter SimpleCov::Formatter::HTMLFormatter
+    formatter SimpleCov::Formatter::MultiFormatter.new([
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::BadgeFormatter
+    ])
   end
 end
 

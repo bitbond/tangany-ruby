@@ -14,10 +14,10 @@ task :quality_check do
 
   puts "== Quality report generation ".ljust(80, "=")
   puts
-  paths = FileList.new(
-    "lib/**/*.rb"
-  ).join(" ")
-  abort unless system("rubycritic #{paths}")
+  excluded_paths = FileList.new("lib/ruby_critic/**/*", "lib/simplecov/**/*")
+  paths = FileList.new("lib/**/*.rb").exclude(*excluded_paths).join(" ")
+  badge_formatter_path = File.expand_path("../lib/ruby_critic/formatter/badge_formatter.rb", __FILE__)
+  abort unless system("rubycritic #{paths} --custom-format #{badge_formatter_path}:RubyCritic::Formatter::BadgeFormatter")
 end
 
 desc "Regenerates the fixtures"
