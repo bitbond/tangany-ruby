@@ -7,7 +7,7 @@ module SimpleCov
         80..89 => "yellow",
         90..94 => "yellowgreen",
         95..99 => "green",
-        100 => "brightgreen"
+        100..100 => "brightgreen"
       }.freeze
 
       def format(result)
