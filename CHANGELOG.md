@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.2 - 2022-12-02
+
+### What's Changed
+
+- README badges and gemspec links by @panteo in https://github.com/bitbond/tangany-ruby/pull/5
+
 ## 0.0.1 - 2022-12-01
 
 ### What's Changed

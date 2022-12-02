@@ -5,8 +5,7 @@ Gem::Specification.new do |spec|
   spec.version = Tangany::VERSION
   spec.required_ruby_version = ">= 2.7.5"
   spec.summary = "Ruby bindings for the Tangany APIs"
-  spec.description = "Tangany is a German provider for custody of digital assets and crypto." \
-    "See https://tangany.com/ for details."
+  spec.description = "Tangany is a German provider for custody of digital assets and crypto. See https://tangany.com/ for details."
   spec.author = "Bitbond"
   spec.email = "service@bitbond.com"
   spec.homepage = "https://github.com/bitbond/tangany-ruby"
