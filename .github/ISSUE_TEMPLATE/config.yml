@@ -1,0 +1,9 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: Bitbond support
+    url: https://www.bitbond.com/contact-us/
+    about: |
+      Please only file issues here that you believe represent actual bugs or feature requests for the Tangany Ruby library.
+
+      If you're having general trouble with your Tangany integration, please reach out to support.
