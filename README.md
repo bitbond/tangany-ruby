@@ -281,6 +281,12 @@ wallet_link = customers_client.wallet_links.create(
 wallet_link = customers_client.wallet_links.retrieve("wl_123456789")
 ```
 
+#### Delete wallet link
+
+```ruby
+response = customers_client.wallet_links.delete("wl_123456789")
+```
+
 ---
 
 ## Custody API
