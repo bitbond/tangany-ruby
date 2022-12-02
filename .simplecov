@@ -1,4 +1,5 @@
 SimpleCov.configure do
+  add_filter "/lib/ruby_critic/"
   add_filter "/lib/simplecov/"
   add_filter "/lib/tangany/version.rb"
   add_filter "/spec/"
