@@ -19,8 +19,8 @@ module SimpleCov
 
       def readme_update(percentage)
         color = COLORS.find { |range, _| range.include?(percentage) }.last
-        badge = "![coverage](https://img.shields.io/badge/coverage-#{percentage}%25-#{color})"
-        File.write("README.md", File.read("README.md").gsub(/!\[coverage\]\(.*\)/, badge))
+        badge = "![Test coverage](https://img.shields.io/badge/coverage-#{percentage}%25-#{color})"
+        File.write("README.md", File.read("README.md").gsub(/!\[Test coverage\]\(.*\)/, badge))
       end
     end
   end
