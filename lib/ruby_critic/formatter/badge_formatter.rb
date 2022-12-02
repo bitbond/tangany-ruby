@@ -5,9 +5,9 @@ module RubyCritic
         0..59 => "red",
         60..69 => "orange",
         70..79 => "yellow",
-        70..84 => "yellowgreen",
-        85..89 => "green",
-        90..100 => "brightgreen"
+        80..89 => "yellowgreen",
+        90..94 => "green",
+        95..100 => "brightgreen"
       }.freeze
 
       def initialize(analysed_modules)
