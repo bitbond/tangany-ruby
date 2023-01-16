@@ -3,7 +3,7 @@ RSpec.describe(Tangany::Collection) do
 
   let(:client) { Tangany::Customers::Client.new(adapter: :test, stubs: stubs) }
   let(:path) { "customers/list" }
-  let(:response) { client.connection.get(path, {}, {"tangany-subscription" => Tangany.subscription}) }
+  let(:response) { client.connection.get(path) }
   let(:stubbed_response) { stub_customers_response(fixture: "customers/list/#{fixture}") }
   let(:stubs) { Faraday::Adapter::Test::Stubs.new }
   let(:type) { Tangany::Customers::Customer }
