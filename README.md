@@ -1,6 +1,5 @@
 # Tangany Ruby Library
 
-[![Gem Version](https://badge.fury.io/rb/tangany.svg)](https://badge.fury.io/rb/tangany)
 [![CI](https://github.com/bitbond/tangany-ruby/actions/workflows/ci.yml/badge.svg)](https://github.com/bitbond/tangany-ruby/actions/workflows/ci.yml)
 ![Test coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 ![Code quality](https://img.shields.io/badge/quality-93%25-green)
