@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.5 - 2023-01-16
+
+## What's Changed
+
+- Customers client version header by [@panteo](https://github.com/panteo) in https://github.com/bitbond/tangany-ruby/pull/7
+
+**Full Changelog**: https://github.com/bitbond/tangany-ruby/compare/v0.0.4...v0.0.5
+
 ## 0.0.4 - 2023-01-16
 
 ### What's Changed
@@ -10,7 +18,7 @@
 
 ## What's Changed
 
-- Better logging in test live by @panteo in https://github.com/bitbond/tangany-ruby/pull/6
+- Better logging in test live by [@panteo](https://github.com/panteo) in https://github.com/bitbond/tangany-ruby/pull/6
 
 **Full Changelog**: https://github.com/bitbond/tangany-ruby/compare/v0.0.2...v0.0.3
 
@@ -18,7 +26,7 @@
 
 ### What's Changed
 
-- README badges and gemspec links by @panteo in https://github.com/bitbond/tangany-ruby/pull/5
+- README badges and gemspec links by [@panteo](https://github.com/panteo) in https://github.com/bitbond/tangany-ruby/pull/5
 
 **Full Changelog**: https://github.com/bitbond/tangany-ruby/compare/v0.0.1...v0.0.2
 
@@ -56,6 +64,6 @@
 
 ### New Contributors
 
-- @panteo made their first contribution in https://github.com/bitbond/tangany-ruby/pull/2
+- [@panteo](https://github.com/panteo) made their first contribution in https://github.com/bitbond/tangany-ruby/pull/2
 
 **Full Changelog**: https://github.com/bitbond/tangany-ruby/commits/v0.0.1
