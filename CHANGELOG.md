@@ -1,10 +1,20 @@
 # Changelog
 
+## 0.0.3 - 2023-01-16
+
+## What's Changed
+
+- Better logging in test live by @panteo in https://github.com/bitbond/tangany-ruby/pull/6
+
+**Full Changelog**: https://github.com/bitbond/tangany-ruby/compare/v0.0.2...v0.0.3
+
 ## 0.0.2 - 2022-12-02
 
 ### What's Changed
 
 - README badges and gemspec links by @panteo in https://github.com/bitbond/tangany-ruby/pull/5
+
+**Full Changelog**: https://github.com/bitbond/tangany-ruby/compare/v0.0.1...v0.0.2
 
 ## 0.0.1 - 2022-12-01
 
