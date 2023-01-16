@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.4 - 2023-01-16
+
+### What's Changed
+
+**Full Changelog**: https://github.com/bitbond/tangany-ruby/compare/v0.0.3...v0.0.4
+
 ## 0.0.3 - 2023-01-16
 
 ## What's Changed
