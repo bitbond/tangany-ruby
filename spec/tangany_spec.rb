@@ -7,7 +7,7 @@ RSpec.describe(Tangany) do
       end
     end
 
-    %i[client_id client_secret environment subscription vault_url].each do |attribute|
+    %i[client_id client_secret environment subscription vault_url version].each do |attribute|
       before { described_class.send("#{attribute}=", "test") }
 
       it { expect(described_class.send(attribute)).to(eq("test")) }

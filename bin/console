@@ -17,6 +17,7 @@ Tangany.client_secret = ENV.fetch("TEST_TANGANY_CLIENT_SECRET", "test")
 Tangany.environment = "testnet"
 Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
 Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
+Tangany.version = ENV.fetch("TEST_TANGANY_VERSION", "1")
 
 require "irb"
 IRB.start(__FILE__)

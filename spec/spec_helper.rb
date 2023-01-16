@@ -34,6 +34,7 @@ RSpec.configure do |config|
     Tangany.environment = "testnet"
     Tangany.subscription = ENV.fetch("TEST_TANGANY_SUBSCRIPTION", "test")
     Tangany.vault_url = ENV.fetch("TEST_TANGANY_VAULT_URL", "test")
+    Tangany.version = ENV.fetch("TEST_TANGANY_VERSION", "1")
   end
   config.disable_monkey_patching!
   config.example_status_persistence_file_path = ".rspec_status"

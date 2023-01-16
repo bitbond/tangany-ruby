@@ -54,6 +54,7 @@ Tangany.client_secret = "..."
 Tangany.environment = "..." # mainnet or testnet
 Tangany.subscription = "..."
 Tangany.vault_url = "..."
+Tangany.version = "..."
 
 customers_client = Tangany::Customers::Client.new
 custody_client = Tangany::Custody::Client.new

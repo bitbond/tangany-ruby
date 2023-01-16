@@ -26,7 +26,9 @@ module Tangany
       :subscription,
       :subscription=,
       :vault_url,
-      :vault_url=
+      :vault_url=,
+      :version,
+      :version=
   end
 end
 
