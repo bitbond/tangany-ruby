@@ -8,11 +8,11 @@ gem "factory_bot"
 gem "faker"
 gem "rake"
 gem "rspec"
-gem "rubocop", "~> 1.21"
+gem "rubocop", "~> 1.42"
 gem "rubocop-rake", "~> 0.6"
-gem "rubocop-rspec", "~> 2.12"
+gem "rubocop-rspec", "~> 2.18"
 gem "rubycritic", require: false
-gem "standard", "~> 1.16"
+gem "standard", "~> 1.22"
 
 group :test do
   gem "simplecov", require: false
