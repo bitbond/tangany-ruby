@@ -2,6 +2,7 @@ module Tangany
   module Customers
     class NaturalPersonsResource < Resource
       BASE_PATH = "entities/natural-persons"
+
       def create(**params)
         NaturalPerson.new(post_request(BASE_PATH, body: sanitize_params!(params).to_json).body)
       end
