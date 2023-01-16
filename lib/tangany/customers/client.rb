@@ -3,11 +3,12 @@ require "faraday"
 module Tangany
   module Customers
     class Client
-      attr_reader :adapter, :subscription
+      attr_reader :adapter, :subscription, :version
 
       def initialize(adapter: Faraday.default_adapter, stubs: nil)
         @adapter = adapter
         @subscription = Tangany.subscription
+        @version = Tangany.version
 
         @stubs = stubs
       end

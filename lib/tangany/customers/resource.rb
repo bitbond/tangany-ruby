@@ -4,7 +4,10 @@ module Tangany
       private
 
       def default_headers
-        {"tangany-subscription" => client.subscription}
+        {
+          "tangany-subscription" => client.subscription,
+          "tangany-version" => client.version
+        }
       end
     end
   end
