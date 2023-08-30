@@ -43,8 +43,10 @@ RUN echo "require 'irb/ext/save-history'" >> /home/sasori/.irbrc \
 
 # Volumes & permissions
 RUN mkdir -p /history \
+  && mkdir -p /home/sasori/.vscode-server \
   && mkdir -p /usr/local/bundle \
   && chown -R sasori:sasori /history \
+  && chown -R sasori:sasori /home/sasori/.vscode-server \
   && chown -R sasori:sasori /usr/local/bundle \
   && chown -R sasori:sasori /home/sasori
 
